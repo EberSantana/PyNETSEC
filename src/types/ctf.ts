@@ -4,6 +4,8 @@ export type TeamRole = 'core' | 'network' | 'blue' | 'red';
 
 export type AppView = 'hub' | 'study' | 'lab' | 'ranking' | 'badges';
 
+export type LabWorkspaceMode = 'mission' | 'sandbox';
+
 export type RankingModuleFilter = 'geral' | 'PySec' | 'BD';
 
 export type SyncStatus = 'synced' | 'duplicate' | 'local' | 'error';
@@ -140,11 +142,19 @@ export interface PurpleReflection {
   savedAt: string;
 }
 
+export interface SandboxTerminalLine {
+  id: string;
+  kind: 'prompt' | 'stdout' | 'stderr' | 'info' | 'error-tip';
+  prefix?: string;
+  text: string;
+}
+
 export interface PersistedSession {
   profile: StudentProfile;
   completedMissions: Record<string, CompletedMissionRecord>;
   completedDrills: Record<string, boolean>;
   codeDrafts: Record<string, string>;
+  sandboxFiles: Record<string, string> | null;
   runHistory: RunHistoryEntry[];
   ethicsAccepted: boolean;
   freeNavigationMode: boolean;

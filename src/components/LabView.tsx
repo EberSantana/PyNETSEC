@@ -27,13 +27,20 @@ import {
 } from '../services/pyodideEngine';
 import {
   CompletedMissionRecord,
+  LabWorkspaceMode,
   Mission,
   PurpleReflection,
   PyodideExecutionResult,
   RunHistoryEntry,
 } from '../types/ctf';
+import { SandboxView } from './SandboxView';
 
 interface LabViewProps {
+  mode: LabWorkspaceMode;
+  onModeChange: (mode: LabWorkspaceMode) => void;
+  sandboxFiles: Record<string, string>;
+  onSandboxFilesChange: (files: Record<string, string>) => void;
+  studentUsername: string;
   mission: Mission;
   code: string;
   completedMissions: Record<string, CompletedMissionRecord>;
@@ -50,6 +57,11 @@ interface LabViewProps {
 }
 
 export function LabView({
+  mode,
+  onModeChange,
+  sandboxFiles,
+  onSandboxFilesChange,
+  studentUsername,
   mission,
   code,
   completedMissions,
@@ -218,9 +230,9 @@ export function LabView({
 
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
-      {/* Compact Workspace Breadcrumb & Mission Navigator */}
+      {/* Compact Workspace Breadcrumb, Lab Mode Switcher (Missão CTF | Sandbox), & Navigator */}
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={onBackToHub}
@@ -230,45 +242,88 @@ export function LabView({
             Voltar à Trilha
           </button>
 
-          <div className="flex items-center gap-2 text-xs text-slate-400 tabular-nums">
-            <span className="font-mono font-semibold text-cyan-300">{mission.id}</span>
-            <span aria-hidden="true">·</span>
-            <span>Circuito 0{mission.circuit}</span>
-            <span aria-hidden="true">·</span>
-            <span>{mission.points} XP</span>
-            {isCompleted && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span className="flex items-center gap-1 font-medium text-emerald-400">
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  Concluída
-                </span>
-              </>
-            )}
+          {/* Lab Mode Segmented Switcher */}
+          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] p-1">
+            <button
+              type="button"
+              onClick={() => onModeChange('mission')}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
+                mode === 'mission'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-400 hover:text-slate-100'
+              }`}
+            >
+              <Flag className="h-3.5 w-3.5" />
+              Missão CTF ({mission.id})
+            </button>
+            <button
+              type="button"
+              onClick={() => onModeChange('sandbox')}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
+                mode === 'sandbox'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-400 hover:text-slate-100'
+              }`}
+            >
+              <Terminal className="h-3.5 w-3.5" />
+              Sandbox Livre
+            </button>
           </div>
+
+          {mode === 'mission' && (
+            <div className="flex items-center gap-2 text-xs text-slate-400 tabular-nums">
+              <span>Circuito 0{mission.circuit}</span>
+              <span aria-hidden="true">·</span>
+              <span>{mission.points} XP</span>
+              {isCompleted && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span className="flex items-center gap-1 font-medium text-emerald-400">
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    Concluída
+                  </span>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            disabled={!prevMission}
-            onClick={() => prevMission && onSelectMission(prevMission)}
-            className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
-          >
-            <ChevronLeft className="h-3.5 w-3.5" />
-            Anterior
-          </button>
-          <button
-            type="button"
-            disabled={!nextMission || !isMissionUnlocked(nextMission)}
-            onClick={() => nextMission && onSelectMission(nextMission)}
-            className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
-          >
-            Próxima
-            <ChevronRight className="h-3.5 w-3.5" />
-          </button>
-        </div>
+        {mode === 'mission' ? (
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              disabled={!prevMission}
+              onClick={() => prevMission && onSelectMission(prevMission)}
+              className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
+            >
+              <ChevronLeft className="h-3.5 w-3.5" />
+              Anterior
+            </button>
+            <button
+              type="button"
+              disabled={!nextMission || !isMissionUnlocked(nextMission)}
+              onClick={() => nextMission && onSelectMission(nextMission)}
+              className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
+            >
+              Próxima
+              <ChevronRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ) : (
+          <p className="text-xs text-slate-400">
+            Terminal persistente · Sockets simulados · Arquivos salvos em /workspace
+          </p>
+        )}
       </div>
+
+      {mode === 'sandbox' ? (
+        <SandboxView
+          files={sandboxFiles}
+          onFilesChange={onSandboxFilesChange}
+          studentUsername={studentUsername}
+        />
+      ) : (
+        <>
 
       {/* Pyodide On-Demand Loading Notice (Only shown while initializing or on error) */}
       {(pyodideStatus === 'loading-script' || pyodideStatus === 'loading-wasm') && (
@@ -739,6 +794,8 @@ export function LabView({
           </div>
         </section>
       </div>
+        </>
+      )}
     </div>
   );
 }

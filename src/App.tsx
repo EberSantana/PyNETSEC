@@ -14,12 +14,14 @@ import { ProfileConfigDrawer } from './components/ProfileConfigDrawer';
 import { RankingView } from './components/RankingView';
 import { StudyView } from './components/StudyView';
 import { MISSIONS, getMissionById, getStudentRankTitle } from './data/missions';
+import { DEFAULT_SANDBOX_FILES } from './data/sandboxDefaults';
 import { STUDY_LESSONS, getLessonForMissionId } from './data/studyLessons';
 import { registrarMissao } from './services/appsScriptClient';
 import { loadSession, resetAllProgress, saveSession } from './services/storage';
 import {
   AppView,
   CircuitId,
+  LabWorkspaceMode,
   Mission,
   PersistedSession,
   PyodideExecutionResult,
@@ -31,6 +33,7 @@ import {
 export default function App() {
   const [session, setSession] = useState<PersistedSession>(() => loadSession());
   const [activeView, setActiveView] = useState<AppView>('hub');
+  const [labMode, setLabMode] = useState<LabWorkspaceMode>('mission');
   const [activeMissionId, setActiveMissionId] = useState<string>('M01');
   const [activeLessonId, setActiveLessonId] = useState<string>('L01');
 
@@ -84,14 +87,26 @@ export default function App() {
         return;
       }
       setActiveMissionId(mission.id);
+      setLabMode('mission');
       setActiveView('lab');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
     [session.ethicsAccepted]
   );
 
+  const handleOpenSandbox = () => {
+    setLabMode('sandbox');
+    setActiveView('lab');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigate = (view: AppView) => {
     if (view === 'lab') {
+      if (labMode === 'sandbox') {
+        setActiveView('lab');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
       const target = isMissionUnlocked(activeMission)
         ? activeMission
         : nextRecommendedMission;
@@ -240,6 +255,18 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleSandboxFilesChange = (nextFiles: Record<string, string>) => {
+    setSession((prev) => ({
+      ...prev,
+      sandboxFiles: nextFiles,
+    }));
+  };
+
+  const sandboxFiles = useMemo(
+    () => session.sandboxFiles ?? DEFAULT_SANDBOX_FILES,
+    [session.sandboxFiles]
+  );
+
   const openConfigDrawer = (tab: 'profile' | 'sheets' = 'profile') => {
     setConfigDrawerTab(tab);
     setConfigDrawerOpen(true);
@@ -298,6 +325,7 @@ export default function App() {
             nextRecommendedMission={nextRecommendedMission}
             onStartMission={openMission}
             onOpenStudy={handleOpenStudyForCircuit}
+            onOpenSandbox={handleOpenSandbox}
             onToggleFreeNavigation={handleToggleFreeNavigation}
             onOpenProfileDrawer={openConfigDrawer}
           />
@@ -316,6 +344,11 @@ export default function App() {
 
         {activeView === 'lab' && (
           <LabView
+            mode={labMode}
+            onModeChange={setLabMode}
+            sandboxFiles={sandboxFiles}
+            onSandboxFilesChange={handleSandboxFilesChange}
+            studentUsername={session.profile.aluno || 'aluno'}
             mission={activeMission}
             code={session.codeDrafts[activeMission.id] ?? activeMission.starterCode}
             completedMissions={session.completedMissions}

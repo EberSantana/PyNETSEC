@@ -29,6 +29,7 @@ interface HubViewProps {
   nextRecommendedMission: Mission;
   onStartMission: (mission: Mission) => void;
   onOpenStudy: (circuitId?: CircuitId) => void;
+  onOpenSandbox: () => void;
   onToggleFreeNavigation: (enabled: boolean) => void;
   onOpenProfileDrawer: (tab?: 'profile' | 'sheets') => void;
 }
@@ -43,6 +44,7 @@ export function HubView({
   nextRecommendedMission,
   onStartMission,
   onOpenStudy,
+  onOpenSandbox,
   onToggleFreeNavigation,
   onOpenProfileDrawer,
 }: HubViewProps) {
@@ -102,6 +104,15 @@ export function HubView({
               >
                 <BookOpen className="h-4 w-4" />
                 Ambiente de Estudo ({completedDrillsCount}/{totalDrillsCount})
+              </button>
+
+              <button
+                type="button"
+                onClick={onOpenSandbox}
+                className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-700 bg-[#090D16] px-4 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200"
+              >
+                <Terminal className="h-4 w-4 text-cyan-400" />
+                Sandbox Livre
               </button>
 
               {!profile.aluno.trim() && (

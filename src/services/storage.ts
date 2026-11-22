@@ -10,6 +10,7 @@ export const DEFAULT_SESSION: PersistedSession = {
   completedMissions: {},
   completedDrills: {},
   codeDrafts: {},
+  sandboxFiles: null,
   runHistory: [],
   ethicsAccepted: false,
   freeNavigationMode: false,
@@ -32,6 +33,10 @@ export function loadSession(): PersistedSession {
       completedMissions: parsed.completedMissions ?? {},
       completedDrills: parsed.completedDrills ?? {},
       codeDrafts: parsed.codeDrafts ?? {},
+      sandboxFiles:
+        parsed.sandboxFiles && typeof parsed.sandboxFiles === 'object'
+          ? parsed.sandboxFiles
+          : null,
       runHistory: Array.isArray(parsed.runHistory) ? parsed.runHistory.slice(0, 40) : [],
       ethicsAccepted: Boolean(parsed.ethicsAccepted),
       freeNavigationMode: Boolean(parsed.freeNavigationMode),
