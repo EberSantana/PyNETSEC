@@ -1,0 +1,6 @@
+{
+  "name": "TrilhaRali — Circuito PySec",
+  "description": "Plataforma CTF interativa de Python, Redes de Computadores e Segurança da Informação com execução real via Pyodide no navegador e placar integrado ao Google Sheets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
