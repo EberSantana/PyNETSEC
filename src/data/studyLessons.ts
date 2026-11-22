@@ -1,4 +1,5 @@
 import { StudyLesson } from '../types/ctf';
+import { PROTOCOLOS_STUDY_LESSON } from './lessons/protocolos';
 
 export const STUDY_LESSONS: StudyLesson[] = [
   // =========================================================================
@@ -628,6 +629,7 @@ print(total)`,
       },
     ],
   },
+  PROTOCOLOS_STUDY_LESSON,
 
   // =========================================================================
   // CIRCUITO 3 — SEGURANÇA DA INFORMAÇÃO (CTF)

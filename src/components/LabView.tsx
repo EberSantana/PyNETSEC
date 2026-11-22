@@ -83,7 +83,7 @@ export function LabView({
     passed: boolean;
     text: string;
   } | null>(null);
-  const [hintLevel, setHintLevel] = useState<0 | 1 | 2>(0);
+  const [hintLevel, setHintLevel] = useState<1 | 2>(1);
   const [consoleTab, setConsoleTab] = useState<'output' | 'history'>('output');
   const [showRawTraceback, setShowRawTraceback] = useState(false);
   const [purpleFix1, setPurpleFix1] = useState(purpleReflection?.correction1 ?? '');
@@ -101,11 +101,11 @@ export function LabView({
     return unsub;
   }, []);
 
-  // Reset per-mission local UI feedback when switching missions
+  // Reset per-mission local UI feedback when switching missions (Dica 1 always visible)
   useEffect(() => {
     setExecResult(null);
     setValidationMessage(null);
-    setHintLevel(0);
+    setHintLevel(1);
     setShowRawTraceback(false);
     setConsoleTab('output');
   }, [mission.id]);
@@ -217,7 +217,7 @@ export function LabView({
   };
 
   const handleRevealHint = () => {
-    setHintLevel((prev) => (prev < 2 ? ((prev + 1) as 1 | 2) : 2));
+    setHintLevel(2);
   };
 
   const handlePurpleSubmit = (e: React.FormEvent) => {
@@ -375,6 +375,12 @@ export function LabView({
               {mission.teamRole === 'red' && (
                 <span className="font-semibold text-rose-300">Red Team Ético</span>
               )}
+              {mission.teamRole === 'linux' && (
+                <span className="font-semibold text-emerald-300">Terminal Linux</span>
+              )}
+              {mission.teamRole === 'network' && (
+                <span className="font-semibold text-cyan-300">Redes</span>
+              )}
             </div>
 
             <h1 className="mt-2 text-2xl font-bold text-slate-50">{mission.title}</h1>
@@ -412,44 +418,38 @@ export function LabView({
               </p>
             </div>
 
-            {/* Layered Hints (Dicas em Camadas) */}
+            {/* Mission Hint Always Visible + Optional Structure Hint 2 */}
             <div className="mt-5 border-t border-slate-800 pt-5">
               <div className="flex items-center justify-between gap-3">
-                <span className="text-xs font-medium text-slate-400">
-                  Dicas em camadas ({hintLevel}/2 reveladas)
+                <span className="text-xs font-semibold text-amber-300">
+                  Dica da Missão ({hintLevel}/2 reveladas)
                 </span>
                 <button
                   type="button"
                   onClick={handleRevealHint}
                   disabled={hintLevel >= 2}
-                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-xs font-semibold text-amber-200 transition-colors hover:bg-amber-400/20 disabled:cursor-not-allowed disabled:opacity-45"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-xs font-semibold text-amber-200 transition-colors hover:bg-amber-400/20 disabled:cursor-not-allowed disabled:opacity-45 whitespace-nowrap"
                 >
                   <HelpCircle className="h-3.5 w-3.5" />
-                  {hintLevel === 0
-                    ? 'Preciso de uma dica'
-                    : hintLevel === 1
-                      ? 'Mostrar Dica 2 (estrutura)'
-                      : 'Todas as dicas abertas'}
+                  {hintLevel < 2 ? 'Ver Dica 2 (estrutura)' : 'Dica completa aberta'}
                 </button>
               </div>
 
-              {hintLevel >= 1 && (
-                <div className="mt-3 space-y-2.5">
-                  <div className="rounded-lg border border-amber-400/25 bg-[#090D16] p-3.5 text-xs leading-relaxed text-slate-200">
-                    <p className="font-semibold text-amber-300">Dica 1 · Conceito</p>
-                    <p className="mt-1">{mission.hints[0]}</p>
-                  </div>
-
-                  {hintLevel >= 2 && (
-                    <div className="rounded-lg border border-amber-400/35 bg-[#090D16] p-3.5 text-xs leading-relaxed text-slate-200">
-                      <p className="font-semibold text-amber-300">
-                        Dica 2 · Estrutura da linha
-                      </p>
-                      <p className="mt-1 font-mono text-amber-100">{mission.hints[1]}</p>
-                    </div>
-                  )}
+              <div className="mt-3 space-y-2.5">
+                <div className="rounded-lg border border-amber-400/30 bg-[#090D16] p-3.5 text-xs leading-relaxed text-slate-200">
+                  <p className="font-semibold text-amber-300">Dica 1 · Orientação da Missão</p>
+                  <p className="mt-1">{mission.hints[0]}</p>
                 </div>
-              )}
+
+                {hintLevel >= 2 && (
+                  <div className="rounded-lg border border-amber-400/40 bg-[#090D16] p-3.5 text-xs leading-relaxed text-slate-200">
+                    <p className="font-semibold text-amber-300">
+                      Dica 2 · Estrutura da linha
+                    </p>
+                    <p className="mt-1 font-mono text-amber-100">{mission.hints[1]}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
-export type CircuitId = 1 | 2 | 3;
+export type CircuitId = 1 | 2 | 3 | 4 | 5;
 
-export type TeamRole = 'core' | 'network' | 'blue' | 'red';
+export type TeamRole = 'core' | 'network' | 'linux' | 'blue' | 'red';
 
 export type AppView = 'hub' | 'study' | 'lab' | 'ranking' | 'badges';
 

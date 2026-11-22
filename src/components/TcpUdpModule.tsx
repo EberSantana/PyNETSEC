@@ -9,10 +9,19 @@ import {
   Pause,
   Play,
   RotateCcw,
+  Search,
   ShieldCheck,
   SkipForward,
   Zap,
 } from 'lucide-react';
+import {
+  PORT_RANGE_SUMMARY,
+  PORT_STATUS_LEGEND,
+  PortRangeCategory,
+  PortStatus,
+  PortTransport,
+  TCP_UDP_PORTS,
+} from '../data/tcpUdpPorts';
 
 type TransportProtocol = 'tcp' | 'udp';
 
@@ -1112,6 +1121,206 @@ export function TcpUdpModule() {
             );
           })}
         </div>
+      </div>
+
+      {/* 5. LISTA INTERATIVA DE PORTAS TCP E UDP (IANA) */}
+      <TcpUdpPortsDirectory />
+    </div>
+  );
+}
+
+function TcpUdpPortsDirectory() {
+  const [query, setQuery] = useState('');
+  const [rangeFilter, setRangeFilter] = useState<'all' | PortRangeCategory>('all');
+  const [transportFilter, setTransportFilter] = useState<'all' | PortTransport>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | PortStatus>('all');
+
+  const q = query.trim().toLowerCase();
+  const filteredPorts = TCP_UDP_PORTS.filter((entry) => {
+    if (rangeFilter !== 'all' && entry.range !== rangeFilter) return false;
+    if (transportFilter !== 'all') {
+      if (transportFilter === 'TCP' && !entry.transport.includes('TCP')) return false;
+      if (transportFilter === 'UDP' && !entry.transport.includes('UDP')) return false;
+      if (transportFilter === 'TCP/UDP' && entry.transport !== 'TCP/UDP') return false;
+    }
+    if (statusFilter !== 'all' && entry.status !== statusFilter) return false;
+    if (!q) return true;
+    return (
+      entry.port.toLowerCase().includes(q) ||
+      entry.service.toLowerCase().includes(q) ||
+      entry.description.toLowerCase().includes(q) ||
+      entry.category.toLowerCase().includes(q) ||
+      entry.transport.toLowerCase().includes(q)
+    );
+  });
+
+  const getStatusClass = (status: PortStatus) => {
+    if (status === 'Oficial') return 'text-emerald-300';
+    if (status === 'Conflito') return 'text-rose-300';
+    if (status === 'Não-oficial') return 'text-amber-300';
+    return 'text-slate-400';
+  };
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+      <div className="border-b border-slate-800 p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+          <span className="font-mono font-semibold text-cyan-300">
+            Referência IANA · 0 a 65535
+          </span>
+          <span className="font-mono text-[11px] text-slate-400 tabular-nums">
+            Exibindo {filteredPorts.length} de {TCP_UDP_PORTS.length} registros
+          </span>
+        </div>
+
+        <h3 className="mt-1.5 text-lg font-bold text-slate-50">
+          Lista de Portas dos Protocolos TCP e UDP
+        </h3>
+        <p className="mt-1 text-xs leading-relaxed text-slate-400">
+          Consulte as portas mais importantes de redes, web, e-mail, bancos de dados, VPN e
+          administração — organizadas pelos 3 intervalos oficiais da IANA e status de registro.
+        </p>
+
+        {/* 3 Official IANA Port Ranges */}
+        <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+          {PORT_RANGE_SUMMARY.map((item) => {
+            const active = rangeFilter === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setRangeFilter(active ? 'all' : item.id)}
+                className={`cursor-pointer rounded-xl border p-3.5 text-left transition-colors ${
+                  active
+                    ? 'border-cyan-400/70 bg-cyan-400/10'
+                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-xs font-bold text-cyan-300 tabular-nums">
+                    {item.rangeLabel}
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    {active ? 'Filtro ativo' : 'Filtrar faixa'}
+                  </span>
+                </div>
+                <div className="mt-1 text-xs font-bold text-slate-100">{item.title}</div>
+                <p className="mt-1 text-[11px] leading-relaxed text-slate-400">
+                  {item.description}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Status Legend */}
+        <div className="mt-4 grid grid-cols-1 gap-2 rounded-xl border border-slate-800 bg-[#090D16] p-3.5 text-[11px] sm:grid-cols-2 lg:grid-cols-4">
+          {PORT_STATUS_LEGEND.map((item) => (
+            <div key={item.status} className="leading-relaxed">
+              <strong className={getStatusClass(item.status)}>{item.status}:</strong>{' '}
+              <span className="text-slate-400">{item.meaning}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Search + Filter Controls */}
+        <div className="mt-4 flex flex-wrap items-center gap-2.5">
+          <div className="relative min-w-[230px] flex-1">
+            <Search className="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Buscar por porta (443, 53, 3306), serviço (SSH, DNS, VPN, MySQL)..."
+              aria-label="Buscar portas TCP e UDP"
+              className="w-full rounded-lg border border-slate-700 bg-[#090D16] py-2 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+            />
+          </div>
+
+          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1">
+            {(['all', 'TCP', 'UDP', 'TCP/UDP'] as const).map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setTransportFilter(t)}
+                className={`cursor-pointer rounded px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                  transportFilter === t
+                    ? 'bg-cyan-400 text-[#05131C]'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                {t === 'all' ? 'Todos' : t}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1">
+            {(['all', 'Oficial', 'Não-oficial', 'Conflito'] as const).map((st) => (
+              <button
+                key={st}
+                type="button"
+                onClick={() => setStatusFilter(st)}
+                className={`cursor-pointer rounded px-2.5 py-1 text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                  statusFilter === st
+                    ? 'bg-slate-200 text-slate-950'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                {st === 'all' ? 'Status: Todos' : st}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scrollable Tabular Ports List */}
+      <div className="max-h-[460px] overflow-auto bg-[#060911]">
+        {filteredPorts.length === 0 ? (
+          <div className="p-8 text-center text-xs text-slate-400">
+            Nenhuma porta encontrada com os filtros atuais. Tente buscar por{' '}
+            <span className="font-mono text-cyan-300">22</span>,{' '}
+            <span className="font-mono text-cyan-300">53</span>,{' '}
+            <span className="font-mono text-cyan-300">443</span> ou{' '}
+            <span className="font-mono text-cyan-300">MySQL</span>.
+          </div>
+        ) : (
+          <table className="w-full text-left text-xs tabular-nums">
+            <thead className="sticky top-0 z-10 border-b border-slate-800 bg-[#0B111E] text-[11px] text-slate-400">
+              <tr>
+                <th className="px-4 py-3 font-semibold">Porta</th>
+                <th className="px-4 py-3 font-semibold">Protocolo</th>
+                <th className="px-4 py-3 font-semibold">Serviço / Aplicação</th>
+                <th className="px-4 py-3 font-semibold">Descrição</th>
+                <th className="px-4 py-3 font-semibold">Status IANA</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/70">
+              {filteredPorts.map((entry) => (
+                <tr key={`${entry.port}-${entry.service}`} className="hover:bg-[#0D1424]">
+                  <td className="px-4 py-2.5 font-mono font-bold text-cyan-300 whitespace-nowrap">
+                    {entry.port}
+                  </td>
+                  <td className="px-4 py-2.5 font-mono text-[11px] text-slate-300 whitespace-nowrap">
+                    {entry.transport}
+                  </td>
+                  <td className="px-4 py-2.5 font-semibold text-slate-100 whitespace-nowrap">
+                    {entry.service}
+                  </td>
+                  <td className="px-4 py-2.5 leading-relaxed text-slate-300">
+                    {entry.description}
+                  </td>
+                  <td
+                    className={`px-4 py-2.5 font-semibold whitespace-nowrap ${getStatusClass(
+                      entry.status
+                    )}`}
+                  >
+                    {entry.status}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

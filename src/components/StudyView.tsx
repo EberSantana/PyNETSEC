@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   AlertTriangle,
+  ArrowLeftRight,
   ArrowRight,
   BookOpen,
   CheckCircle2,
@@ -31,9 +32,14 @@ import {
 } from '../types/ctf';
 import { NetworkFundamentalsView } from './NetworkFundamentalsView';
 import { LinuxLabView } from './LinuxLabView';
+import { ProtocolosLessonSection } from './ProtocolosLessonSection';
+
+export type StudyTrack = 'python' | 'protocolos' | 'networks' | 'linux';
 
 interface StudyViewProps {
   activeLessonId: string;
+  activeTrack?: StudyTrack;
+  onChangeTrack?: (track: StudyTrack) => void;
   completedDrills: Record<string, boolean>;
   isMissionUnlocked: (mission: Mission) => boolean;
   onSelectLesson: (lessonId: string) => void;
@@ -44,6 +50,8 @@ interface StudyViewProps {
 
 export function StudyView({
   activeLessonId,
+  activeTrack,
+  onChangeTrack,
   completedDrills,
   isMissionUnlocked,
   onSelectLesson,
@@ -56,7 +64,12 @@ export function StudyView({
     [activeLessonId]
   );
 
-  const [studyTrack, setStudyTrack] = useState<'python' | 'networks' | 'linux'>('python');
+  const [internalTrack, setInternalTrack] = useState<StudyTrack>(activeTrack ?? 'python');
+  const studyTrack = activeTrack ?? internalTrack;
+  const setStudyTrack = (next: StudyTrack) => {
+    setInternalTrack(next);
+    onChangeTrack?.(next);
+  };
   const [circuitFilter, setCircuitFilter] = useState<CircuitId>(activeLesson.circuit);
   const [practiceTab, setPracticeTab] = useState<'drills' | 'sandbox'>('drills');
   const [activeDrillIdx, setActiveDrillIdx] = useState<number>(0);
@@ -159,18 +172,22 @@ export function StudyView({
             Ambiente de Estudo · Python, Segurança, Redes e Linux
           </p>
           <h1 className="mt-1 text-3xl font-bold text-slate-50">
-            {studyTrack === 'networks'
-              ? 'Fundamentos de Redes na Prática'
-              : studyTrack === 'linux'
-                ? 'Ambiente Linux Interativo'
-                : 'Aprenda os comandos antes das missões'}
+            {studyTrack === 'protocolos'
+              ? 'Protocolos de Transporte: TCP vs. UDP'
+              : studyTrack === 'networks'
+                ? 'Fundamentos de Redes na Prática'
+                : studyTrack === 'linux'
+                  ? 'Ambiente Linux Interativo'
+                  : 'Aprenda os comandos antes das missões'}
           </h1>
           <p className="mt-1.5 max-w-2xl text-sm text-slate-400">
-            {studyTrack === 'networks'
-              ? 'Explore de forma interativa os tipos de rede, topologias com simulação de falhas, meios de transmissão, protocolos do dia a dia, TCP e UDP, configuração básica e soluções de problemas.'
-              : studyTrack === 'linux'
-                ? 'Pratique a estrutura de diretórios FHS, manipulação de arquivos, pacotes APT, buscas, editores nano e vim, usuários, permissões, redes, firewall e compactação direto no terminal simulado.'
-                : 'Leia o guia rápido, teste exemplos reais no Python do navegador e faça os 3 treinos curtos de repetição para ganhar confiança antes de entrar no CTF.'}
+            {studyTrack === 'protocolos'
+              ? 'Entenda em detalhes como funcionam TCP e UDP na Camada 4, compare cabeçalhos, handshake e confiabilidade, e descubra quando usar cada protocolo antes das missões de redes.'
+              : studyTrack === 'networks'
+                ? 'Explore de forma interativa os tipos de rede, topologias com simulação de falhas, meios de transmissão, protocolos do dia a dia, TCP e UDP, configuração básica e soluções de problemas.'
+                : studyTrack === 'linux'
+                  ? 'Pratique a estrutura de diretórios FHS, manipulação de arquivos, pacotes APT, buscas, editores nano e vim, usuários, permissões, redes, firewall e compactação direto no terminal simulado.'
+                  : 'Leia o guia rápido, teste exemplos reais no Python do navegador e faça os 3 treinos curtos de repetição para ganhar confiança antes de entrar no CTF.'}
           </p>
         </div>
 
@@ -188,6 +205,18 @@ export function StudyView({
             >
               <BookOpen className="h-3.5 w-3.5" />
               Aulas de Python
+            </button>
+            <button
+              type="button"
+              onClick={() => setStudyTrack('protocolos')}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
+                studyTrack === 'protocolos'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-300 hover:text-slate-100'
+              }`}
+            >
+              <ArrowLeftRight className="h-3.5 w-3.5" />
+              TCP vs. UDP
             </button>
             <button
               type="button"
@@ -226,7 +255,19 @@ export function StudyView({
         </div>
       </div>
 
-      {studyTrack === 'networks' ? (
+      {studyTrack === 'protocolos' ? (
+        <div className="mt-6">
+          <ProtocolosLessonSection
+            isMissionUnlocked={isMissionUnlocked}
+            onGoToMission={onGoToMission}
+            onPracticePythonDrills={() => {
+              onSelectLesson('L10');
+              setStudyTrack('python');
+            }}
+            onOpenNetworkSimulator={() => setStudyTrack('networks')}
+          />
+        </div>
+      ) : studyTrack === 'networks' ? (
         <div className="mt-6">
           <NetworkFundamentalsView onOpenSandbox={onOpenSandbox} />
         </div>
@@ -239,7 +280,7 @@ export function StudyView({
       {/* Circuit Filter + Horizontal Lesson Strip */}
       <div className="mt-6 space-y-3">
         <div className="flex flex-wrap items-center gap-1.5 rounded-xl bg-[#111827] p-1.5 border border-slate-800 w-fit">
-          {CIRCUITS.map((c) => (
+          {CIRCUITS.filter((c) => STUDY_LESSONS.some((l) => l.circuit === c.id)).map((c) => (
             <button
               key={c.id}
               type="button"
@@ -283,7 +324,7 @@ export function StudyView({
                 <div>
                   <div className="flex items-center justify-between text-xs text-slate-400 tabular-nums">
                     <span className="font-mono font-semibold text-cyan-300">
-                      Aula 0{lesson.order}
+                      Aula {String(lesson.order).padStart(2, '0')}
                     </span>
                     <span className={allDone ? 'font-semibold text-emerald-400' : ''}>
                       {doneInLesson}/{lesson.drills.length} treinos
@@ -316,7 +357,7 @@ export function StudyView({
             <div className="flex items-center justify-between text-xs text-slate-400">
               <span className="flex items-center gap-1.5 font-medium text-cyan-300">
                 <BookOpen className="h-3.5 w-3.5" />
-                Aula 0{activeLesson.order} · {activeLesson.readTimeMinutes} min de leitura
+                Aula {String(activeLesson.order).padStart(2, '0')} · {activeLesson.readTimeMinutes} min de leitura
               </span>
               <span>{activeLesson.subtitle}</span>
             </div>
@@ -330,6 +371,20 @@ export function StudyView({
                 <p key={idx}>{text}</p>
               ))}
             </div>
+
+            {activeLesson.id === 'L10' && (
+              <button
+                type="button"
+                onClick={() => setStudyTrack('protocolos')}
+                className="mt-4 flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-cyan-400/35 bg-cyan-400/10 px-4 py-3 text-left text-xs font-semibold text-cyan-200 transition-colors hover:bg-cyan-400/20"
+              >
+                <span className="flex items-center gap-2">
+                  <ArrowLeftRight className="h-4 w-4 shrink-0 text-cyan-300" />
+                  Abrir guia visual completo de TCP vs. UDP (Cabeçalhos, Tabela e Casos de Uso)
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0" />
+              </button>
+            )}
 
             {/* Command Cheat-Sheet Table */}
             <div className="mt-6">

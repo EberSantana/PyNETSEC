@@ -12,7 +12,7 @@ import {
 import { Navbar } from './components/Navbar';
 import { ProfileConfigDrawer } from './components/ProfileConfigDrawer';
 import { RankingView } from './components/RankingView';
-import { StudyView } from './components/StudyView';
+import { StudyTrack, StudyView } from './components/StudyView';
 import { MISSIONS, getMissionById, getStudentRankTitle } from './data/missions';
 import { DEFAULT_SANDBOX_FILES } from './data/sandboxDefaults';
 import { STUDY_LESSONS, getLessonForMissionId } from './data/studyLessons';
@@ -36,6 +36,7 @@ export default function App() {
   const [labMode, setLabMode] = useState<LabWorkspaceMode>('mission');
   const [activeMissionId, setActiveMissionId] = useState<string>('M01');
   const [activeLessonId, setActiveLessonId] = useState<string>('L01');
+  const [studyTrack, setStudyTrack] = useState<StudyTrack>('python');
 
   // Modals & Drawers
   const [configDrawerOpen, setConfigDrawerOpen] = useState(false);
@@ -238,10 +239,17 @@ export default function App() {
   };
 
   const handleOpenStudyForCircuit = (circuitId?: CircuitId) => {
-    if (circuitId) {
-      const firstLesson = STUDY_LESSONS.find((l) => l.circuit === circuitId);
-      if (firstLesson) {
-        setActiveLessonId(firstLesson.id);
+    if (circuitId === 4) {
+      setStudyTrack('networks');
+    } else if (circuitId === 5) {
+      setStudyTrack('linux');
+    } else {
+      setStudyTrack('python');
+      if (circuitId) {
+        const firstLesson = STUDY_LESSONS.find((l) => l.circuit === circuitId);
+        if (firstLesson) {
+          setActiveLessonId(firstLesson.id);
+        }
       }
     }
     setActiveView('study');
@@ -249,8 +257,19 @@ export default function App() {
   };
 
   const handleOpenStudyForMission = (missionId: string) => {
-    const lesson = getLessonForMissionId(missionId);
-    setActiveLessonId(lesson.id);
+    const targetMission = getMissionById(missionId);
+    if (missionId === 'M33' || missionId === 'M34') {
+      setActiveLessonId('L10');
+      setStudyTrack('protocolos');
+    } else if (targetMission.circuit === 4) {
+      setStudyTrack('networks');
+    } else if (targetMission.circuit === 5) {
+      setStudyTrack('linux');
+    } else {
+      setStudyTrack('python');
+      const lesson = getLessonForMissionId(missionId);
+      setActiveLessonId(lesson.id);
+    }
     setActiveView('study');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -334,6 +353,8 @@ export default function App() {
         {activeView === 'study' && (
           <StudyView
             activeLessonId={activeLessonId}
+            activeTrack={studyTrack}
+            onChangeTrack={setStudyTrack}
             completedDrills={session.completedDrills}
             isMissionUnlocked={isMissionUnlocked}
             onSelectLesson={(lessonId) => setActiveLessonId(lessonId)}

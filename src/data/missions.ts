@@ -1,4 +1,5 @@
 import { CircuitInfo, CodePreset, Mission } from '../types/ctf';
+import { EXTENDED_MISSIONS } from './extendedMissions';
 
 export const CIRCUITS: CircuitInfo[] = [
   {
@@ -30,6 +31,26 @@ export const CIRCUITS: CircuitInfo[] = [
       'Decodifique Base64, quebre Cifra de César, faça auditoria SHA-256 e enfrente o Chefão Duplo: 20A (Blue Team Forense) e 20B (Red Team Ético).',
     missionCount: 6,
     accentLabel: 'Blue & Red Team',
+  },
+  {
+    id: 4,
+    code: 'Circuito 04',
+    title: 'Arquitetura de Redes & Protocolos',
+    subtitle: 'OSI, Topologias, TCP/UDP e Troubleshooting · Missões 22 a 35',
+    description:
+      'Domine o Modelo OSI, tipos e topologias de rede, meios e modos de transmissão, protocolos do dia a dia, TCP vs. UDP e soluções de falhas.',
+    missionCount: 14,
+    accentLabel: 'Protocolos',
+  },
+  {
+    id: 5,
+    code: 'Circuito 05',
+    title: 'Terminal Linux & Diagnóstico de Rede',
+    subtitle: 'FHS, Comandos Linux, Sandbox e Chefão 50 · Missões 36 a 50',
+    description:
+      'Pratique diretórios FHS, ls/cat/grep/chmod/apt/tar, editores nano/vim, ifconfig/netstat/ufw, ferramentas ping/whois/nmap/sniff e o Chefão Final 50.',
+    missionCount: 15,
+    accentLabel: 'Linux & Ops',
   },
 ];
 
@@ -1247,6 +1268,7 @@ for pin in range(1000, 10000):
       };
     },
   },
+  ...EXTENDED_MISSIONS,
 ];
 
 export function getMissionById(id: string): Mission {
@@ -1254,7 +1276,9 @@ export function getMissionById(id: string): Mission {
 }
 
 export function getStudentRankTitle(completedCount: number): string {
-  if (completedCount >= 21) return 'Especialista Purple Team';
+  if (completedCount >= 50) return 'Mestre CTF · 50/50';
+  if (completedCount >= 36) return 'Especialista Linux & Redes';
+  if (completedCount >= 22) return 'Especialista Purple Team';
   if (completedCount >= 16) return 'Analista CTF';
   if (completedCount >= 11) return 'Engenheiro de Redes';
   if (completedCount >= 5) return 'Operador Python';
