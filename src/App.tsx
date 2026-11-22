@@ -339,6 +339,7 @@ export default function App() {
             onSelectLesson={(lessonId) => setActiveLessonId(lessonId)}
             onCompleteDrill={handleCompleteDrill}
             onGoToMission={openMission}
+            onOpenSandbox={handleOpenSandbox}
           />
         )}
 
