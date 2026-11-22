@@ -30,6 +30,7 @@ import {
   StudyLesson,
 } from '../types/ctf';
 import { NetworkFundamentalsView } from './NetworkFundamentalsView';
+import { LinuxLabView } from './LinuxLabView';
 
 interface StudyViewProps {
   activeLessonId: string;
@@ -55,7 +56,7 @@ export function StudyView({
     [activeLessonId]
   );
 
-  const [studyTrack, setStudyTrack] = useState<'python' | 'networks'>('python');
+  const [studyTrack, setStudyTrack] = useState<'python' | 'networks' | 'linux'>('python');
   const [circuitFilter, setCircuitFilter] = useState<CircuitId>(activeLesson.circuit);
   const [practiceTab, setPracticeTab] = useState<'drills' | 'sandbox'>('drills');
   const [activeDrillIdx, setActiveDrillIdx] = useState<number>(0);
@@ -155,23 +156,27 @@ export function StudyView({
       <div className="flex flex-col justify-between gap-4 border-b border-slate-800 pb-6 lg:flex-row lg:items-end">
         <div>
           <p className="text-xs font-medium text-cyan-300">
-            Ambiente de Estudo · Python, Segurança e Fundamentos de Redes
+            Ambiente de Estudo · Python, Segurança, Redes e Linux
           </p>
           <h1 className="mt-1 text-3xl font-bold text-slate-50">
             {studyTrack === 'networks'
               ? 'Fundamentos de Redes na Prática'
-              : 'Aprenda os comandos antes das missões'}
+              : studyTrack === 'linux'
+                ? 'Ambiente Linux Interativo'
+                : 'Aprenda os comandos antes das missões'}
           </h1>
           <p className="mt-1.5 max-w-2xl text-sm text-slate-400">
             {studyTrack === 'networks'
-              ? 'Explore de forma interativa os tipos de rede, topologias com simulação de falhas, meios de transmissão e modos Simplex, Half-Duplex e Full-Duplex.'
-              : 'Leia o guia rápido, teste exemplos reais no Python do navegador e faça os 3 treinos curtos de repetição para ganhar confiança antes de entrar no CTF.'}
+              ? 'Explore de forma interativa os tipos de rede, topologias com simulação de falhas, meios de transmissão, protocolos do dia a dia, TCP e UDP, configuração básica e soluções de problemas.'
+              : studyTrack === 'linux'
+                ? 'Pratique a estrutura de diretórios FHS, manipulação de arquivos, pacotes APT, buscas, editores nano e vim, usuários, permissões, redes, firewall e compactação direto no terminal simulado.'
+                : 'Leia o guia rápido, teste exemplos reais no Python do navegador e faça os 3 treinos curtos de repetição para ganhar confiança antes de entrar no CTF.'}
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 shrink-0">
           {/* Top-level Study Track Switcher */}
-          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#111827] p-1">
+          <div className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#111827] p-1">
             <button
               type="button"
               onClick={() => setStudyTrack('python')}
@@ -196,6 +201,18 @@ export function StudyView({
               <Network className="h-3.5 w-3.5" />
               Fundamentos de Redes
             </button>
+            <button
+              type="button"
+              onClick={() => setStudyTrack('linux')}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
+                studyTrack === 'linux'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-300 hover:text-slate-100'
+              }`}
+            >
+              <Terminal className="h-3.5 w-3.5" />
+              Terminal Linux
+            </button>
           </div>
 
           {studyTrack === 'python' && (
@@ -212,6 +229,10 @@ export function StudyView({
       {studyTrack === 'networks' ? (
         <div className="mt-6">
           <NetworkFundamentalsView onOpenSandbox={onOpenSandbox} />
+        </div>
+      ) : studyTrack === 'linux' ? (
+        <div className="mt-6">
+          <LinuxLabView />
         </div>
       ) : (
       <>

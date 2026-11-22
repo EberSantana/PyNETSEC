@@ -7,12 +7,14 @@ import {
   CheckCircle2,
   Eye,
   Globe,
+  Layers,
   Network,
   Radio,
   RotateCcw,
   ShieldAlert,
   ShieldCheck,
   Wifi,
+  Wrench,
   Zap,
 } from 'lucide-react';
 import {
@@ -26,54 +28,75 @@ import {
   TransmissionModeItem,
 } from '../data/networkFundamentals';
 import { EverydayProtocolsModule } from './EverydayProtocolsModule';
+import { NetworkConfigTroubleshootModule } from './NetworkConfigTroubleshootModule';
+import { TcpUdpModule } from './TcpUdpModule';
 
-type ModuleTab = 'types' | 'topologies' | 'media' | 'modes' | 'protocols';
+type ModuleTab =
+  | 'types'
+  | 'topologies'
+  | 'media'
+  | 'modes'
+  | 'protocols'
+  | 'tcp-udp'
+  | 'config';
 
 interface NetworkFundamentalsViewProps {
   onOpenSandbox?: () => void;
 }
 
-const MODULE_TABS: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }[] = [
+const ARCH_MODULE_TABS: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }[] = [
   { id: 'types', label: 'Tipos de Rede', subtitle: 'PAN · LAN · WLAN · CAN · MAN · WAN · SAN · VPN', icon: Globe },
   { id: 'topologies', label: 'Topologias de Rede', subtitle: 'Estrela · Anel · Barramento · Árvore · Mesh · Híbrida', icon: Network },
   { id: 'media', label: 'Meios de Transmissão', subtitle: 'Guiados (cabo) e Não Guiados (sem fio)', icon: Cable },
   { id: 'modes', label: 'Modos de Transmissão', subtitle: 'Simplex · Half-Duplex · Full-Duplex', icon: ArrowLeftRight },
+];
+
+const PROTOCOL_MODULE_TABS: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }[] = [
   { id: 'protocols', label: 'Protocolos no Dia a Dia', subtitle: 'HTTP/S · DNS · DHCP · SMB · F12 · Wireshark', icon: Eye },
+  { id: 'tcp-udp', label: 'TCP e UDP', subtitle: 'Camada 4 · Handshake · Portas · Confiabilidade vs. Velocidade', icon: Layers },
+  { id: 'config', label: 'Config. & Soluções', subtitle: 'DHCP · IP Estático · Diagnóstico de Falhas', icon: Wrench },
 ];
 
 export function NetworkFundamentalsView({ onOpenSandbox }: NetworkFundamentalsViewProps) {
   const [activeTab, setActiveTab] = useState<ModuleTab>('types');
 
+  const renderTabButton = (tab: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }) => {
+    const Icon = tab.icon;
+    const isActive = activeTab === tab.id;
+    return (
+      <button
+        key={tab.id}
+        type="button"
+        onClick={() => setActiveTab(tab.id)}
+        className={`cursor-pointer rounded-xl border p-4 text-left transition-colors ${
+          isActive
+            ? 'border-cyan-400/70 bg-cyan-400/10'
+            : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+        }`}
+      >
+        <div className="flex items-center gap-2">
+          <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
+          <span className={`text-sm font-bold whitespace-nowrap truncate ${isActive ? 'text-cyan-100' : 'text-slate-100'}`}>
+            {tab.label}
+          </span>
+        </div>
+        <p className="mt-1 truncate font-mono text-[11px] text-slate-400">
+          {tab.subtitle}
+        </p>
+      </button>
+    );
+  };
+
   return (
     <div className="space-y-6">
-      {/* 5-Module Switcher */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        {MODULE_TABS.map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id)}
-              className={`cursor-pointer rounded-xl border p-4 text-left transition-colors ${
-                isActive
-                  ? 'border-cyan-400/70 bg-cyan-400/10'
-                  : 'border-slate-800 bg-[#111827] hover:border-slate-700'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
-                <span className={`text-sm font-bold ${isActive ? 'text-cyan-100' : 'text-slate-100'}`}>
-                  {tab.label}
-                </span>
-              </div>
-              <p className="mt-1 truncate font-mono text-[11px] text-slate-400">
-                {tab.subtitle}
-              </p>
-            </button>
-          );
-        })}
+      {/* 7-Module Switcher arranged in 2 balanced rows (4 Architecture + 3 Protocols & Ops) */}
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {ARCH_MODULE_TABS.map(renderTabButton)}
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {PROTOCOL_MODULE_TABS.map(renderTabButton)}
+        </div>
       </div>
 
       {/* Active Interactive Module */}
@@ -82,6 +105,8 @@ export function NetworkFundamentalsView({ onOpenSandbox }: NetworkFundamentalsVi
       {activeTab === 'media' && <TransmissionMediaModule />}
       {activeTab === 'modes' && <TransmissionModesModule />}
       {activeTab === 'protocols' && <EverydayProtocolsModule onOpenSandbox={onOpenSandbox} />}
+      {activeTab === 'tcp-udp' && <TcpUdpModule />}
+      {activeTab === 'config' && <NetworkConfigTroubleshootModule />}
     </div>
   );
 }
