@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronUp,
+  Layers,
   Pause,
   Play,
   RotateCcw,
@@ -16,6 +17,7 @@ import {
   XCircle,
 } from 'lucide-react';
 import { NetworkPacketFrame, NetworkVisualEvent } from '../types/ctf';
+import { OsiModelVisualizer } from './OsiModelVisualizer';
 
 interface NetworkMonitorProps {
   event: NetworkVisualEvent | null;
@@ -143,6 +145,7 @@ export function NetworkMonitor({
 }: NetworkMonitorProps) {
   const prefersReducedMotion = useReducedMotion();
   const [collapsed, setCollapsed] = useState(false);
+  const [monitorTab, setMonitorTab] = useState<'flow' | 'osi'>('flow');
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [slowMode, setSlowMode] = useState(false);
@@ -301,31 +304,67 @@ export function NetworkMonitor({
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-1.5">
-          {TOOL_DEMOS.map((item) => {
-            const active = event?.tool === item.tool;
-            return (
-              <button
-                key={item.tool}
-                type="button"
-                disabled={isExecuting}
-                onClick={() => onRunDemoCommand(item.cmd)}
-                className={`cursor-pointer rounded-md border px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors disabled:opacity-50 ${
-                  active
-                    ? 'border-cyan-400/70 bg-cyan-400/15 text-cyan-200'
-                    : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-cyan-400/40 hover:text-cyan-200'
-                }`}
-              >
-                {item.label}
-              </button>
-            );
-          })}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* View Switcher: Fluxo de Pacotes vs Modelo OSI (7 Camadas) */}
+          <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+            <button
+              type="button"
+              onClick={() => {
+                setMonitorTab('flow');
+                setCollapsed(false);
+              }}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                monitorTab === 'flow'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Activity className="h-3.5 w-3.5" />
+              Fluxo de Pacotes
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMonitorTab('osi');
+                setCollapsed(false);
+              }}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                monitorTab === 'osi'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Layers className="h-3.5 w-3.5" />
+              Modelo OSI (7 Camadas)
+            </button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1.5">
+            {TOOL_DEMOS.map((item) => {
+              const active = event?.tool === item.tool;
+              return (
+                <button
+                  key={item.tool}
+                  type="button"
+                  disabled={isExecuting}
+                  onClick={() => onRunDemoCommand(item.cmd)}
+                  className={`cursor-pointer rounded-md border px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors disabled:opacity-50 ${
+                    active
+                      ? 'border-cyan-400/70 bg-cyan-400/15 text-cyan-200'
+                      : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-cyan-400/40 hover:text-cyan-200'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
 
           <button
             type="button"
             onClick={() => setCollapsed((v) => !v)}
             aria-label={collapsed ? 'Expandir Network Monitor' : 'Recolher Network Monitor'}
-            className="ml-1 cursor-pointer rounded-md border border-slate-700 p-1.5 text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
+            className="cursor-pointer rounded-md border border-slate-700 p-1.5 text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
           >
             {collapsed ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronUp className="h-3.5 w-3.5" />}
           </button>
@@ -334,7 +373,9 @@ export function NetworkMonitor({
 
       {!collapsed && (
         <div className="p-4 sm:p-5">
-          {!event || !activePacket || !palette || !nodes ? (
+          {monitorTab === 'osi' ? (
+            <OsiModelVisualizer event={event} activePacket={activePacket} />
+          ) : !event || !activePacket || !palette || !nodes ? (
             /* Empty Ready State */
             <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-dashed border-slate-800 bg-[#060911] px-5 py-6 text-center sm:flex-row sm:text-left">
               <div className="space-y-1">
@@ -348,18 +389,28 @@ export function NetworkMonitor({
                   <code className="font-mono text-cyan-300">nslookup</code>,{' '}
                   <code className="font-mono text-cyan-300">sniff</code>) ou um script Python com{' '}
                   <code className="font-mono text-cyan-300">socket</code> para acompanhar o fluxo
-                  gráfico TX/RX, cabeçalhos e payload de cada pacote.
+                  gráfico TX/RX, cabeçalhos e as 7 camadas do Modelo OSI.
                 </p>
               </div>
-              <button
-                type="button"
-                disabled={isExecuting}
-                onClick={() => onRunDemoCommand('nmap -sV 10.0.0.10')}
-                className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg bg-cyan-400 px-3.5 py-2 text-xs font-semibold text-[#05131C] transition-colors hover:bg-cyan-300 disabled:opacity-50 whitespace-nowrap"
-              >
-                <Play className="h-3.5 w-3.5 fill-current" />
-                Iniciar captura (nmap)
-              </button>
+              <div className="flex shrink-0 flex-wrap items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setMonitorTab('osi')}
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#111827] px-3 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
+                >
+                  <Layers className="h-3.5 w-3.5" />
+                  Ver Modelo OSI
+                </button>
+                <button
+                  type="button"
+                  disabled={isExecuting}
+                  onClick={() => onRunDemoCommand('nmap -sV 10.0.0.10')}
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-cyan-400 px-3.5 py-2 text-xs font-semibold text-[#05131C] transition-colors hover:bg-cyan-300 disabled:opacity-50 whitespace-nowrap"
+                >
+                  <Play className="h-3.5 w-3.5 fill-current" />
+                  Iniciar captura (nmap)
+                </button>
+              </div>
             </div>
           ) : (
             <div className="space-y-4">
@@ -967,6 +1018,15 @@ export function NetworkMonitor({
                     <p className="text-xs leading-relaxed text-slate-300">
                       {activePacket.explanation}
                     </p>
+
+                    <button
+                      type="button"
+                      onClick={() => setMonitorTab('osi')}
+                      className="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-cyan-400/35 bg-cyan-400/10 px-3 py-1.5 text-[11px] font-semibold text-cyan-200 transition-colors hover:bg-cyan-400/20"
+                    >
+                      <Layers className="h-3.5 w-3.5" />
+                      Inspecionar este pacote nas 7 Camadas OSI
+                    </button>
                   </div>
 
                   {/* Clickable Packet Timeline Progress */}
