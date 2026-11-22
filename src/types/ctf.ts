@@ -149,6 +149,45 @@ export interface SandboxTerminalLine {
   text: string;
 }
 
+export interface NmapPortEntry {
+  port: number;
+  state: 'open' | 'closed' | 'filtered';
+  service: string;
+  version: string;
+}
+
+export interface NetworkPacketFrame {
+  seq: number;
+  direction: 'tx' | 'rx' | 'drop' | 'sniff';
+  proto: 'ICMP' | 'TCP' | 'UDP' | 'DNS' | 'HTTP' | 'WHOIS';
+  src: string;
+  dst: string;
+  flags: string;
+  bytes: number;
+  ttl: number;
+  latencyMs?: number;
+  payload: string;
+  explanation: string;
+  severity?: 'normal' | 'ok' | 'warn' | 'alert';
+}
+
+export interface NetworkVisualEvent {
+  id: string;
+  tool: 'ping' | 'whois' | 'nmap' | 'sniff' | 'nslookup' | 'socket';
+  target: string;
+  resolvedIp: string;
+  success: boolean;
+  summary: string;
+  avgMs?: number | null;
+  riskNote?: string;
+  org?: string;
+  created?: string;
+  ports?: NmapPortEntry[];
+  packetCount?: number;
+  alertCount?: number;
+  packets?: NetworkPacketFrame[];
+}
+
 export interface PersistedSession {
   profile: StudentProfile;
   completedMissions: Record<string, CompletedMissionRecord>;

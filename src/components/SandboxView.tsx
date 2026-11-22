@@ -32,7 +32,8 @@ import {
   runSandboxShellCommand,
   syncFilesToSandbox,
 } from '../services/pyodideSandbox';
-import { SandboxTerminalLine } from '../types/ctf';
+import { NetworkVisualEvent, SandboxTerminalLine } from '../types/ctf';
+import { NetworkMonitor } from './NetworkMonitor';
 
 interface SandboxViewProps {
   files: Record<string, string>;
@@ -41,17 +42,50 @@ interface SandboxViewProps {
 }
 
 const QUICK_SHELL_COMMANDS = [
-  'ls',
-  'hosts',
-  'cat logs/acesso.log',
-  'python3 scripts/scanner_etico.py',
-  'python3 scripts/analisar_log.py',
+  'ping 10.0.0.10',
+  'nmap -sV 10.0.0.10',
+  'whois phish-alerta.lab',
+  'whois 185.220.101.47',
+  'nslookup portal.if.edu.br',
+  'sniff -c 8',
+  'sniff --proto HTTP',
+  'python3 scripts/sniffer_lab.py',
 ];
 
 const QUICK_REPL_SNIPPETS = [
-  'import os; os.listdir(".")',
+  'netlab.ping("10.0.0.10", count=2)["avg_ms"]',
+  'netlab.nmap("10.0.0.10", scan_type="sV")["ports"]',
+  'netlab.whois("phish-alerta.lab")["risk_note"]',
+  'len(netlab.sniff(proto="TCP"))',
   'import socket; s = socket.socket(); s.connect_ex(("10.0.0.10", 80))',
-  'import hashlib; hashlib.sha256(b"pysec").hexdigest()[:16]',
+];
+
+const NET_UTILITIES = [
+  {
+    cmd: 'ping -c 3 10.0.0.10',
+    name: 'ping',
+    desc: 'Testa latência e perda de pacotes ICMP',
+  },
+  {
+    cmd: 'nmap -sV 10.0.0.10',
+    name: 'nmap',
+    desc: 'Mapeia portas abertas, filtradas e serviços (-sV)',
+  },
+  {
+    cmd: 'whois phish-alerta.lab',
+    name: 'whois',
+    desc: 'Investiga titular, criação e risco de phishing',
+  },
+  {
+    cmd: 'nslookup portal.if.edu.br',
+    name: 'nslookup',
+    desc: 'Consulta registros DNS (A, NS, TXT)',
+  },
+  {
+    cmd: 'sniff -c 8',
+    name: 'sniff',
+    desc: 'Sniffer de pacotes TCP, DNS, HTTP e ICMP',
+  },
 ];
 
 export function SandboxView({
@@ -78,6 +112,7 @@ export function SandboxView({
   const [historyCursor, setHistoryCursor] = useState<number>(-1);
   const [isExecuting, setIsExecuting] = useState(false);
   const [pyodideStatus, setPyodideStatus] = useState<PyodideStatus>(getPyodideStatus());
+  const [visualEvent, setVisualEvent] = useState<NetworkVisualEvent | null>(null);
   const [terminalLines, setTerminalLines] = useState<SandboxTerminalLine[]>([
     {
       id: 'welcome-1',
@@ -87,7 +122,7 @@ export function SandboxView({
     {
       id: 'welcome-2',
       kind: 'info',
-      text: 'Digite "help" para comandos do shell, "hosts" para ver a rede virtual de sockets, ou alterne para Python REPL (>>>).',
+      text: 'Utilitários animados prontos: ping, nmap, whois, nslookup, sniff (packet sniffer) e módulo "import netlab". Digite "help" para ver todas as opções.',
     },
   ]);
 
@@ -247,6 +282,9 @@ export function SandboxView({
     );
     setCwd(res.cwd);
     onFilesChange(res.files);
+    if (res.visualEvent) {
+      setVisualEvent(res.visualEvent);
+    }
     setIsDirty(false);
     if (res.files[selectedFile] !== undefined) {
       setEditorDraft(res.files[selectedFile]);
@@ -276,10 +314,14 @@ export function SandboxView({
     setIsExecuting(false);
   };
 
-  const handleExecuteTerminalCommand = async (rawCommand?: string) => {
+  const handleExecuteTerminalCommand = async (
+    rawCommand?: string,
+    modeOverride?: 'shell' | 'repl'
+  ) => {
     const cmd = (rawCommand ?? commandInput).trim();
     if (!cmd || isExecuting) return;
 
+    const effectiveMode = modeOverride ?? terminalMode;
     setCommandInput('');
     setCmdHistory((prev) => [cmd, ...prev.filter((c) => c !== cmd)].slice(0, 40));
     setHistoryCursor(-1);
@@ -290,18 +332,21 @@ export function SandboxView({
     }
 
     const latestFiles = isDirty ? await handleSaveCurrentFile() : files;
-    const prefix = terminalMode === 'repl' ? '>>>' : `${safeUser}@pysec:${cwd}$`;
+    const prefix = effectiveMode === 'repl' ? '>>>' : `${safeUser}@pysec:${cwd}$`;
 
     appendLines([{ kind: 'prompt', prefix, text: cmd }]);
     setIsExecuting(true);
 
     const res =
-      terminalMode === 'repl'
+      effectiveMode === 'repl'
         ? await runSandboxPythonCode(cmd, 'repl.py', true, latestFiles)
         : await runSandboxShellCommand(cmd, latestFiles);
 
     setCwd(res.cwd);
     onFilesChange(res.files);
+    if (res.visualEvent) {
+      setVisualEvent(res.visualEvent);
+    }
     if (!isDirty && res.files[selectedFile] !== undefined) {
       setEditorDraft(res.files[selectedFile]);
     }
@@ -403,6 +448,16 @@ export function SandboxView({
           </span>
         </div>
       )}
+
+      {/* Live Network Monitor (Animated Packet Flow + Packet Inspector) */}
+      <NetworkMonitor
+        event={visualEvent}
+        isExecuting={isExecuting}
+        onRunDemoCommand={(cmd) => {
+          setTerminalMode('shell');
+          handleExecuteTerminalCommand(cmd, 'shell');
+        }}
+      />
 
       {/* Main 12-Col Sandbox Layout */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
@@ -532,6 +587,38 @@ export function SandboxView({
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Networking Utilities One-Click Reference */}
+            <div className="mt-5 border-t border-slate-800 pt-4">
+              <p className="text-xs font-semibold text-slate-200">
+                Utilitários de Rede (clique para testar)
+              </p>
+              <div className="mt-2.5 space-y-1.5">
+                {NET_UTILITIES.map((util) => (
+                  <button
+                    key={util.name}
+                    type="button"
+                    onClick={() => {
+                      setTerminalMode('shell');
+                      handleExecuteTerminalCommand(util.cmd, 'shell');
+                    }}
+                    className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg border border-slate-800 bg-[#090D16] px-3 py-2 text-left transition-colors hover:border-cyan-400/50"
+                  >
+                    <div className="min-w-0">
+                      <code className="font-mono text-xs font-semibold text-cyan-300">
+                        {util.name}
+                      </code>
+                      <p className="truncate text-[11px] text-slate-400">{util.desc}</p>
+                    </div>
+                    <Play className="h-3 w-3 shrink-0 text-slate-500" />
+                  </button>
+                ))}
+              </div>
+              <p className="mt-2.5 text-[11px] text-slate-500">
+                Em scripts Python, use <code className="text-cyan-300">import netlab</code>{' '}
+                para automatizar ping, nmap, whois, nslookup e sniff.
+              </p>
             </div>
           </div>
         </aside>

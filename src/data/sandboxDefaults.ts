@@ -39,17 +39,22 @@ export const DEFAULT_SANDBOX_FILES: Record<string, string> = {
   'README.txt': `=== SANDBOX PYTHON · TRILHARALI PYSEC ===
 Diretório persistente: /workspace
 
-Comandos úteis no modo Shell:
-  ls, pwd, cd <pasta>, cat <arquivo>, mkdir <pasta>, touch <arquivo>, rm <arquivo>
+Comandos no modo Shell:
+  ls, pwd, cd <pasta>, cat <arquivo>, mkdir, touch, rm
+  ping [-c N] <host>         -> Testa conectividade ICMP simulada
+  nmap [-sV] <host>          -> Mapeia portas abertas/fechadas (SYN scan)
+  whois <dominio|ip>         -> Consulta titular, bloco CIDR e alertas de risco
+  nslookup <dominio>         -> Consulta registros DNS (A, NS, TXT)
+  sniff [--proto HTTP|TCP|DNS|ICMP] [--host IP] [-c N] [--save captura.json]
+  python3 scripts/sniffer_lab.py
   python3 scripts/scanner_etico.py
-  python3 scripts/analisar_log.py
-  clear, help
 
-Hosts virtuais seguros para testes de socket (100% em memória):
-  127.0.0.1 (localhost) -> portas 22, 80, 443, 8080
-  10.0.0.10 (Web IF)    -> portas 22, 80, 443, 3306
-  10.0.0.20 (DNS Lab)   -> portas 22, 53, 80
-  192.168.10.1 (GW)     -> portas 22, 80
+Em Python, importe o módulo nativo do lab:
+  import netlab
+  netlab.ping("10.0.0.10")
+  netlab.nmap("10.0.0.10", scan_type="sV")
+  netlab.whois("phish-alerta.lab")
+  netlab.sniff(count=10, proto="HTTP")
 `,
   'logs/acesso.log': `08:10:01 192.168.10.15 GET /portal 200 OK
 08:10:14 10.0.0.55 POST /login 401 Unauthorized
@@ -96,6 +101,17 @@ with open("logs/acesso.log", "r", encoding="utf-8") as arquivo:
 print("Resumo de falhas 401:")
 for ip, total in falhas.items():
     print(f"  {ip} -> {total} tentativas")
+`,
+  'scripts/sniffer_lab.py': `import netlab
+
+pacotes = netlab.sniff(count=14)
+print(f"Total capturado: {len(pacotes)} pacotes\\n")
+
+for pkt in pacotes:
+    payload = pkt["payload"]
+    if "texto puro" in payload or "port-scan" in payload or "suspeito" in payload:
+        print(f"[ALERTA {pkt['proto']}] {pkt['src_ip']} -> {pkt['dst_ip']}:{pkt['dst_port']}")
+        print(f"   Detalhe: {payload}")
 `,
 };
 
@@ -157,6 +173,58 @@ with open("wordlists/comuns.txt", "r", encoding="utf-8") as f:
         if hashlib.sha256(senha.encode()).hexdigest() == alvo_hash:
             print(f"Correspondencia encontrada na wordlist: {senha}")
             break
+`,
+  },
+  {
+    id: 'tpl-packet-sniffer',
+    label: 'Packet Sniffer (netlab)',
+    filename: 'scripts/sniffer_lab.py',
+    description: 'Captura pacotes simulados e alerta sobre senhas em HTTP puro, port-scans SYN e DNS suspeito',
+    code: `import netlab
+
+pacotes = netlab.sniff(count=14)
+print(f"Total capturado: {len(pacotes)} pacotes\\n")
+
+for pkt in pacotes:
+    payload = pkt["payload"]
+    if "texto puro" in payload or "port-scan" in payload or "suspeito" in payload:
+        print(f"[ALERTA {pkt['proto']}] {pkt['src_ip']} -> {pkt['dst_ip']}:{pkt['dst_port']}")
+        print(f"   Detalhe: {payload}")
+`,
+  },
+  {
+    id: 'tpl-recon-whois',
+    label: 'Reconhecimento (ping + whois)',
+    filename: 'scripts/recon_whois.py',
+    description: 'Automação de reconhecimento combinando ping, nslookup e whois via módulo netlab',
+    code: `import netlab
+
+alvos = ["portal.if.edu.br", "phish-alerta.lab"]
+
+for dominio in alvos:
+    dns = netlab.nslookup(dominio)
+    ip = dns["a"][0] if dns["a"] else "N/A"
+    ping_res = netlab.ping(dominio, count=2)
+    info = netlab.whois(dominio)
+
+    print(f"=== {dominio} ({ip}) ===")
+    print(f"  Ping medio: {ping_res['avg_ms']} ms")
+    print(f"  Criado em:  {info.get('created', '?')} | Pais: {info.get('country', '?')}")
+    print(f"  Analise:    {info.get('risk_note', '')}\\n")
+`,
+  },
+  {
+    id: 'tpl-nmap-scan',
+    label: 'Nmap Port & Service Scan',
+    filename: 'scripts/nmap_lab.py',
+    description: 'Executa varredura Nmap (-sV) no servidor escolar e destaca portas críticas',
+    code: `import netlab
+
+relatorio = netlab.nmap("10.0.0.10", scan_type="sV")
+print(relatorio["raw"])
+
+abertas = [p for p in relatorio["ports"] if p["state"] == "open"]
+print(f"Resumo Python: {len(abertas)} servicos ativos encontrados.")
 `,
   },
 ];
