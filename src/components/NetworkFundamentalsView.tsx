@@ -29,6 +29,7 @@ import {
 } from '../data/networkFundamentals';
 import { EverydayProtocolsModule } from './EverydayProtocolsModule';
 import { NetworkConfigTroubleshootModule } from './NetworkConfigTroubleshootModule';
+import { NetworkProtocolVisualizer } from './NetworkProtocolVisualizer';
 import { TcpUdpModule } from './TcpUdpModule';
 
 type ModuleTab =
@@ -42,6 +43,7 @@ type ModuleTab =
 
 interface NetworkFundamentalsViewProps {
   onOpenSandbox?: () => void;
+  onOpenLinuxLab?: () => void;
 }
 
 const ARCH_MODULE_TABS: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }[] = [
@@ -54,10 +56,13 @@ const ARCH_MODULE_TABS: { id: ModuleTab; label: string; subtitle: string; icon: 
 const PROTOCOL_MODULE_TABS: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }[] = [
   { id: 'protocols', label: 'Protocolos no Dia a Dia', subtitle: 'HTTP/S · DNS · DHCP · SMB · F12 · Wireshark', icon: Eye },
   { id: 'tcp-udp', label: 'TCP e UDP', subtitle: 'Camada 4 · Handshake · Portas · Confiabilidade vs. Velocidade', icon: Layers },
-  { id: 'config', label: 'Config. & Soluções', subtitle: 'DHCP · IP Estático · Diagnóstico de Falhas', icon: Wrench },
+  { id: 'config', label: 'Config. & Soluções', subtitle: 'DHCP · IP Estático · Dicas de Troubleshooting', icon: Wrench },
 ];
 
-export function NetworkFundamentalsView({ onOpenSandbox }: NetworkFundamentalsViewProps) {
+export function NetworkFundamentalsView({
+  onOpenSandbox,
+  onOpenLinuxLab,
+}: NetworkFundamentalsViewProps) {
   const [activeTab, setActiveTab] = useState<ModuleTab>('types');
 
   const renderTabButton = (tab: { id: ModuleTab; label: string; subtitle: string; icon: typeof Globe }) => {
@@ -105,8 +110,18 @@ export function NetworkFundamentalsView({ onOpenSandbox }: NetworkFundamentalsVi
       {activeTab === 'media' && <TransmissionMediaModule />}
       {activeTab === 'modes' && <TransmissionModesModule />}
       {activeTab === 'protocols' && <EverydayProtocolsModule onOpenSandbox={onOpenSandbox} />}
-      {activeTab === 'tcp-udp' && <TcpUdpModule />}
-      {activeTab === 'config' && <NetworkConfigTroubleshootModule />}
+      {activeTab === 'tcp-udp' && (
+        <div className="space-y-6">
+          <NetworkProtocolVisualizer />
+          <TcpUdpModule />
+        </div>
+      )}
+      {activeTab === 'config' && (
+        <NetworkConfigTroubleshootModule
+          onOpenSandbox={onOpenSandbox}
+          onOpenLinuxLab={onOpenLinuxLab}
+        />
+      )}
     </div>
   );
 }

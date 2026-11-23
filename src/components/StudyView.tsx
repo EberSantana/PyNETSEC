@@ -17,6 +17,7 @@ import {
   RotateCcw,
   Shield,
   Terminal,
+  Wrench,
 } from 'lucide-react';
 import { CIRCUITS, MISSIONS, getMissionById } from '../data/missions';
 import { DEFENSE_THEORY_MISSIONS } from '../data/infoSecData';
@@ -43,9 +44,14 @@ import { LinuxLabView } from './LinuxLabView';
 import { ProtocolosLessonSection } from './ProtocolosLessonSection';
 import { InfoSecLabView } from './InfoSecLabView';
 import { NetworkProtocolVisualizer } from './NetworkProtocolVisualizer';
+import { NetworkTroubleshootingTipsPanel } from './NetworkTroubleshootingTipsPanel';
 
 export type StudyTrack = 'python' | 'networks' | 'infosec' | 'linux';
-export type NetworkStudySubTab = 'fundamentals' | 'visualizer' | 'protocolos';
+export type NetworkStudySubTab =
+  | 'fundamentals'
+  | 'visualizer'
+  | 'protocolos'
+  | 'troubleshooting';
 
 interface StudyViewProps {
   activeLessonId: string;
@@ -450,7 +456,19 @@ export function StudyView({
                 }`}
               >
                 <ArrowLeftRight className="h-3.5 w-3.5" />
-                Guia Completo: TCP vs. UDP
+                Protocolos de Rede (TCP vs. UDP)
+              </button>
+              <button
+                type="button"
+                onClick={() => setNetworkSubTab('troubleshooting')}
+                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
+                  networkSubTab === 'troubleshooting'
+                    ? 'bg-cyan-400 text-[#05131C]'
+                    : 'text-slate-300 hover:text-slate-100'
+                }`}
+              >
+                <Wrench className="h-3.5 w-3.5" />
+                Dicas de Troubleshooting
               </button>
             </div>
 
@@ -459,7 +477,9 @@ export function StudyView({
                 ? 'Tipos de rede, topologias com falhas, meios, protocolos cotidianos e troubleshooting'
                 : networkSubTab === 'visualizer'
                   ? 'Animação passo a passo do Three-Way Handshake TCP vs. datagramas diretos UDP'
-                  : 'Camada 4 em detalhes: confiabilidade, cabeçalhos, tabela comparativa e casos de uso'}
+                  : networkSubTab === 'troubleshooting'
+                    ? 'Comandos essenciais (ping, traceroute, netstat/ss, nslookup, ip e tcpdump) e quando usar cada um'
+                    : 'Camada 4 em detalhes: confiabilidade, cabeçalhos, tabela comparativa e casos de uso'}
             </span>
           </div>
 
@@ -479,9 +499,15 @@ export function StudyView({
                 onOpenNetworkSimulator={() => setNetworkSubTab('fundamentals')}
               />
             </div>
+          ) : networkSubTab === 'troubleshooting' ? (
+            <NetworkTroubleshootingTipsPanel
+              onOpenSandbox={onOpenLabMode ? () => onOpenLabMode('sandbox') : undefined}
+              onOpenLinuxLab={onOpenLabMode ? () => onOpenLabMode('linux') : undefined}
+            />
           ) : (
             <NetworkFundamentalsView
-              onOpenSandbox={() => onOpenLabMode?.('sandbox')}
+              onOpenSandbox={onOpenLabMode ? () => onOpenLabMode('sandbox') : undefined}
+              onOpenLinuxLab={onOpenLabMode ? () => onOpenLabMode('linux') : undefined}
             />
           )}
         </div>

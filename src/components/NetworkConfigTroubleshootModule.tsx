@@ -9,6 +9,7 @@ import {
   Wrench,
   XCircle,
 } from 'lucide-react';
+import { NetworkTroubleshootingTipsPanel } from './NetworkTroubleshootingTipsPanel';
 
 interface TroubleshootScenario {
   id: string;
@@ -95,7 +96,15 @@ function isValidIpv4(ip: string): boolean {
   return parts.every((p) => /^\d+$/.test(p) && Number(p) >= 0 && Number(p) <= 255);
 }
 
-export function NetworkConfigTroubleshootModule() {
+interface NetworkConfigTroubleshootModuleProps {
+  onOpenSandbox?: () => void;
+  onOpenLinuxLab?: () => void;
+}
+
+export function NetworkConfigTroubleshootModule({
+  onOpenSandbox,
+  onOpenLinuxLab,
+}: NetworkConfigTroubleshootModuleProps = {}) {
   // Part 1: Basic Network Configuration Lab
   const [configMode, setConfigMode] = useState<'dhcp' | 'static'>('dhcp');
   const [ipAddr, setIpAddr] = useState('192.168.10.25');
@@ -398,6 +407,12 @@ export function NetworkConfigTroubleshootModule() {
           </div>
         </div>
       </div>
+
+      {/* PART 3: PAINEL DE DICAS DE TROUBLESHOOTING DE REDE */}
+      <NetworkTroubleshootingTipsPanel
+        onOpenSandbox={onOpenSandbox}
+        onOpenLinuxLab={onOpenLinuxLab}
+      />
     </div>
   );
 }
