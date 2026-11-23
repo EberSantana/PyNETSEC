@@ -4,9 +4,9 @@ export type TeamRole = 'core' | 'network' | 'linux' | 'blue' | 'red';
 
 export type AppView = 'hub' | 'study' | 'lab' | 'ranking' | 'badges';
 
-export type LabWorkspaceMode = 'mission' | 'sandbox';
+export type LabWorkspaceMode = 'mission' | 'sandbox' | 'linux';
 
-export type RankingModuleFilter = 'geral' | 'PySec' | 'BD';
+export type RankingModuleFilter = 'geral' | 'PyNetSec' | 'BD';
 
 export type SyncStatus = 'synced' | 'duplicate' | 'local' | 'error';
 
@@ -188,10 +188,27 @@ export interface NetworkVisualEvent {
   packets?: NetworkPacketFrame[];
 }
 
+export type DefenseBadgeId =
+  | 'badge-firewall'
+  | 'badge-crypto'
+  | 'badge-ids-ips'
+  | 'badge-defense-depth';
+
+export interface DefenseMissionCompletion {
+  missionId: string;
+  badgeId: DefenseBadgeId;
+  badgeTitle: string;
+  badgeCode: string;
+  completedAt: string;
+  score: number;
+  total: number;
+}
+
 export interface PersistedSession {
   profile: StudentProfile;
   completedMissions: Record<string, CompletedMissionRecord>;
   completedDrills: Record<string, boolean>;
+  completedDefenseMissions: Record<string, DefenseMissionCompletion>;
   codeDrafts: Record<string, string>;
   sandboxFiles: Record<string, string> | null;
   runHistory: RunHistoryEntry[];

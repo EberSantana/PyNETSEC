@@ -22,10 +22,10 @@ os.makedirs(_WORKSPACE_ROOT, exist_ok=True)
 # Virtual lab network topology (100% in-memory, safe for school firewalls)
 _VIRTUAL_LAB_NETWORK = {
     "127.0.0.1": {
-        22: b"SSH-2.0-OpenSSH_9.6p1 PySecLocal\\r\\n",
-        80: b"HTTP/1.1 200 OK\\r\\nServer: PySec-LocalHTTP/1.0\\r\\nContent-Type: text/plain\\r\\n\\r\\nBem-vindo ao servidor local (127.0.0.1:80)\\n",
-        443: b"TLSv1.3 Handshake OK (certificado local: localhost.pysec.lab)\\r\\n",
-        8080: b"HTTP/1.1 200 OK\\r\\nServer: PySec-Dev/8080\\r\\n\\r\\nPainel de testes local ativo.\\n",
+        22: b"SSH-2.0-OpenSSH_9.6p1 PyNetSecLocal\\r\\n",
+        80: b"HTTP/1.1 200 OK\\r\\nServer: PyNetSec-LocalHTTP/1.0\\r\\nContent-Type: text/plain\\r\\n\\r\\nBem-vindo ao servidor local (127.0.0.1:80)\\n",
+        443: b"TLSv1.3 Handshake OK (certificado local: localhost.pynetsec.lab)\\r\\n",
+        8080: b"HTTP/1.1 200 OK\\r\\nServer: PyNetSec-Dev/8080\\r\\n\\r\\nPainel de testes local ativo.\\n",
     },
     "10.0.0.10": {
         22: b"SSH-2.0-OpenSSH_8.9p1 Ubuntu-LabIF\\r\\n",
@@ -218,7 +218,7 @@ class _SimulatedLabSocket:
         if port in (80, 8080) and b"GET " in self._sent_data:
             req_line = self._sent_data.split(b"\\r\\n")[0].decode("utf-8", errors="ignore")
             self._buffer = (
-                f"HTTP/1.1 200 OK\\r\\nServer: PySec-Lab ({host}:{port})\\r\\n"
+                f"HTTP/1.1 200 OK\\r\\nServer: PyNetSec-Lab ({host}:{port})\\r\\n"
                 f"X-Request: {req_line}\\r\\n\\r\\n"
                 f"Resposta simulada com sucesso para {req_line}\\n"
             ).encode("utf-8")
@@ -352,7 +352,7 @@ _WHOIS_DB = {
         "risk_note": "Dominio institucional antigo e legitimo.",
     },
     "web.if.lab": {
-        "org": "Servidor Web Escolar (Lab PySec)",
+        "org": "Servidor Web Escolar (Lab PyNetSec)",
         "registrar": "NIC Lab Interno",
         "country": "BR",
         "created": "2023-02-15",
@@ -415,7 +415,7 @@ _SERVICE_CATALOG = {
     80: ("http", "nginx 1.24.0 (IF-Lab)"),
     443: ("https", "nginx TLSv1.3"),
     3306: ("mysql", "MySQL 5.7.44 (Exposto!)"),
-    8080: ("http-proxy", "PySec-Dev/8080"),
+    8080: ("http-proxy", "PyNetSec-Dev/8080"),
 }
 
 def _netlab_ping(host, count=4):
@@ -706,7 +706,7 @@ def _netlab_nmap(host, scan_type="sS"):
 
     if host_services is None:
         raw = (
-            f"Starting Nmap 7.94 (Simulado PySecLab)\\n"
+            f"Starting Nmap 7.94 (Simulado PyNetSec)\\n"
             f"Host '{target}' ({resolved}) fora da rede virtual autorizada.\\n"
             "Alvos disponiveis: 127.0.0.1, 10.0.0.10, 10.0.0.20, 192.168.10.1, web.if.lab\\n"
         )
@@ -747,7 +747,7 @@ def _netlab_nmap(host, scan_type="sS"):
 
     open_entries = [e for e in port_entries if e["state"] == "open"]
     lines = [
-        f"Starting Nmap 7.94 (Simulado PySecLab) — Modo -{scan_type}",
+        f"Starting Nmap 7.94 (Simulado PyNetSec) — Modo -{scan_type}",
         f"Nmap scan report for {target} ({resolved})",
         "Host is up (0.0014s latency).",
         "",

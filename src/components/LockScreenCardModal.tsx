@@ -51,6 +51,7 @@ export interface LockScreenCardData {
   turma: string;
   points: number;
   rankTitle: string;
+  badgeLabel?: string;
   defaultPalette?: CardPaletteId;
 }
 
@@ -124,7 +125,7 @@ function drawWallpaperCanvas(
   // Header caption
   ctx.fillStyle = theme.accent;
   ctx.font = '600 32px "JetBrains Mono", monospace';
-  ctx.fillText(`TRILHARALI · CIRCUITO PYSEC`, cardX + 48, cardY + 124);
+  ctx.fillText(`PYNETSEC · TRILHA INTERATIVA`, cardX + 48, cardY + 124);
 
   // Mission badge / code
   ctx.fillStyle = '#94A3B8';
@@ -164,7 +165,7 @@ function drawWallpaperCanvas(
 
   ctx.fillStyle = '#64748B';
   ctx.font = '500 22px "JetBrains Mono", monospace';
-  ctx.fillText('FLAG CAPTURADA', cardX + 76, flagBoxY + 42);
+  ctx.fillText(card.badgeLabel ?? 'FLAG CAPTURADA', cardX + 76, flagBoxY + 42);
 
   ctx.fillStyle = theme.accent;
   ctx.font = '600 30px "JetBrains Mono", monospace';
@@ -175,7 +176,7 @@ function drawWallpaperCanvas(
   const footerY = cardY + 628;
   ctx.fillStyle = '#E2E8F0';
   ctx.font = '600 32px "Plus Jakarta Sans", sans-serif';
-  ctx.fillText(card.studentName || 'Operador PySec', cardX + 48, footerY);
+  ctx.fillText(card.studentName || 'Operador PyNetSec', cardX + 48, footerY);
 
   ctx.fillStyle = '#94A3B8';
   ctx.font = '500 26px "Plus Jakarta Sans", sans-serif';
@@ -236,7 +237,7 @@ export function LockScreenCardModal({ open, card, onClose }: LockScreenCardModal
   const handleDownload = () => {
     if (!canvasRef.current) return;
     const link = document.createElement('a');
-    link.download = `pysec-${card.missionCode.toLowerCase()}-wallpaper.png`;
+    link.download = `pynetsec-${card.missionCode.toLowerCase()}-wallpaper.png`;
     link.href = canvasRef.current.toDataURL('image/png');
     link.click();
     setDownloaded(true);

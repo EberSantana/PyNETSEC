@@ -101,8 +101,8 @@ export function createInitialLinuxState(): LinuxState {
       nano: makeFile('nano', '# ELF binary: Nano text editor', 'root', 'root', 'rwxr-xr-x', 'Oct 10 12:00'),
     }),
     boot: makeDir('boot', {
-      'vmlinuz-6.8.0-lab': makeFile('vmlinuz-6.8.0-lab', 'Kernel Linux 6.8.0-pysec (arquivo de inicializacao)', 'root', 'root', 'rw-r--r--', 'Oct 01 07:30'),
-      'grub.cfg': makeFile('grub.cfg', 'set default=0\nset timeout=5\nmenuentry "Ubuntu Lab PySec" { linux /boot/vmlinuz-6.8.0-lab }', 'root', 'root', 'rw-r--r--', 'Oct 01 07:30'),
+      'vmlinuz-6.8.0-lab': makeFile('vmlinuz-6.8.0-lab', 'Kernel Linux 6.8.0-pynetsec (arquivo de inicializacao)', 'root', 'root', 'rw-r--r--', 'Oct 01 07:30'),
+      'grub.cfg': makeFile('grub.cfg', 'set default=0\nset timeout=5\nmenuentry "Ubuntu Lab PyNetSec" { linux /boot/vmlinuz-6.8.0-lab }', 'root', 'root', 'rw-r--r--', 'Oct 01 07:30'),
     }),
     dev: makeDir('dev', {
       null: makeFile('null', '', 'root', 'root', 'rw-rw-rw-', 'Nov 22 08:00'),
@@ -110,7 +110,7 @@ export function createInitialLinuxState(): LinuxState {
       tty0: makeFile('tty0', 'Terminal virtual de entrada e saida', 'root', 'tty', 'rw--w----', 'Nov 22 08:00'),
     }),
     etc: makeDir('etc', {
-      hostname: makeFile('hostname', 'pysec-linux\n', 'root', 'root', 'rw-r--r--', 'Oct 15 10:00'),
+      hostname: makeFile('hostname', 'pynetsec-linux\n', 'root', 'root', 'rw-r--r--', 'Oct 15 10:00'),
       hosts: makeFile(
         'hosts',
         '127.0.0.1   localhost\n10.0.0.10   portal.if.edu.br web.if.lab\n10.0.0.20   dns.if.lab\n192.168.10.1 gateway.if.lab\n',
@@ -135,7 +135,7 @@ export function createInitialLinuxState(): LinuxState {
       aluno: makeDir(
         'aluno',
         {
-          '.bashrc': makeFile('.bashrc', '# Configuracao oculta do terminal do usuario aluno\nexport PS1="\\u@pysec-linux:\\w$ "\nalias ll="ls -lh"\n', 'aluno', 'alunos', 'rw-r--r--', 'Nov 10 08:00'),
+          '.bashrc': makeFile('.bashrc', '# Configuracao oculta do terminal do usuario aluno\nexport PS1="\\u@pynetsec-linux:\\w$ "\nalias ll="ls -lh"\n', 'aluno', 'alunos', 'rw-r--r--', 'Nov 10 08:00'),
           '.profile': makeFile('.profile', '# Variaveis de ambiente do login\nPATH="$HOME/bin:/usr/bin:/bin"\n', 'aluno', 'alunos', 'rw-r--r--', 'Nov 10 08:00'),
           'notas.txt': makeFile(
             'notas.txt',
@@ -195,8 +195,8 @@ export function createInitialLinuxState(): LinuxState {
       }, 'aluno', 'alunos'),
     }),
     opt: makeDir('opt', {
-      'pysec-tools': makeDir('pysec-tools', {
-        'README.txt': makeFile('README.txt', 'Aplicacao de terceiros instalada em /opt/pysec-tools\n', 'root', 'root', 'rw-r--r--', 'Nov 12 11:00'),
+      'pynetsec-tools': makeDir('pynetsec-tools', {
+        'README.txt': makeFile('README.txt', 'Aplicacao de terceiros instalada em /opt/pynetsec-tools\n', 'root', 'root', 'rw-r--r--', 'Nov 12 11:00'),
       }),
     }),
     sbin: makeDir('sbin', {
@@ -225,7 +225,7 @@ export function createInitialLinuxState(): LinuxState {
       log: makeDir('log', {
         syslog: makeFile(
           'syslog',
-          'Nov 22 08:01:12 pysec-linux systemd[1]: Rede eth0 iniciada com sucesso.\nNov 22 08:01:15 pysec-linux dhclient[412]: DHCPACK de 192.168.10.1 -> IP 192.168.10.15\nNov 22 08:04:02 pysec-linux kernel: ERRO temporario de timeout no link externo\nNov 22 08:05:19 pysec-linux nginx[810]: HTTP 200 GET /portal.if.edu.br\nNov 22 08:09:44 pysec-linux ufw[911]: [UFW BLOCK] SRC=185.220.101.47 DPT=3306 PROTO=TCP\nNov 22 08:12:05 pysec-linux sshd[940]: Erro de autenticacao para usuario admin (185.220.101.47)\nNov 22 08:15:30 pysec-linux systemd[1]: Backup concluido sem falhas.\n',
+          'Nov 22 08:01:12 pynetsec-linux systemd[1]: Rede eth0 iniciada com sucesso.\nNov 22 08:01:15 pynetsec-linux dhclient[412]: DHCPACK de 192.168.10.1 -> IP 192.168.10.15\nNov 22 08:04:02 pynetsec-linux kernel: ERRO temporario de timeout no link externo\nNov 22 08:05:19 pynetsec-linux nginx[810]: HTTP 200 GET /portal.if.edu.br\nNov 22 08:09:44 pynetsec-linux ufw[911]: [UFW BLOCK] SRC=185.220.101.47 DPT=3306 PROTO=TCP\nNov 22 08:12:05 pynetsec-linux sshd[940]: Erro de autenticacao para usuario admin (185.220.101.47)\nNov 22 08:15:30 pynetsec-linux systemd[1]: Backup concluido sem falhas.\n',
           'root',
           'adm',
           'rw-r-----',
@@ -233,7 +233,7 @@ export function createInitialLinuxState(): LinuxState {
         ),
         'auth.log': makeFile(
           'auth.log',
-          'Nov 22 08:10:01 pysec-linux sshd[902]: Accepted publickey for aluno from 192.168.10.22\nNov 22 08:12:05 pysec-linux sshd[940]: Failed password for invalid user admin from 185.220.101.47\nNov 22 08:12:07 pysec-linux sshd[941]: Failed password for invalid user root from 185.220.101.47\n',
+          'Nov 22 08:10:01 pynetsec-linux sshd[902]: Accepted publickey for aluno from 192.168.10.22\nNov 22 08:12:05 pynetsec-linux sshd[940]: Failed password for invalid user admin from 185.220.101.47\nNov 22 08:12:07 pynetsec-linux sshd[941]: Failed password for invalid user root from 185.220.101.47\n',
           'root',
           'adm',
           'rw-r-----',
@@ -251,7 +251,7 @@ export function createInitialLinuxState(): LinuxState {
     isRoot: false,
     users: {
       root: { username: 'root', comment: 'Superusuario do Sistema', home: '/root', locked: false, groups: ['root', 'sudo'] },
-      aluno: { username: 'aluno', comment: 'Estudante PySec', home: '/home/aluno', locked: false, groups: ['alunos', 'sudo', 'redes'] },
+      aluno: { username: 'aluno', comment: 'Estudante PyNetSec', home: '/home/aluno', locked: false, groups: ['alunos', 'sudo', 'redes'] },
       professor: { username: 'professor', comment: 'Docente de Redes', home: '/home/professor', locked: false, groups: ['sudo', 'adm', 'redes'] },
     },
     groups: {
@@ -963,7 +963,7 @@ export function runLinuxCommand(prevState: LinuxState, rawInput: string): LinuxE
     }
     stdout =
       (MAN_PAGES[topic] ??
-        `${topic.toUpperCase()}(1) — Manual resumido do ambiente PySec Linux.\nConsulte a barra lateral "Guia de Comandos" para exemplos praticos de '${topic}'.`) +
+        `${topic.toUpperCase()}(1) — Manual resumido do ambiente PyNetSec Linux.\nConsulte a barra lateral "Guia de Comandos" para exemplos praticos de '${topic}'.`) +
       '\n';
     return finish();
   }
@@ -998,7 +998,7 @@ export function runLinuxCommand(prevState: LinuxState, rawInput: string): LinuxE
       cmdLower === 'head' ? allLines.slice(0, linesCount) : allLines.slice(-linesCount);
     stdout = slice.join('\n') + '\n';
     if (cmdLower === 'tail' && follow) {
-      stdout += `[tail -f] Monitorando novas linhas em ${fileArg} em tempo real (simulado no lab)...\nNov 22 agora pysec-linux kernel: [LIVE] Novo evento capturado no log.\n`;
+      stdout += `[tail -f] Monitorando novas linhas em ${fileArg} em tempo real (simulado no lab)...\nNov 22 agora pynetsec-linux kernel: [LIVE] Novo evento capturado no log.\n`;
     }
     return finish();
   }
@@ -1487,7 +1487,7 @@ export function runLinuxCommand(prevState: LinuxState, rawInput: string): LinuxE
   }
 
   if (cmdLower === 'hostname') {
-    stdout = args.includes('-I') ? '192.168.10.15 10.0.0.15\n' : 'pysec-linux\n';
+    stdout = args.includes('-I') ? '192.168.10.15 10.0.0.15\n' : 'pynetsec-linux\n';
     return finish();
   }
 

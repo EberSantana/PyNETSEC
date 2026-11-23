@@ -1,7 +1,21 @@
-import { Flag, History, Smartphone, Award, ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  CheckCircle2,
+  Flag,
+  Flame,
+  History,
+  KeyRound,
+  Lock,
+  Radar,
+  ShieldCheck,
+  Smartphone,
+} from 'lucide-react';
+import { DEFENSE_THEORY_MISSIONS, DefenseTheoryMission } from '../data/infoSecData';
 import { MISSIONS, getStudentRankTitle } from '../data/missions';
 import {
   CompletedMissionRecord,
+  DefenseMissionCompletion,
   Mission,
   RunHistoryEntry,
   StudentProfile,
@@ -11,19 +25,26 @@ import { CardPaletteId, LockScreenCardData } from './LockScreenCardModal';
 interface BadgesViewProps {
   profile: StudentProfile;
   completedMissions: Record<string, CompletedMissionRecord>;
+  completedDefenseMissions: Record<string, DefenseMissionCompletion>;
   runHistory: RunHistoryEntry[];
   onOpenLockScreenCard: (card: LockScreenCardData) => void;
   onStartMission: (mission: Mission) => void;
+  onOpenDefenseStudy: () => void;
 }
 
 export function BadgesView({
   profile,
   completedMissions,
+  completedDefenseMissions,
   runHistory,
   onOpenLockScreenCard,
   onStartMission,
+  onOpenDefenseStudy,
 }: BadgesViewProps) {
   const completedList = MISSIONS.filter((m) => Boolean(completedMissions[m.id]));
+  const unlockedDefenseList = DEFENSE_THEORY_MISSIONS.filter((m) =>
+    Boolean(completedDefenseMissions[m.id])
+  );
   const totalPoints = Object.values(completedMissions).reduce(
     (sum, item) => sum + item.pontos,
     0
@@ -32,16 +53,16 @@ export function BadgesView({
 
   const openOverallCard = () => {
     onOpenLockScreenCard({
-      missionCode: `PYSEC ${completedList.length}/${MISSIONS.length}`,
+      missionCode: `PYNETSEC ${completedList.length}/${MISSIONS.length}`,
       title: rankTitle,
       flag:
         completedList.length > 0
           ? completedMissions[completedList[completedList.length - 1].id].flag
-          : 'FLAG{jornada_iniciada_pysec}',
-      studentName: profile.aluno.trim() || 'Operador PySec',
+          : 'FLAG{jornada_iniciada_pynetsec}',
+      studentName: profile.aluno.trim() || 'Operador PyNetSec',
       turma: profile.turma.trim() || 'Ensino Médio Técnico',
       points: totalPoints,
-      rankTitle: `${completedList.length} missões concluídas`,
+      rankTitle: `${completedList.length} missões · ${unlockedDefenseList.length}/${DEFENSE_THEORY_MISSIONS.length} badges`,
       defaultPalette: 'cyan',
     });
   };
@@ -57,12 +78,33 @@ export function BadgesView({
       missionCode: `MISSÃO ${mission.id}`,
       title: mission.title,
       flag: mission.flag,
-      studentName: profile.aluno.trim() || 'Operador PySec',
+      studentName: profile.aluno.trim() || 'Operador PyNetSec',
       turma: profile.turma.trim() || 'Ensino Médio Técnico',
       points: mission.points,
       rankTitle,
       defaultPalette: palette,
     });
+  };
+
+  const openDefenseBadgeCard = (mission: DefenseTheoryMission) => {
+    onOpenLockScreenCard({
+      missionCode: `SEGURANÇA · ${mission.id}`,
+      title: mission.badgeTitle,
+      flag: mission.badgeCode,
+      studentName: profile.aluno.trim() || 'Operador PyNetSec',
+      turma: profile.turma.trim() || 'Ensino Médio Técnico',
+      points: mission.badgePoints,
+      rankTitle: `Badge de Defesa · ${mission.pillarLabel}`,
+      badgeLabel: 'BADGE DE DEFESA DESBLOQUEADA',
+      defaultPalette: mission.badgePalette,
+    });
+  };
+
+  const getDefenseIcon = (pillar: DefenseTheoryMission['pillar']) => {
+    if (pillar === 'firewall') return Flame;
+    if (pillar === 'criptografia') return KeyRound;
+    if (pillar === 'ids-ips') return Radar;
+    return ShieldCheck;
   };
 
   return (
@@ -71,14 +113,18 @@ export function BadgesView({
       <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#111827] p-6 sm:flex-row sm:items-center">
         <div>
           <p className="text-xs font-medium text-cyan-300">
-            Cofre de Flags · Cartões 9:16 Lock-Screen
+            Perfil de Conquistas · Badges de Defesa &amp; Cofre de Flags
           </p>
           <h1 className="mt-1 text-3xl font-bold text-slate-50">
-            Suas Conquistas PySec
+            Suas Conquistas PyNetSec
           </h1>
           <p className="mt-1.5 text-sm text-slate-400 tabular-nums">
             Patente atual: <strong className="text-slate-100">{rankTitle}</strong> ·{' '}
-            {completedList.length}/{MISSIONS.length} Flags · {totalPoints} XP acumulados
+            <strong className="text-emerald-400">
+              {unlockedDefenseList.length}/{DEFENSE_THEORY_MISSIONS.length}
+            </strong>{' '}
+            Badges de Defesa · {completedList.length}/{MISSIONS.length} Flags · {totalPoints} XP
+            acumulados
           </p>
         </div>
 
@@ -92,8 +138,134 @@ export function BadgesView({
         </button>
       </div>
 
-      {/* Captured Flags Grid */}
+      {/* Defense Badges Section (Segurança da Informação) */}
       <section className="mt-8">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+          <div>
+            <h2 className="text-xl font-bold text-slate-50">
+              Badges de Defesa · Segurança da Informação
+            </h2>
+            <p className="mt-1 text-xs text-slate-400">
+              Desbloqueadas ao completar as missões teóricas de Firewall, Criptografia, IDS/IPS e
+              Defesa em Profundidade no Centro de Estudos.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 text-xs tabular-nums shrink-0">
+            <span className="text-slate-400">
+              <strong className="font-mono text-emerald-400">
+                {unlockedDefenseList.length}/{DEFENSE_THEORY_MISSIONS.length}
+              </strong>{' '}
+              desbloqueadas
+            </span>
+            <button
+              type="button"
+              onClick={onOpenDefenseStudy}
+              className="flex cursor-pointer items-center gap-1 font-semibold text-cyan-300 transition-colors hover:text-cyan-200 whitespace-nowrap"
+            >
+              Ir para Missões de Defesa
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {DEFENSE_THEORY_MISSIONS.map((mission) => {
+            const record = completedDefenseMissions[mission.id];
+            const unlocked = Boolean(record);
+            const Icon = getDefenseIcon(mission.pillar);
+
+            return (
+              <div
+                key={mission.id}
+                className={`flex flex-col justify-between rounded-xl border p-5 ${
+                  unlocked
+                    ? 'border-emerald-500/40 bg-[#111827]'
+                    : 'border-slate-800 bg-[#0D1321]'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 text-xs tabular-nums">
+                    <span className="font-mono font-semibold text-cyan-300">
+                      {mission.id} · {mission.pillarLabel}
+                    </span>
+                    {unlocked ? (
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                    ) : (
+                      <Lock className="h-4 w-4 shrink-0 text-slate-500" />
+                    )}
+                  </div>
+
+                  <div className="mt-3 flex items-center gap-3">
+                    <div
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${
+                        unlocked
+                          ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-300'
+                          : 'border-slate-800 bg-[#090D16] text-slate-600'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3
+                        className={`text-sm font-bold ${
+                          unlocked ? 'text-slate-50' : 'text-slate-400'
+                        }`}
+                      >
+                        {mission.badgeTitle}
+                      </h3>
+                      <p className="text-[11px] text-slate-400">
+                        {unlocked
+                          ? `Conquistada em ${new Date(record.completedAt).toLocaleDateString('pt-BR')}`
+                          : 'Missão teórica pendente'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-xs leading-relaxed text-slate-400">
+                    {mission.badgeSubtitle}
+                  </p>
+
+                  {unlocked && (
+                    <div className="mt-3 truncate rounded-lg border border-emerald-500/25 bg-[#060911] px-3 py-1.5 font-mono text-[11px] text-emerald-300">
+                      {mission.badgeCode}
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-4 flex items-center justify-between border-t border-slate-800/80 pt-3 text-xs">
+                  {unlocked ? (
+                    <>
+                      <span className="font-mono text-[11px] text-slate-400 tabular-nums">
+                        {record.score}/{record.total} acertos
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => openDefenseBadgeCard(mission)}
+                        className="flex cursor-pointer items-center gap-1.5 font-semibold text-cyan-300 transition-colors hover:text-cyan-200 whitespace-nowrap"
+                      >
+                        <Smartphone className="h-3.5 w-3.5" />
+                        Ver Lock-Screen
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={onOpenDefenseStudy}
+                      className="flex w-full cursor-pointer items-center justify-between font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
+                    >
+                      <span>Desbloquear em Estudar</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Captured Flags Grid */}
+      <section className="mt-10">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold text-slate-50">Flags Capturadas</h2>
           <span className="text-xs text-slate-400 tabular-nums">

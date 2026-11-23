@@ -14,13 +14,15 @@ import {
   Zap,
 } from 'lucide-react';
 import {
-  PROTOCOLOS_DEEP_DIVE,
+  PROTOCOL_LESSON,
+  ProtocolosLessonContent,
   ProtocolProfile,
 } from '../data/lessons/protocolos';
 import { getMissionById } from '../data/missions';
 import { Mission } from '../types/ctf';
 
 interface ProtocolosLessonSectionProps {
+  lesson?: ProtocolosLessonContent;
   isMissionUnlocked: (mission: Mission) => boolean;
   onGoToMission: (mission: Mission) => void;
   onPracticePythonDrills: () => void;
@@ -30,6 +32,7 @@ interface ProtocolosLessonSectionProps {
 type LessonTab = 'mechanics' | 'comparison' | 'use-cases';
 
 export function ProtocolosLessonSection({
+  lesson = PROTOCOL_LESSON,
   isMissionUnlocked,
   onGoToMission,
   onPracticePythonDrills,
@@ -40,11 +43,18 @@ export function ProtocolosLessonSection({
   const [useCaseFilter, setUseCaseFilter] = useState<'ALL' | 'TCP' | 'UDP'>('ALL');
 
   const profile: ProtocolProfile =
-    focusedProto === 'tcp' ? PROTOCOLOS_DEEP_DIVE.tcp : PROTOCOLOS_DEEP_DIVE.udp;
+    focusedProto === 'tcp' ? lesson.tcp : lesson.udp;
 
-  const filteredUseCases = PROTOCOLOS_DEEP_DIVE.useCases.filter((uc) =>
+  const filteredUseCases = lesson.useCases.filter((uc) =>
     useCaseFilter === 'ALL' ? true : uc.protocol === useCaseFilter
   );
+
+  const highlightItems = [
+    lesson.highlights.reliability,
+    lesson.highlights.handshake,
+    lesson.highlights.headerSize,
+    lesson.highlights.streamingVsFileTransfer,
+  ];
 
   return (
     <div className="space-y-6">
@@ -55,18 +65,18 @@ export function ProtocolosLessonSection({
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
               <span className="inline-flex items-center gap-1.5 font-semibold text-cyan-300">
                 <Layers className="h-3.5 w-3.5" />
-                {PROTOCOLOS_DEEP_DIVE.osiLayer}
+                {lesson.osiLayer}
               </span>
               <span className="text-slate-600">·</span>
               <span className="tabular-nums">
-                {PROTOCOLOS_DEEP_DIVE.readTimeMinutes} min de leitura
+                {lesson.readTimeMinutes} min de leitura
               </span>
             </div>
 
             <h2 className="mt-2 text-2xl font-bold text-slate-50">
-              {PROTOCOLOS_DEEP_DIVE.title}
+              {lesson.title}
             </h2>
-            <p className="mt-1 text-sm text-slate-400">{PROTOCOLOS_DEEP_DIVE.subtitle}</p>
+            <p className="mt-1 text-sm text-slate-400">{lesson.subtitle}</p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 shrink-0">
@@ -90,12 +100,32 @@ export function ProtocolosLessonSection({
         </div>
 
         <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-3">
-          {PROTOCOLOS_DEEP_DIVE.overviewParagraphs.map((paragraph, idx) => (
+          {lesson.overviewParagraphs.map((paragraph, idx) => (
             <div
               key={idx}
               className="rounded-xl border border-slate-800/90 bg-[#090D16] p-4 text-xs leading-relaxed text-slate-300"
             >
               {paragraph}
+            </div>
+          ))}
+        </div>
+
+        {/* 4 Core Pillars: Reliability, Handshake, Header Size, Streaming vs File Transfer */}
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {highlightItems.map((item) => (
+            <div
+              key={item.label}
+              className="rounded-xl border border-slate-800 bg-[#090D16] p-4 text-xs"
+            >
+              <p className="font-semibold text-slate-100">{item.label}</p>
+              <p className="mt-2 leading-relaxed text-slate-300">
+                <span className="font-mono font-semibold text-cyan-300">TCP: </span>
+                {item.tcp}
+              </p>
+              <p className="mt-1.5 leading-relaxed text-slate-300">
+                <span className="font-mono font-semibold text-amber-300">UDP: </span>
+                {item.udp}
+              </p>
             </div>
           ))}
         </div>
@@ -109,40 +139,40 @@ export function ProtocolosLessonSection({
                 <ShieldCheck className="h-5 w-5 text-cyan-300" />
                 <div>
                   <h3 className="text-base font-bold text-slate-50">
-                    {PROTOCOLOS_DEEP_DIVE.tcp.acronym}
+                    {lesson.tcp.acronym}
                   </h3>
                   <p className="text-xs text-slate-400">
-                    {PROTOCOLOS_DEEP_DIVE.tcp.fullName}
+                    {lesson.tcp.fullName}
                   </p>
                 </div>
               </div>
-              <span className="rounded-md border border-cyan-400/30 bg-cyan-400/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-cyan-200 whitespace-nowrap">
-                {PROTOCOLOS_DEEP_DIVE.tcp.rfc}
+              <span className="font-mono text-[11px] font-semibold text-cyan-200 whitespace-nowrap">
+                {lesson.tcp.rfc}
               </span>
             </div>
 
             <p className="mt-3 text-xs leading-relaxed text-slate-300">
-              {PROTOCOLOS_DEEP_DIVE.tcp.summary}
+              {lesson.tcp.summary}
             </p>
 
             <div className="mt-3.5 grid grid-cols-2 gap-2.5 text-xs">
               <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Cabeçalho</span>
                 <span className="font-mono font-semibold text-cyan-300 tabular-nums">
-                  {PROTOCOLOS_DEEP_DIVE.tcp.headerSize}
+                  {lesson.tcp.headerSize}
                 </span>
               </div>
               <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Socket Python</span>
                 <span className="font-mono font-semibold text-cyan-300">
-                  {PROTOCOLOS_DEEP_DIVE.tcp.pythonSocket}
+                  {lesson.tcp.pythonSocket}
                 </span>
               </div>
             </div>
 
             <p className="mt-3 rounded-lg border border-slate-800/80 bg-[#0D1322] px-3 py-2 text-xs text-slate-300">
               <span className="font-semibold text-cyan-200">Analogia: </span>
-              {PROTOCOLOS_DEEP_DIVE.tcp.analogy}
+              {lesson.tcp.analogy}
             </p>
           </div>
 
@@ -153,40 +183,40 @@ export function ProtocolosLessonSection({
                 <Zap className="h-5 w-5 text-amber-300" />
                 <div>
                   <h3 className="text-base font-bold text-slate-50">
-                    {PROTOCOLOS_DEEP_DIVE.udp.acronym}
+                    {lesson.udp.acronym}
                   </h3>
                   <p className="text-xs text-slate-400">
-                    {PROTOCOLOS_DEEP_DIVE.udp.fullName}
+                    {lesson.udp.fullName}
                   </p>
                 </div>
               </div>
-              <span className="rounded-md border border-amber-400/30 bg-amber-400/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-amber-200 whitespace-nowrap">
-                {PROTOCOLOS_DEEP_DIVE.udp.rfc}
+              <span className="font-mono text-[11px] font-semibold text-amber-200 whitespace-nowrap">
+                {lesson.udp.rfc}
               </span>
             </div>
 
             <p className="mt-3 text-xs leading-relaxed text-slate-300">
-              {PROTOCOLOS_DEEP_DIVE.udp.summary}
+              {lesson.udp.summary}
             </p>
 
             <div className="mt-3.5 grid grid-cols-2 gap-2.5 text-xs">
               <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Cabeçalho</span>
                 <span className="font-mono font-semibold text-amber-300 tabular-nums">
-                  {PROTOCOLOS_DEEP_DIVE.udp.headerSize}
+                  {lesson.udp.headerSize}
                 </span>
               </div>
               <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Socket Python</span>
                 <span className="font-mono font-semibold text-amber-300">
-                  {PROTOCOLOS_DEEP_DIVE.udp.pythonSocket}
+                  {lesson.udp.pythonSocket}
                 </span>
               </div>
             </div>
 
             <p className="mt-3 rounded-lg border border-slate-800/80 bg-[#0D1322] px-3 py-2 text-xs text-slate-300">
               <span className="font-semibold text-amber-200">Analogia: </span>
-              {PROTOCOLOS_DEEP_DIVE.udp.analogy}
+              {lesson.udp.analogy}
             </p>
           </div>
         </div>
@@ -230,7 +260,7 @@ export function ProtocolosLessonSection({
               }`}
             >
               <BookOpen className="h-3.5 w-3.5" />
-              Casos de Uso Reais ({PROTOCOLOS_DEEP_DIVE.useCases.length})
+              Casos de Uso Reais ({lesson.useCases.length})
             </button>
           </div>
 
@@ -430,7 +460,7 @@ export function ProtocolosLessonSection({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/70">
-                  {PROTOCOLOS_DEEP_DIVE.comparisonRows.map((row, idx) => (
+                  {lesson.comparisonRows.map((row, idx) => (
                     <tr key={idx} className="hover:bg-slate-900/40">
                       <td className="px-4 py-3 font-semibold text-slate-100">
                         {row.criterion}
@@ -446,7 +476,7 @@ export function ProtocolosLessonSection({
 
             {/* Golden Rules */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {PROTOCOLOS_DEEP_DIVE.goldenRules.map((rule) => (
+              {lesson.goldenRules.map((rule) => (
                 <div
                   key={rule.protocol}
                   className={`rounded-xl border p-4 bg-[#090D16] ${
@@ -523,7 +553,7 @@ export function ProtocolosLessonSection({
             Pronto para aplicar TCP e UDP no CTF? Missões de redes ligadas a esta lição:
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {PROTOCOLOS_DEEP_DIVE.relatedMissionIds.map((mId) => {
+            {lesson.relatedMissionIds.map((mId) => {
               const mission = getMissionById(mId);
               const unlocked = isMissionUnlocked(mission);
               return (

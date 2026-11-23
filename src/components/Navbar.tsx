@@ -38,7 +38,7 @@ export function Navbar({
           onClick={() => onNavigate('hub')}
           className="cursor-pointer font-[var(--font-display)] text-lg font-bold tracking-tight text-slate-50 transition-colors hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400 whitespace-nowrap shrink-0"
         >
-          TrilhaRali <span className="text-cyan-400">PySec</span>
+          Py<span className="text-cyan-400">NetSec</span>
         </button>
 
         {/* Zone 2: Clean Single-Line Text Navigation Links */}

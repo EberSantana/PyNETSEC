@@ -57,6 +57,29 @@ export interface ProtocolGoldenRule {
   answer: string;
 }
 
+export interface ProtocolCoreHighlights {
+  reliability: {
+    label: string;
+    tcp: string;
+    udp: string;
+  };
+  handshake: {
+    label: string;
+    tcp: string;
+    udp: string;
+  };
+  headerSize: {
+    label: string;
+    tcp: string;
+    udp: string;
+  };
+  streamingVsFileTransfer: {
+    label: string;
+    tcp: string;
+    udp: string;
+  };
+}
+
 export interface ProtocolosLessonContent {
   lessonId: string;
   title: string;
@@ -64,6 +87,7 @@ export interface ProtocolosLessonContent {
   osiLayer: string;
   readTimeMinutes: number;
   overviewParagraphs: string[];
+  highlights: ProtocolCoreHighlights;
   tcp: ProtocolProfile;
   udp: ProtocolProfile;
   comparisonRows: ProtocolComparisonRow[];
@@ -72,11 +96,11 @@ export interface ProtocolosLessonContent {
   relatedMissionIds: string[];
 }
 
-export const PROTOCOLOS_DEEP_DIVE: ProtocolosLessonContent = {
+export const PROTOCOL_LESSON: ProtocolosLessonContent = {
   lessonId: 'L10',
   title: 'Protocolos de Transporte: TCP vs. UDP',
   subtitle:
-    'Diferenças arquiteturais, funcionamento interno na Camada 4 e escolha correta para cada aplicação de rede',
+    'Diferenças arquiteturais, confiabilidade, handshake, tamanho do cabeçalho e casos de uso (streaming vs. transferência de arquivos)',
   osiLayer: 'Camada 4 — Transporte (Modelo OSI / TCP-IP)',
   readTimeMinutes: 6,
   overviewParagraphs: [
@@ -84,6 +108,28 @@ export const PROTOCOLOS_DEEP_DIVE: ProtocolosLessonContent = {
     'O TCP (Transmission Control Protocol) prioriza confiabilidade, integridade e ordenação: ele abre uma sessão antes de enviar qualquer dado, numera cada pedaço, exige confirmações e retransmite tudo o que se perder pelo caminho.',
     'O UDP (User Datagram Protocol) prioriza velocidade e latência mínima: ele dispara datagramas diretamente sem negociação prévia, sem controle de ordem e sem retransmissão — ideal para tráfego em tempo real, onde esperar um pacote atrasado estraga a experiência.',
   ],
+  highlights: {
+    reliability: {
+      label: 'Confiabilidade',
+      tcp: 'Alta — confirma cada segmento (ACK), ordena bytes e retransmite perdas automaticamente.',
+      udp: 'Best-effort — envia sem confirmação e não retransmite pacotes perdidos ou fora de ordem.',
+    },
+    handshake: {
+      label: 'Handshake (Conexão)',
+      tcp: 'Three-Way Handshake obrigatório (SYN → SYN-ACK → ACK) antes de enviar dados.',
+      udp: 'Sem conexão (0-handshake) — dispara datagramas imediatamente no primeiro pacote.',
+    },
+    headerSize: {
+      label: 'Tamanho do Cabeçalho',
+      tcp: '20 bytes (mínimo) até 60 bytes com opções de controle.',
+      udp: '8 bytes fixos — 60% menos overhead por pacote transmitido.',
+    },
+    streamingVsFileTransfer: {
+      label: 'Streaming vs. Transferência de Arquivos',
+      tcp: 'Transferência de arquivos (FTP, SFTP, downloads, HTTPS): nenhum byte pode faltar.',
+      udp: 'Streaming ao vivo, VoIP e jogos: manter fluidez em tempo real vence retransmitir atrasos.',
+    },
+  },
   tcp: {
     id: 'tcp',
     acronym: 'TCP',
@@ -417,6 +463,26 @@ export const PROTOCOLOS_DEEP_DIVE: ProtocolosLessonContent = {
         'O aparelho ainda nem possui endereço IP e precisa enviar um broadcast para toda a LAN — algo impossível no TCP.',
     },
     {
+      id: 'uc-file-transfer',
+      protocol: 'TCP',
+      service: 'Transferência de Arquivos (FTP / SFTP / Downloads)',
+      ports: '21 / 22 / 443',
+      category: 'Transferência de Arquivos',
+      scenario: 'Download de imagens ISO, instaladores, backups em servidor e envio de relatórios.',
+      whyItFits:
+        'Um único byte perdido ou invertido corrompe um arquivo ZIP ou executável; o TCP garante 100% dos bytes intactos na ordem correta.',
+    },
+    {
+      id: 'uc-streaming',
+      protocol: 'UDP',
+      service: 'Streaming ao Vivo & IPTV (RTP / RTSP)',
+      ports: '554 / RTP',
+      category: 'Streaming em Tempo Real',
+      scenario: 'Transmissões esportivas ao vivo, rádio online, câmeras IP e aulas transmitidas em tempo real.',
+      whyItFits:
+        'Em uma transmissão ao vivo, esperar a retransmissão de um quadro antigo trava o vídeo inteiro; descartar o pacote perdido mantém o fluxo contínuo.',
+    },
+    {
       id: 'uc-quic',
       protocol: 'UDP',
       service: 'QUIC / HTTP3',
@@ -433,18 +499,20 @@ export const PROTOCOLOS_DEEP_DIVE: ProtocolosLessonContent = {
       protocol: 'TCP',
       question: 'Um byte perdido corrompe o resultado final?',
       answer:
-        'Sim → Use TCP (downloads, bancos, HTTPS clássico, SSH, e-mail, SQL). A precisão é mais importante do que alguns milissegundos.',
+        'Sim → Use TCP (transferência de arquivos, downloads, bancos, HTTPS clássico, SSH, e-mail, SQL). A precisão é mais importante do que alguns milissegundos.',
     },
     {
       title: 'Quando escolher UDP?',
       protocol: 'UDP',
       question: 'A informação antiga perde o valor se chegar atrasada?',
       answer:
-        'Sim → Use UDP (jogos online, videochamadas, lives, DNS rápido, DHCP). Velocidade e fluidez vencem a retransmissão.',
+        'Sim → Use UDP (streaming ao vivo, jogos online, videochamadas, DNS rápido, DHCP). Velocidade e fluidez vencem a retransmissão.',
     },
   ],
   relatedMissionIds: ['M14', 'M32', 'M33', 'M34'],
 };
+
+export const PROTOCOLOS_DEEP_DIVE: ProtocolosLessonContent = PROTOCOL_LESSON;
 
 export const PROTOCOLOS_STUDY_LESSON: StudyLesson = {
   id: 'L10',

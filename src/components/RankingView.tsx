@@ -24,7 +24,7 @@ interface RankingViewProps {
 
 const MODULE_TABS: Array<{ id: RankingModuleFilter; label: string }> = [
   { id: 'geral', label: 'Geral' },
-  { id: 'PySec', label: 'PySec' },
+  { id: 'PyNetSec', label: 'PyNetSec' },
   { id: 'BD', label: 'Banco de Dados' },
 ];
 
@@ -34,7 +34,7 @@ export function RankingView({
   completedMissions,
   onOpenSheetsConfig,
 }: RankingViewProps) {
-  const [modulo, setModulo] = useState<RankingModuleFilter>('PySec');
+  const [modulo, setModulo] = useState<RankingModuleFilter>('PyNetSec');
   const [ranking, setRanking] = useState<RankingEntry[]>([]);
   const [source, setSource] = useState<'remote' | 'local'>('local');
   const [loading, setLoading] = useState(false);

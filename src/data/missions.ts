@@ -143,7 +143,7 @@ function doPost(e) {
 }
 
 // 2. RETORNA O RANKING POR MÓDULO OU GERAL (GET)
-// ?modulo=PySec -> Ranking apenas do módulo PySec
+// ?modulo=PyNetSec -> Ranking apenas do módulo PyNetSec
 // ?modulo=geral -> Ranking somando todos os módulos
 function doGet(e) {
   const moduloFiltro = (e.parameter.modulo || "geral").trim();
@@ -1282,5 +1282,5 @@ export function getStudentRankTitle(completedCount: number): string {
   if (completedCount >= 16) return 'Analista CTF';
   if (completedCount >= 11) return 'Engenheiro de Redes';
   if (completedCount >= 5) return 'Operador Python';
-  return 'Recruta PySec';
+  return 'Recruta PyNetSec';
 }

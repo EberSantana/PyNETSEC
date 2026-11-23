@@ -80,7 +80,7 @@ export async function registrarMissao(
 }
 
 /**
- * Fetches leaderboard from Google Apps Script GET ?modulo=geral|PySec|BD
+ * Fetches leaderboard from Google Apps Script GET ?modulo=geral|PyNetSec|BD
  * and falls back cleanly to the local session leaderboard when unconfigured.
  */
 export async function buscarRanking(
@@ -145,7 +145,7 @@ export async function testarConexaoAppsScript(
 
   try {
     const separator = cleanUrl.includes('?') ? '&' : '?';
-    const response = await fetch(`${cleanUrl}${separator}modulo=PySec`, { method: 'GET' });
+    const response = await fetch(`${cleanUrl}${separator}modulo=PyNetSec`, { method: 'GET' });
     if (!response.ok) {
       return {
         ok: false,
@@ -161,7 +161,7 @@ export async function testarConexaoAppsScript(
     }
     return {
       ok: true,
-      mensagem: `Conexão confirmada! ${data.ranking.length} registro(s) encontrado(s) no módulo PySec.`,
+      mensagem: `Conexão confirmada! ${data.ranking.length} registro(s) encontrado(s) no módulo PyNetSec.`,
     };
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Erro de rede';

@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
+  Code2,
   Flag,
   HelpCircle,
   History,
@@ -34,6 +35,7 @@ import {
   RunHistoryEntry,
 } from '../types/ctf';
 import { SandboxView } from './SandboxView';
+import { LinuxLabView } from './LinuxLabView';
 
 interface LabViewProps {
   mode: LabWorkspaceMode;
@@ -242,8 +244,8 @@ export function LabView({
             Voltar à Trilha
           </button>
 
-          {/* Lab Mode Segmented Switcher */}
-          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] p-1">
+          {/* Lab Mode Segmented Switcher: Missão CTF | Sandbox Python & Redes | Terminal Linux */}
+          <div className="flex flex-wrap items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] p-1">
             <button
               type="button"
               onClick={() => onModeChange('mission')}
@@ -265,8 +267,20 @@ export function LabView({
                   : 'text-slate-400 hover:text-slate-100'
               }`}
             >
+              <Code2 className="h-3.5 w-3.5" />
+              Sandbox Python &amp; Redes
+            </button>
+            <button
+              type="button"
+              onClick={() => onModeChange('linux')}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
+                mode === 'linux'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-400 hover:text-slate-100'
+              }`}
+            >
               <Terminal className="h-3.5 w-3.5" />
-              Sandbox Livre
+              Terminal Linux
             </button>
           </div>
 
@@ -289,7 +303,7 @@ export function LabView({
         </div>
 
         {mode === 'mission' ? (
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               disabled={!prevMission}
@@ -299,6 +313,28 @@ export function LabView({
               <ChevronLeft className="h-3.5 w-3.5" />
               Anterior
             </button>
+            <select
+              aria-label="Selecionar missão CTF"
+              value={mission.id}
+              onChange={(e) => {
+                const chosen = MISSIONS.find((m) => m.id === e.target.value);
+                if (chosen && isMissionUnlocked(chosen)) {
+                  onSelectMission(chosen);
+                }
+              }}
+              className="max-w-[210px] cursor-pointer rounded-lg border border-slate-800 bg-[#111827] px-2.5 py-2 font-mono text-xs text-slate-200 focus:border-cyan-400 focus:outline-none"
+            >
+              {MISSIONS.map((m) => {
+                const unlocked = isMissionUnlocked(m);
+                const done = Boolean(completedMissions[m.id]);
+                return (
+                  <option key={m.id} value={m.id} disabled={!unlocked}>
+                    {done ? '✓ ' : !unlocked ? '🔒 ' : ''}
+                    {m.id} · {m.title}
+                  </option>
+                );
+              })}
+            </select>
             <button
               type="button"
               disabled={!nextMission || !isMissionUnlocked(nextMission)}
@@ -309,9 +345,13 @@ export function LabView({
               <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
-        ) : (
+        ) : mode === 'sandbox' ? (
           <p className="text-xs text-slate-400">
             Terminal persistente · Sockets simulados · Arquivos salvos em /workspace
+          </p>
+        ) : (
+          <p className="text-xs text-slate-400">
+            Ubuntu Lab PyNetSec · FHS, Bash, APT, permissões, nano/vim e firewall
           </p>
         )}
       </div>
@@ -322,6 +362,8 @@ export function LabView({
           onFilesChange={onSandboxFilesChange}
           studentUsername={studentUsername}
         />
+      ) : mode === 'linux' ? (
+        <LinuxLabView />
       ) : (
         <>
 

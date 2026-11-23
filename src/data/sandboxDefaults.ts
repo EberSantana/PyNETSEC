@@ -36,7 +36,7 @@ export const SANDBOX_LAB_HOSTS: SandboxHostInfo[] = [
 ];
 
 export const DEFAULT_SANDBOX_FILES: Record<string, string> = {
-  'README.txt': `=== SANDBOX PYTHON · TRILHARALI PYSEC ===
+  'README.txt': `=== SANDBOX PYTHON & REDES · PYNETSEC ===
 Diretório persistente: /workspace
 
 Comandos no modo Shell:

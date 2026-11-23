@@ -66,7 +66,7 @@ export function LinuxLabView() {
     {
       id: 'init-1',
       kind: 'info',
-      text: 'Ubuntu Lab PySec (Simulador Linux Interativo) · Diretórios FHS, Bash, APT, Permissões, Rede, Nano e Vim prontos.',
+      text: 'Ubuntu Lab PyNetSec (Simulador Linux Interativo) · Diretórios FHS, Bash, APT, Permissões, Rede, Nano e Vim prontos.',
     },
     {
       id: 'init-2',
@@ -90,7 +90,7 @@ export function LinuxLabView() {
     const home = `/home/${linuxState.currentUser}`;
     const displayPath = linuxState.cwd === home ? '~' : linuxState.cwd.startsWith(`${home}/`) ? `~${linuxState.cwd.slice(home.length)}` : linuxState.cwd;
     const symbol = linuxState.isRoot ? '#' : '$';
-    return `${user}@pysec-linux:${displayPath}${symbol}`;
+    return `${user}@pynetsec-linux:${displayPath}${symbol}`;
   }, [linuxState]);
 
   const reverseSearchMatch = useMemo(() => {

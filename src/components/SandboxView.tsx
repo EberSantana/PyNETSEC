@@ -265,7 +265,7 @@ export function SandboxView({
     const syncedFiles = await handleSaveCurrentFile();
     setIsExecuting(true);
 
-    const promptPrefix = `${safeUser}@pysec:${cwd}$`;
+    const promptPrefix = `${safeUser}@pynetsec:${cwd}$`;
     appendLines([
       {
         kind: 'prompt',
@@ -332,7 +332,7 @@ export function SandboxView({
     }
 
     const latestFiles = isDirty ? await handleSaveCurrentFile() : files;
-    const prefix = effectiveMode === 'repl' ? '>>>' : `${safeUser}@pysec:${cwd}$`;
+    const prefix = effectiveMode === 'repl' ? '>>>' : `${safeUser}@pynetsec:${cwd}$`;
 
     appendLines([{ kind: 'prompt', prefix, text: cmd }]);
     setIsExecuting(true);
@@ -819,7 +819,7 @@ export function SandboxView({
             {/* Interactive Prompt Input Bar */}
             <div className="flex items-center gap-2 border-t border-slate-800 bg-[#080C15] px-4 py-3 font-mono text-xs sm:text-[13px]">
               <span className="shrink-0 font-semibold text-cyan-400">
-                {terminalMode === 'repl' ? '>>>' : `${safeUser}@pysec:${cwd}$`}
+                {terminalMode === 'repl' ? '>>>' : `${safeUser}@pynetsec:${cwd}$`}
               </span>
               <input
                 ref={inputRef}

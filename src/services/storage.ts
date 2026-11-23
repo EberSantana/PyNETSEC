@@ -9,6 +9,7 @@ export const DEFAULT_SESSION: PersistedSession = {
   },
   completedMissions: {},
   completedDrills: {},
+  completedDefenseMissions: {},
   codeDrafts: {},
   sandboxFiles: null,
   runHistory: [],
@@ -32,6 +33,10 @@ export function loadSession(): PersistedSession {
       },
       completedMissions: parsed.completedMissions ?? {},
       completedDrills: parsed.completedDrills ?? {},
+      completedDefenseMissions:
+        parsed.completedDefenseMissions && typeof parsed.completedDefenseMissions === 'object'
+          ? parsed.completedDefenseMissions
+          : {},
       codeDrafts: parsed.codeDrafts ?? {},
       sandboxFiles:
         parsed.sandboxFiles && typeof parsed.sandboxFiles === 'object'

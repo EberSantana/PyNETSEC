@@ -12,7 +12,8 @@ import {
 import { Navbar } from './components/Navbar';
 import { ProfileConfigDrawer } from './components/ProfileConfigDrawer';
 import { RankingView } from './components/RankingView';
-import { StudyTrack, StudyView } from './components/StudyView';
+import { NetworkStudySubTab, StudyTrack, StudyView } from './components/StudyView';
+import { DEFENSE_THEORY_MISSIONS } from './data/infoSecData';
 import { MISSIONS, getMissionById, getStudentRankTitle } from './data/missions';
 import { DEFAULT_SANDBOX_FILES } from './data/sandboxDefaults';
 import { STUDY_LESSONS, getLessonForMissionId } from './data/studyLessons';
@@ -21,6 +22,7 @@ import { loadSession, resetAllProgress, saveSession } from './services/storage';
 import {
   AppView,
   CircuitId,
+  DefenseMissionCompletion,
   LabWorkspaceMode,
   Mission,
   PersistedSession,
@@ -37,6 +39,9 @@ export default function App() {
   const [activeMissionId, setActiveMissionId] = useState<string>('M01');
   const [activeLessonId, setActiveLessonId] = useState<string>('L01');
   const [studyTrack, setStudyTrack] = useState<StudyTrack>('python');
+  const [networkStudySubTab, setNetworkStudySubTab] =
+    useState<NetworkStudySubTab>('fundamentals');
+  const [returnMissionId, setReturnMissionId] = useState<string | null>(null);
 
   // Modals & Drawers
   const [configDrawerOpen, setConfigDrawerOpen] = useState(false);
@@ -88,6 +93,7 @@ export default function App() {
         return;
       }
       setActiveMissionId(mission.id);
+      setReturnMissionId(null);
       setLabMode('mission');
       setActiveView('lab');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -95,15 +101,15 @@ export default function App() {
     [session.ethicsAccepted]
   );
 
-  const handleOpenSandbox = () => {
-    setLabMode('sandbox');
+  const handleOpenLabMode = (mode: LabWorkspaceMode) => {
+    setLabMode(mode);
     setActiveView('lab');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNavigate = (view: AppView) => {
     if (view === 'lab') {
-      if (labMode === 'sandbox') {
+      if (labMode === 'sandbox' || labMode === 'linux') {
         setActiveView('lab');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
@@ -113,6 +119,9 @@ export default function App() {
         : nextRecommendedMission;
       openMission(target);
       return;
+    }
+    if (view !== 'study') {
+      setReturnMissionId(null);
     }
     setActiveView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -172,7 +181,7 @@ export default function App() {
     const syncResp = await registrarMissao(session.appsScriptUrl, {
       aluno: studentName,
       turma: studentClass,
-      modulo: 'PySec',
+      modulo: 'PyNetSec',
       missaoId: mission.id,
       flag: mission.flag,
       pontos: mission.points,
@@ -238,8 +247,45 @@ export default function App() {
     }));
   };
 
+  const handleCompleteDefenseMission = (completion: DefenseMissionCompletion) => {
+    setSession((prev) => ({
+      ...prev,
+      completedDefenseMissions: {
+        ...prev.completedDefenseMissions,
+        [completion.missionId]: completion,
+      },
+    }));
+  };
+
+  const handleOpenDefenseStudy = () => {
+    setReturnMissionId(null);
+    setStudyTrack('infosec');
+    setActiveView('study');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenDefenseBadgeCard = (missionId: string) => {
+    const mission = DEFENSE_THEORY_MISSIONS.find((m) => m.id === missionId);
+    if (!mission) return;
+    setLockScreenCard({
+      missionCode: `SEGURANÇA · ${mission.id}`,
+      title: mission.badgeTitle,
+      flag: mission.badgeCode,
+      studentName: session.profile.aluno.trim() || 'Operador PyNetSec',
+      turma: session.profile.turma.trim() || 'Ensino Médio Técnico',
+      points: mission.badgePoints,
+      rankTitle: `Badge de Defesa · ${mission.pillarLabel}`,
+      badgeLabel: 'BADGE DE DEFESA DESBLOQUEADA',
+      defaultPalette: mission.badgePalette,
+    });
+  };
+
   const handleOpenStudyForCircuit = (circuitId?: CircuitId) => {
-    if (circuitId === 4) {
+    setReturnMissionId(null);
+    if (circuitId === 3) {
+      setStudyTrack('infosec');
+    } else if (circuitId === 4) {
+      setNetworkStudySubTab('fundamentals');
       setStudyTrack('networks');
     } else if (circuitId === 5) {
       setStudyTrack('linux');
@@ -258,10 +304,15 @@ export default function App() {
 
   const handleOpenStudyForMission = (missionId: string) => {
     const targetMission = getMissionById(missionId);
+    setReturnMissionId(isMissionUnlocked(targetMission) ? missionId : null);
     if (missionId === 'M33' || missionId === 'M34') {
       setActiveLessonId('L10');
-      setStudyTrack('protocolos');
+      setNetworkStudySubTab('protocolos');
+      setStudyTrack('networks');
+    } else if (targetMission.circuit === 3) {
+      setStudyTrack('infosec');
     } else if (targetMission.circuit === 4) {
+      setNetworkStudySubTab('fundamentals');
       setStudyTrack('networks');
     } else if (targetMission.circuit === 5) {
       setStudyTrack('linux');
@@ -294,6 +345,9 @@ export default function App() {
   const completedCount = Object.keys(session.completedMissions).length;
   const totalDrillsCount = STUDY_LESSONS.reduce((sum, l) => sum + l.drills.length, 0);
   const completedDrillsCount = Object.values(session.completedDrills).filter(Boolean).length;
+  const defenseBadgesCount = DEFENSE_THEORY_MISSIONS.filter((m) =>
+    Boolean(session.completedDefenseMissions[m.id])
+  ).length;
 
   const victoryNextMission = useMemo(() => {
     if (!victoryState.mission) return null;
@@ -313,13 +367,18 @@ export default function App() {
       missionCode: `MISSÃO ${m.id}`,
       title: m.title,
       flag: m.flag,
-      studentName: session.profile.aluno.trim() || 'Operador PySec',
+      studentName: session.profile.aluno.trim() || 'Operador PyNetSec',
       turma: session.profile.turma.trim() || 'Ensino Médio Técnico',
       points: m.points,
       rankTitle: getStudentRankTitle(completedCount),
       defaultPalette: palette,
     });
   };
+
+  const returnMission = useMemo(
+    () => (returnMissionId ? getMissionById(returnMissionId) : null),
+    [returnMissionId]
+  );
 
   return (
     <div className="flex min-h-screen flex-col bg-[#090D16] text-slate-100">
@@ -339,12 +398,15 @@ export default function App() {
             completedMissions={session.completedMissions}
             completedDrillsCount={completedDrillsCount}
             totalDrillsCount={totalDrillsCount}
+            defenseBadgesCount={defenseBadgesCount}
+            totalDefenseBadges={DEFENSE_THEORY_MISSIONS.length}
             freeNavigationMode={session.freeNavigationMode}
             isMissionUnlocked={isMissionUnlocked}
             nextRecommendedMission={nextRecommendedMission}
             onStartMission={openMission}
             onOpenStudy={handleOpenStudyForCircuit}
-            onOpenSandbox={handleOpenSandbox}
+            onOpenStudyForMission={handleOpenStudyForMission}
+            onOpenLabMode={handleOpenLabMode}
             onToggleFreeNavigation={handleToggleFreeNavigation}
             onOpenProfileDrawer={openConfigDrawer}
           />
@@ -355,12 +417,21 @@ export default function App() {
             activeLessonId={activeLessonId}
             activeTrack={studyTrack}
             onChangeTrack={setStudyTrack}
+            activeNetworkSubTab={networkStudySubTab}
+            onChangeNetworkSubTab={setNetworkStudySubTab}
             completedDrills={session.completedDrills}
+            completedMissions={session.completedMissions}
+            completedDefenseMissions={session.completedDefenseMissions}
+            returnMission={returnMission}
+            onReturnToMission={openMission}
             isMissionUnlocked={isMissionUnlocked}
             onSelectLesson={(lessonId) => setActiveLessonId(lessonId)}
             onCompleteDrill={handleCompleteDrill}
+            onCompleteDefenseMission={handleCompleteDefenseMission}
+            onOpenBadges={() => handleNavigate('badges')}
+            onOpenDefenseBadgeCard={handleOpenDefenseBadgeCard}
             onGoToMission={openMission}
-            onOpenSandbox={handleOpenSandbox}
+            onOpenLabMode={handleOpenLabMode}
           />
         )}
 
@@ -400,9 +471,11 @@ export default function App() {
           <BadgesView
             profile={session.profile}
             completedMissions={session.completedMissions}
+            completedDefenseMissions={session.completedDefenseMissions}
             runHistory={session.runHistory}
             onOpenLockScreenCard={(card) => setLockScreenCard(card)}
             onStartMission={openMission}
+            onOpenDefenseStudy={handleOpenDefenseStudy}
           />
         )}
       </main>
@@ -411,8 +484,7 @@ export default function App() {
       <footer className="mt-12 border-t border-slate-800/80 bg-[#070B13]">
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-3 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:px-6 lg:px-8">
           <p>
-            TrilhaRali · Circuito PySec — Ambiente educativo de Python, Redes e Segurança da
-            Informação
+            PyNetSec — Plataforma educativa de Python, Redes, Linux e Segurança da Informação
           </p>
           <div className="flex items-center gap-5">
             <button
@@ -466,12 +538,14 @@ export default function App() {
         open={configDrawerOpen}
         initialTab={configDrawerTab}
         profile={session.profile}
+        completedDefenseMissions={session.completedDefenseMissions}
         appsScriptUrl={session.appsScriptUrl}
         freeNavigationMode={session.freeNavigationMode}
         onSaveProfile={handleSaveProfile}
         onSaveAppsScriptUrl={handleSaveAppsScriptUrl}
         onToggleFreeNavigation={handleToggleFreeNavigation}
         onResetProgress={handleResetProgress}
+        onOpenBadges={() => handleNavigate('badges')}
         onClose={() => setConfigDrawerOpen(false)}
       />
     </div>
