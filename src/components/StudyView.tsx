@@ -7,6 +7,7 @@ import {
   BookOpen,
   CheckCircle2,
   Code2,
+  Cpu,
   Flag,
   HelpCircle,
   Loader2,
@@ -15,6 +16,7 @@ import {
   Play,
   Repeat,
   RotateCcw,
+  Server,
   Shield,
   Terminal,
   Wrench,
@@ -45,12 +47,16 @@ import { ProtocolosLessonSection } from './ProtocolosLessonSection';
 import { InfoSecLabView } from './InfoSecLabView';
 import { NetworkProtocolVisualizer } from './NetworkProtocolVisualizer';
 import { NetworkTroubleshootingTipsPanel } from './NetworkTroubleshootingTipsPanel';
+import { LanLinuxConfigGuide } from './LanLinuxConfigGuide';
+import { PacketTracerView } from './PacketTracerView';
 
 export type StudyTrack = 'python' | 'networks' | 'infosec' | 'linux';
 export type NetworkStudySubTab =
   | 'fundamentals'
+  | 'packet-tracer'
   | 'visualizer'
   | 'protocolos'
+  | 'lan-linux'
   | 'troubleshooting';
 
 interface StudyViewProps {
@@ -283,7 +289,7 @@ export function StudyView({
     networks: {
       title: '02. Fundamentos de Redes & Protocolos TCP/UDP',
       subtitle:
-        'Alterne livremente entre a base visual de redes (tipos, topologias com falhas, meios e diagnóstico) e o comparativo profundo de TCP vs. UDP.',
+        'Alterne livremente entre fundamentos de redes, simulador TCP × UDP, configuração passo a passo de LAN no Linux (ip, ifconfig, dhclient) e dicas de troubleshooting.',
     },
     infosec: {
       title: '03. Segurança da Informação & Conceitos de Defesa',
@@ -432,7 +438,19 @@ export function StudyView({
                 }`}
               >
                 <Network className="h-3.5 w-3.5" />
-                Fundamentos, Topologias & Diagnóstico
+                Fundamentos &amp; Topologias
+              </button>
+              <button
+                type="button"
+                onClick={() => setNetworkSubTab('packet-tracer')}
+                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
+                  networkSubTab === 'packet-tracer'
+                    ? 'bg-cyan-400 text-[#05131C]'
+                    : 'text-slate-300 hover:text-slate-100'
+                }`}
+              >
+                <Cpu className="h-3.5 w-3.5" />
+                Packet Tracer (Montar Redes)
               </button>
               <button
                 type="button"
@@ -444,7 +462,7 @@ export function StudyView({
                 }`}
               >
                 <Play className="h-3.5 w-3.5" />
-                Simulador TCP × UDP (Pacotes)
+                Simulador TCP × UDP
               </button>
               <button
                 type="button"
@@ -456,7 +474,19 @@ export function StudyView({
                 }`}
               >
                 <ArrowLeftRight className="h-3.5 w-3.5" />
-                Protocolos de Rede (TCP vs. UDP)
+                TCP vs. UDP (Teoria)
+              </button>
+              <button
+                type="button"
+                onClick={() => setNetworkSubTab('lan-linux')}
+                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
+                  networkSubTab === 'lan-linux'
+                    ? 'bg-cyan-400 text-[#05131C]'
+                    : 'text-slate-300 hover:text-slate-100'
+                }`}
+              >
+                <Server className="h-3.5 w-3.5" />
+                Configuração LAN (Linux)
               </button>
               <button
                 type="button"
@@ -475,15 +505,21 @@ export function StudyView({
             <span className="text-xs text-slate-400">
               {networkSubTab === 'fundamentals'
                 ? 'Tipos de rede, topologias com falhas, meios, protocolos cotidianos e troubleshooting'
-                : networkSubTab === 'visualizer'
-                  ? 'Animação passo a passo do Three-Way Handshake TCP vs. datagramas diretos UDP'
-                  : networkSubTab === 'troubleshooting'
-                    ? 'Comandos essenciais (ping, traceroute, netstat/ss, nslookup, ip e tcpdump) e quando usar cada um'
-                    : 'Camada 4 em detalhes: confiabilidade, cabeçalhos, tabela comparativa e casos de uso'}
+                : networkSubTab === 'packet-tracer'
+                  ? 'Monte LAN, P2P, Wi-Fi e Roteamento L3, configure IPs e veja pacotes e comandos funcionando ao vivo'
+                  : networkSubTab === 'visualizer'
+                    ? 'Animação passo a passo do Three-Way Handshake TCP vs. datagramas diretos UDP'
+                    : networkSubTab === 'lan-linux'
+                      ? 'Guia passo a passo para configurar LAN no Linux (ip, ifconfig, dhclient) + check-list de conectividade'
+                      : networkSubTab === 'troubleshooting'
+                        ? 'Comandos essenciais (ping, traceroute, netstat/ss, nslookup, ip e tcpdump) e quando usar cada um'
+                        : 'Camada 4 em detalhes: confiabilidade, cabeçalhos, tabela comparativa e casos de uso'}
             </span>
           </div>
 
-          {networkSubTab === 'visualizer' ? (
+          {networkSubTab === 'packet-tracer' ? (
+            <PacketTracerView />
+          ) : networkSubTab === 'visualizer' ? (
             <NetworkProtocolVisualizer />
           ) : networkSubTab === 'protocolos' ? (
             <div className="space-y-6">
@@ -499,6 +535,11 @@ export function StudyView({
                 onOpenNetworkSimulator={() => setNetworkSubTab('fundamentals')}
               />
             </div>
+          ) : networkSubTab === 'lan-linux' ? (
+            <LanLinuxConfigGuide
+              onOpenLinuxLab={onOpenLabMode ? () => onOpenLabMode('linux') : undefined}
+              onOpenSandbox={onOpenLabMode ? () => onOpenLabMode('sandbox') : undefined}
+            />
           ) : networkSubTab === 'troubleshooting' ? (
             <NetworkTroubleshootingTipsPanel
               onOpenSandbox={onOpenLabMode ? () => onOpenLabMode('sandbox') : undefined}

@@ -12,6 +12,7 @@ import {
   HelpCircle,
   History,
   Loader2,
+  Network,
   Play,
   RotateCcw,
   ShieldCheck,
@@ -36,6 +37,7 @@ import {
 } from '../types/ctf';
 import { SandboxView } from './SandboxView';
 import { LinuxLabView } from './LinuxLabView';
+import { PacketTracerView } from './PacketTracerView';
 
 interface LabViewProps {
   mode: LabWorkspaceMode;
@@ -282,6 +284,18 @@ export function LabView({
               <Terminal className="h-3.5 w-3.5" />
               Terminal Linux
             </button>
+            <button
+              type="button"
+              onClick={() => onModeChange('packet-tracer')}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
+                mode === 'packet-tracer'
+                  ? 'bg-cyan-400 text-[#05131C]'
+                  : 'text-slate-400 hover:text-slate-100'
+              }`}
+            >
+              <Network className="h-3.5 w-3.5" />
+              Packet Tracer
+            </button>
           </div>
 
           {mode === 'mission' && (
@@ -349,6 +363,10 @@ export function LabView({
           <p className="text-xs text-slate-400">
             Terminal persistente · Sockets simulados · Arquivos salvos em /workspace
           </p>
+        ) : mode === 'packet-tracer' ? (
+          <p className="text-xs text-slate-400">
+            Montagem de redes LAN/WLAN/Roteadas · Configuração IP · Pacotes animados e CLI
+          </p>
         ) : (
           <p className="text-xs text-slate-400">
             Ubuntu Lab PyNetSec · FHS, Bash, APT, permissões, nano/vim e firewall
@@ -364,6 +382,8 @@ export function LabView({
         />
       ) : mode === 'linux' ? (
         <LinuxLabView />
+      ) : mode === 'packet-tracer' ? (
+        <PacketTracerView />
       ) : (
         <>
 

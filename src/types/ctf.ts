@@ -4,7 +4,7 @@ export type TeamRole = 'core' | 'network' | 'linux' | 'blue' | 'red';
 
 export type AppView = 'hub' | 'study' | 'lab' | 'ranking' | 'badges';
 
-export type LabWorkspaceMode = 'mission' | 'sandbox' | 'linux';
+export type LabWorkspaceMode = 'mission' | 'sandbox' | 'linux' | 'packet-tracer';
 
 export type RankingModuleFilter = 'geral' | 'PyNetSec' | 'BD';
 

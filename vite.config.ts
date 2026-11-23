@@ -28,6 +28,44 @@ export default defineConfig(() => {
           }
         },
       },
+      {
+        name: 'serve-materiais-mime-headers',
+        configureServer(server) {
+          const mimeMap: Record<string, string> = {
+            '.pdf': 'application/pdf',
+            '.docx':
+              'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            '.pptx':
+              'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            '.zip': 'application/zip',
+          };
+          server.middlewares.use((req, res, next) => {
+            const urlPath = (req.url || '').split('?')[0];
+            if (urlPath.startsWith('/materiais/')) {
+              const ext = path.extname(urlPath).toLowerCase();
+              const mime = mimeMap[ext];
+              if (mime) {
+                const fileName = path.basename(urlPath);
+                const filePath = path.resolve(__dirname, 'public/materiais', fileName);
+                if (fs.existsSync(filePath)) {
+                  const stat = fs.statSync(filePath);
+                  res.statusCode = 200;
+                  res.setHeader('Content-Type', mime);
+                  res.setHeader('Content-Length', String(stat.size));
+                  res.setHeader(
+                    'Content-Disposition',
+                    `attachment; filename="${fileName}"`
+                  );
+                  res.setHeader('Cache-Control', 'no-cache');
+                  fs.createReadStream(filePath).pipe(res);
+                  return;
+                }
+              }
+            }
+            next();
+          });
+        },
+      },
     ],
     resolve: {
       alias: {

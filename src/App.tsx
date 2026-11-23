@@ -109,7 +109,7 @@ export default function App() {
 
   const handleNavigate = (view: AppView) => {
     if (view === 'lab') {
-      if (labMode === 'sandbox' || labMode === 'linux') {
+      if (labMode === 'sandbox' || labMode === 'linux' || labMode === 'packet-tracer') {
         setActiveView('lab');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;

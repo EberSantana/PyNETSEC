@@ -292,11 +292,19 @@ export function HubView({
               Bancada Prática Unificada
             </h2>
             <p className="mt-1 text-xs leading-relaxed text-slate-400">
-              Alterne sem atrito entre a missão ativa, Sandbox Python/Redes (ping, nmap, sniff) e o
-              Terminal Linux.
+              Alterne sem atrito entre a missão ativa, Sandbox Python, Terminal Linux e o Simulador
+              Packet Tracer de redes.
             </p>
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-800/80 pt-3 text-xs">
+            <button
+              type="button"
+              onClick={() => onOpenLabMode('packet-tracer')}
+              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1.5 font-medium text-amber-200 transition-colors hover:border-amber-400/60 whitespace-nowrap"
+            >
+              <Network className="h-3.5 w-3.5" />
+              Packet Tracer
+            </button>
             <button
               type="button"
               onClick={() => onOpenLabMode('sandbox')}
