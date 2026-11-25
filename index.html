@@ -24,6 +24,16 @@
   </head>
   <body class="bg-[#090D16] text-slate-100 antialiased selection:bg-cyan-400/30 selection:text-cyan-100">
     <div id="root"></div>
+    <!-- Login, liberação pelo professor e progresso individual: os mesmos do Trilha Rali HUB -->
+    <script>
+      window.PROGRESSO_ID = 'pynetsec';
+      window.PORTAL_PASTA = 'pynetsec';
+      window.PROGRESSO_DADOS = function () {
+        return window.__pynetsecDados ? window.__pynetsecDados() : { feitas: 0, total: 0, pontos: 0, detalhe: {} };
+      };
+    </script>
+    <script src="../disciplinas/config.js"></script>
+    <script src="../disciplinas/progresso-turma.js"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
