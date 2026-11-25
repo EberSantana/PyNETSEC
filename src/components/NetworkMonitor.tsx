@@ -71,7 +71,7 @@ function getPacketPalette(pkt: NetworkPacketFrame): VisualPalette {
     };
   }
   return {
-    stroke: '#22D3EE',
+    stroke: '#3BE37A',
     fill: '#083344',
     badge: 'border-cyan-400/50 bg-cyan-500/15 text-cyan-200',
     text: 'text-cyan-300',
@@ -277,7 +277,7 @@ export function NetworkMonitor({
   return (
     <section
       aria-label="Network Monitor — Visualizador de Pacotes"
-      className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]"
+      className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]"
     >
       {/* Top Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-4 py-3">
@@ -306,7 +306,7 @@ export function NetworkMonitor({
 
         <div className="flex flex-wrap items-center gap-2">
           {/* View Switcher: Fluxo de Pacotes vs Modelo OSI (7 Camadas) */}
-          <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+          <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
             <button
               type="button"
               onClick={() => {
@@ -351,7 +351,7 @@ export function NetworkMonitor({
                   className={`cursor-pointer rounded-md border px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors disabled:opacity-50 ${
                     active
                       ? 'border-cyan-400/70 bg-cyan-400/15 text-cyan-200'
-                      : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-cyan-400/40 hover:text-cyan-200'
+                      : 'border-slate-800 bg-[#071225] text-slate-300 hover:border-cyan-400/40 hover:text-cyan-200'
                   }`}
                 >
                   {item.label}
@@ -377,7 +377,7 @@ export function NetworkMonitor({
             <OsiModelVisualizer event={event} activePacket={activePacket} />
           ) : !event || !activePacket || !palette || !nodes ? (
             /* Empty Ready State */
-            <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-dashed border-slate-800 bg-[#060911] px-5 py-6 text-center sm:flex-row sm:text-left">
+            <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-dashed border-slate-800 bg-[#050E1D] px-5 py-6 text-center sm:flex-row sm:text-left">
               <div className="space-y-1">
                 <p className="text-sm font-semibold text-slate-100">
                   Observe os pacotes trafegando em tempo real entre o terminal e o alvo
@@ -396,7 +396,7 @@ export function NetworkMonitor({
                 <button
                   type="button"
                   onClick={() => setMonitorTab('osi')}
-                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#111827] px-3 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#0F1E36] px-3 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
                 >
                   <Layers className="h-3.5 w-3.5" />
                   Ver Modelo OSI
@@ -415,7 +415,7 @@ export function NetworkMonitor({
           ) : (
             <div className="space-y-4">
               {/* 1. ANIMATED SVG TOPOLOGY & DUAL-CHANNEL PACKET BUS */}
-              <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-[#060911]">
+              <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-[#050E1D]">
                 <svg
                   viewBox="0 0 880 226"
                   role="img"
@@ -438,9 +438,9 @@ export function NetworkMonitor({
                       />
                     </pattern>
                     <linearGradient id="tx-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#22D3EE" stopOpacity="0.2" />
-                      <stop offset="50%" stopColor="#22D3EE" stopOpacity="0.85" />
-                      <stop offset="100%" stopColor="#22D3EE" stopOpacity="0.2" />
+                      <stop offset="0%" stopColor="#3BE37A" stopOpacity="0.2" />
+                      <stop offset="50%" stopColor="#3BE37A" stopOpacity="0.85" />
+                      <stop offset="100%" stopColor="#3BE37A" stopOpacity="0.2" />
                     </linearGradient>
                     <linearGradient id="rx-grad" x1="100%" y1="0%" x2="0%" y2="0%">
                       <stop offset="0%" stopColor="#10B981" stopOpacity="0.2" />
@@ -528,12 +528,12 @@ export function NetworkMonitor({
                       height="106"
                       rx="14"
                       fill="#0C1424"
-                      stroke={activePacket.direction === 'rx' ? '#10B981' : '#22D3EE'}
+                      stroke={activePacket.direction === 'rx' ? '#10B981' : '#3BE37A'}
                       strokeOpacity="0.6"
                       strokeWidth="1.5"
                     />
-                    <rect x="44" y="16" width="36" height="24" rx="4" fill="#060911" stroke="#22D3EE" strokeWidth="1.5" />
-                    <path d="M 52 25 L 57 29 L 52 33 M 61 33 L 70 33" stroke="#22D3EE" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+                    <rect x="44" y="16" width="36" height="24" rx="4" fill="#050E1D" stroke="#3BE37A" strokeWidth="1.5" />
+                    <path d="M 52 25 L 57 29 L 52 33 M 61 33 L 70 33" stroke="#3BE37A" strokeWidth="1.6" fill="none" strokeLinecap="round" />
                     <text
                       x="62"
                       y="64"
@@ -571,7 +571,7 @@ export function NetworkMonitor({
                       cx="64"
                       cy="24"
                       r="9"
-                      fill="#060911"
+                      fill="#050E1D"
                       stroke={activePacket.direction === 'drop' ? '#FB7185' : '#94A3B8'}
                       strokeWidth="1.5"
                     />
@@ -579,7 +579,7 @@ export function NetworkMonitor({
                       cx="64"
                       cy="24"
                       r="3"
-                      fill={activePacket.direction === 'drop' ? '#FB7185' : '#22D3EE'}
+                      fill={activePacket.direction === 'drop' ? '#FB7185' : '#3BE37A'}
                     />
                     <text
                       x="64"
@@ -616,10 +616,10 @@ export function NetworkMonitor({
                       strokeWidth="1.5"
                     />
                     {/* Server rack icon */}
-                    <rect x="44" y="15" width="36" height="10" rx="2.5" fill="#060911" stroke={event.success ? '#10B981' : '#FB7185'} strokeWidth="1.3" />
-                    <rect x="44" y="29" width="36" height="10" rx="2.5" fill="#060911" stroke={event.success ? '#10B981' : '#FB7185'} strokeWidth="1.3" />
+                    <rect x="44" y="15" width="36" height="10" rx="2.5" fill="#050E1D" stroke={event.success ? '#10B981' : '#FB7185'} strokeWidth="1.3" />
+                    <rect x="44" y="29" width="36" height="10" rx="2.5" fill="#050E1D" stroke={event.success ? '#10B981' : '#FB7185'} strokeWidth="1.3" />
                     <circle cx="72" cy="20" r="1.8" fill={event.success ? '#10B981' : '#FB7185'} />
-                    <circle cx="72" cy="34" r="1.8" fill={event.success ? '#22D3EE' : '#FB7185'} />
+                    <circle cx="72" cy="34" r="1.8" fill={event.success ? '#3BE37A' : '#FB7185'} />
                     <text
                       x="62"
                       y="64"
@@ -742,7 +742,7 @@ export function NetworkMonitor({
                 </svg>
 
                 {/* Playback Control Strip Anchored to Bottom of SVG Canvas */}
-                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800/90 bg-[#090D16] px-4 py-2.5">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800/90 bg-[#071225] px-4 py-2.5">
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] tabular-nums">
                     <span className={`font-semibold ${palette.text}`}>
                       Pacote #{activePacket.seq} de {packets.length}
@@ -791,7 +791,7 @@ export function NetworkMonitor({
                       }}
                       title="Pacote anterior"
                       aria-label="Pacote anterior"
-                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#111827] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
+                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#0F1E36] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
                     >
                       <StepBack className="h-3.5 w-3.5" />
                     </button>
@@ -804,7 +804,7 @@ export function NetworkMonitor({
                       }}
                       title="Próximo pacote"
                       aria-label="Próximo pacote"
-                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#111827] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
+                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#0F1E36] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
                     >
                       <StepForward className="h-3.5 w-3.5" />
                     </button>
@@ -817,7 +817,7 @@ export function NetworkMonitor({
                       }}
                       title="Reiniciar sequência"
                       aria-label="Reiniciar sequência"
-                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#111827] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
+                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#0F1E36] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
                     >
                       <RotateCcw className="h-3.5 w-3.5" />
                     </button>
@@ -826,7 +826,7 @@ export function NetworkMonitor({
                       type="button"
                       onClick={() => setSlowMode((s) => !s)}
                       title="Alternar velocidade didática"
-                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#111827] px-2.5 py-1 font-mono text-[11px] font-semibold text-slate-300 transition-colors hover:border-slate-500 tabular-nums"
+                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#0F1E36] px-2.5 py-1 font-mono text-[11px] font-semibold text-slate-300 transition-colors hover:border-slate-500 tabular-nums"
                     >
                       {slowMode ? '0.6x' : '1.0x'}
                     </button>
@@ -836,7 +836,7 @@ export function NetworkMonitor({
 
               {/* 2. LIVE PORT MATRIX (Shown automatically on nmap or Python socket port scans) */}
               {event.ports && event.ports.length > 0 && (
-                <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5">
+                <div className="rounded-xl border border-slate-800 bg-[#071225] p-3.5">
                   <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
                     <span className="font-semibold text-slate-200">
                       Mapa de Portas TCP em {event.resolvedIp}
@@ -857,7 +857,7 @@ export function NetworkMonitor({
                           key={p.port}
                           className={`rounded-lg border px-2.5 py-2 transition-colors ${
                             !revealed
-                              ? 'border-slate-800 bg-[#060911] text-slate-500'
+                              ? 'border-slate-800 bg-[#050E1D] text-slate-500'
                               : isRiskyMysql
                                 ? 'border-rose-400/60 bg-rose-500/10 text-rose-200'
                                 : isOpen
@@ -903,8 +903,8 @@ export function NetworkMonitor({
               {/* 3. SPLIT LIVE PACKET STREAM LOG + DEEP PACKET INSPECTOR */}
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
                 {/* Packet Stream Table (7 cols) */}
-                <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#060911] lg:col-span-7">
-                  <div className="flex items-center justify-between border-b border-slate-800 bg-[#090D16] px-3.5 py-2 text-[11px]">
+                <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#050E1D] lg:col-span-7">
+                  <div className="flex items-center justify-between border-b border-slate-800 bg-[#071225] px-3.5 py-2 text-[11px]">
                     <span className="font-semibold text-slate-200">
                       Fluxo de Pacotes (clique em qualquer linha para inspecionar)
                     </span>
@@ -970,7 +970,7 @@ export function NetworkMonitor({
                 </div>
 
                 {/* Packet Header & Educational Inspector (5 cols) */}
-                <div className="flex flex-col justify-between gap-3 rounded-xl border border-slate-800 bg-[#090D16] p-4 lg:col-span-5">
+                <div className="flex flex-col justify-between gap-3 rounded-xl border border-slate-800 bg-[#071225] p-4 lg:col-span-5">
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-bold text-slate-100">
@@ -983,7 +983,7 @@ export function NetworkMonitor({
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 rounded-lg border border-slate-800/80 bg-[#060911] p-2.5 font-mono text-[11px] tabular-nums">
+                    <div className="grid grid-cols-2 gap-2 rounded-lg border border-slate-800/80 bg-[#050E1D] p-2.5 font-mono text-[11px] tabular-nums">
                       <div className="min-w-0">
                         <span className="block text-[10px] text-slate-500">ORIGEM</span>
                         <span className="block truncate text-cyan-300">{activePacket.src}</span>
@@ -1010,7 +1010,7 @@ export function NetworkMonitor({
                       </div>
                     </div>
 
-                    <div className="rounded-lg border border-slate-800/80 bg-[#060911] px-3 py-2 font-mono text-[11px] text-slate-200 break-words">
+                    <div className="rounded-lg border border-slate-800/80 bg-[#050E1D] px-3 py-2 font-mono text-[11px] text-slate-200 break-words">
                       <span className="mr-1.5 text-slate-500">PAYLOAD:</span>
                       {activePacket.payload}
                     </div>

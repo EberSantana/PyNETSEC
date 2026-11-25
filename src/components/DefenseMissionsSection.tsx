@@ -130,7 +130,7 @@ export function DefenseMissionsSection({
   return (
     <div className="space-y-6">
       {/* Top Banner: Defense Curriculum + Profile Badges Progress */}
-      <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+      <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
           <div>
             <p className="text-xs font-semibold text-cyan-300">
@@ -147,7 +147,7 @@ export function DefenseMissionsSection({
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] px-4 py-2.5 text-xs tabular-nums">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] px-4 py-2.5 text-xs tabular-nums">
               <p className="text-slate-400">Badges de Defesa no Perfil</p>
               <p className="mt-0.5 font-mono text-base font-bold text-emerald-400">
                 {unlockedCount}/{DEFENSE_THEORY_MISSIONS.length}
@@ -167,7 +167,7 @@ export function DefenseMissionsSection({
       </section>
 
       {/* BLOCK 1: 3 Core Defense Pillars Study Panel */}
-      <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+      <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
             <p className="text-xs font-semibold text-cyan-300">
@@ -207,7 +207,7 @@ export function DefenseMissionsSection({
                 className={`flex cursor-pointer flex-col justify-between rounded-xl border p-4 text-left transition-colors ${
                   isActive
                     ? 'border-cyan-400 bg-[#162033]'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div>
@@ -227,7 +227,7 @@ export function DefenseMissionsSection({
 
         {/* Active Pillar Deep Dive */}
         <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-12">
-          <div className="space-y-4 rounded-xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-7">
+          <div className="space-y-4 rounded-xl border border-slate-800 bg-[#071225] p-5 lg:col-span-7">
             <div>
               <p className="text-xs font-semibold text-cyan-300">
                 Defesa {activePillar.step} · Papel Principal
@@ -243,7 +243,7 @@ export function DefenseMissionsSection({
               {activePillar.mechanisms.map((item) => (
                 <div
                   key={item.name}
-                  className="rounded-xl border border-slate-800 bg-[#111827] p-3.5"
+                  className="rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5"
                 >
                   <p className="text-xs font-semibold text-slate-100">{item.name}</p>
                   <p className="mt-1 text-xs leading-relaxed text-slate-400">{item.detail}</p>
@@ -253,7 +253,7 @@ export function DefenseMissionsSection({
           </div>
 
           <div className="flex flex-col justify-between gap-4 lg:col-span-5">
-            <div className="rounded-xl border border-slate-800 bg-[#060911] p-4">
+            <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-4">
               <p className="text-xs font-semibold text-cyan-300">
                 {activePillar.practicalExampleTitle}
               </p>
@@ -291,7 +291,7 @@ export function DefenseMissionsSection({
                 </h4>
               </div>
 
-              <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1 w-fit">
+              <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1 w-fit">
                 <button
                   type="button"
                   onClick={() => setIdsSimMode('ids')}
@@ -318,7 +318,7 @@ export function DefenseMissionsSection({
             </div>
 
             {/* Interactive SVG Architecture Flow */}
-            <div className="rounded-xl border border-slate-800 bg-[#060911] p-4">
+            <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-4">
               <svg
                 viewBox="0 0 840 210"
                 className="h-auto w-full"
@@ -365,7 +365,7 @@ export function DefenseMissionsSection({
                       width="160"
                       height="64"
                       rx="12"
-                      fill="#111827"
+                      fill="#0F1E36"
                       stroke="#38BDF8"
                       strokeWidth="1.5"
                     />
@@ -389,7 +389,7 @@ export function DefenseMissionsSection({
                       y1="96"
                       x2="410"
                       y2="136"
-                      stroke="#22D3EE"
+                      stroke="#3BE37A"
                       strokeWidth="2"
                       strokeDasharray="4 4"
                     />
@@ -400,7 +400,7 @@ export function DefenseMissionsSection({
                       height="56"
                       rx="12"
                       fill="#0B1F2E"
-                      stroke="#22D3EE"
+                      stroke="#3BE37A"
                       strokeWidth="1.5"
                     />
                     <text x="410" y="161" textAnchor="middle" fill="#67E8F9" fontSize="13" fontWeight="700">
@@ -513,10 +513,10 @@ export function DefenseMissionsSection({
             </div>
 
             {/* Clean IDS vs. IPS Comparison Table */}
-            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#090D16]">
+            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#071225]">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-800 bg-[#060911] text-slate-300">
+                  <tr className="border-b border-slate-800 bg-[#050E1D] text-slate-300">
                     <th className="px-4 py-3 font-semibold">Critério</th>
                     <th className="px-4 py-3 font-semibold text-cyan-300">
                       IDS (Detecção de Intrusão)
@@ -544,7 +544,7 @@ export function DefenseMissionsSection({
       </section>
 
       {/* BLOCK 2: 4 Theoretical Multiple-Choice Missions that Unlock Profile Badges */}
-      <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+      <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
             <p className="text-xs font-semibold text-emerald-300">
@@ -580,8 +580,8 @@ export function DefenseMissionsSection({
                   isSelected
                     ? 'border-cyan-400 bg-[#162033]'
                     : isUnlocked
-                      ? 'border-emerald-500/40 bg-[#090D16] hover:border-emerald-400/70'
-                      : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                      ? 'border-emerald-500/40 bg-[#071225] hover:border-emerald-400/70'
+                      : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div>
@@ -610,7 +610,7 @@ export function DefenseMissionsSection({
         </div>
 
         {/* Active Mission Challenge Card */}
-        <div className="mt-6 rounded-2xl border border-slate-800 bg-[#090D16] p-5 sm:p-6">
+        <div className="mt-6 rounded-2xl border border-slate-800 bg-[#071225] p-5 sm:p-6">
           <div className="flex flex-col justify-between gap-4 border-b border-slate-800 pb-5 lg:flex-row lg:items-center">
             <div>
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-400">
@@ -630,7 +630,7 @@ export function DefenseMissionsSection({
               </p>
             </div>
 
-            <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-[#111827] px-4 py-3 shrink-0">
+            <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-[#0F1E36] px-4 py-3 shrink-0">
               {missionAlreadyUnlocked ? (
                 <ShieldCheck className="h-7 w-7 shrink-0 text-emerald-400" />
               ) : (
@@ -656,7 +656,7 @@ export function DefenseMissionsSection({
               return (
                 <div
                   key={q.id}
-                  className="rounded-xl border border-slate-800 bg-[#111827] p-5"
+                  className="rounded-xl border border-slate-800 bg-[#0F1E36] p-5"
                 >
                   <div className="flex items-center justify-between gap-2 text-xs text-slate-400 tabular-nums">
                     <span className="font-mono font-semibold text-cyan-300">
@@ -683,7 +683,7 @@ export function DefenseMissionsSection({
                     )}
                   </div>
 
-                  <p className="mt-2 rounded-lg border border-slate-800 bg-[#090D16] px-3.5 py-2.5 text-xs leading-relaxed text-slate-300">
+                  <p className="mt-2 rounded-lg border border-slate-800 bg-[#071225] px-3.5 py-2.5 text-xs leading-relaxed text-slate-300">
                     <strong className="text-slate-100">Cenário:</strong> {q.scenario}
                   </p>
 
@@ -695,7 +695,7 @@ export function DefenseMissionsSection({
                       const rightOption = optIdx === q.correctIndex;
 
                       let btnStyle =
-                        'border-slate-800 bg-[#090D16] text-slate-200 hover:border-cyan-400/50 hover:bg-slate-800/40';
+                        'border-slate-800 bg-[#071225] text-slate-200 hover:border-cyan-400/50 hover:bg-slate-800/40';
                       if (isAnswered) {
                         if (rightOption) {
                           btnStyle =
@@ -703,7 +703,7 @@ export function DefenseMissionsSection({
                         } else if (picked && !rightOption) {
                           btnStyle = 'border-rose-500/60 bg-rose-500/10 text-rose-100';
                         } else {
-                          btnStyle = 'border-slate-800/60 bg-[#090D16]/60 text-slate-500';
+                          btnStyle = 'border-slate-800/60 bg-[#071225]/60 text-slate-500';
                         }
                       }
 
@@ -748,7 +748,7 @@ export function DefenseMissionsSection({
           </div>
 
           {/* Mission Completion / Result Footer */}
-          <div className="mt-5 flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#111827] p-4 sm:flex-row sm:items-center">
+          <div className="mt-5 flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#0F1E36] p-4 sm:flex-row sm:items-center">
             <div className="flex items-start gap-3">
               {passedThisAttempt || missionAlreadyUnlocked ? (
                 <Award className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
@@ -780,7 +780,7 @@ export function DefenseMissionsSection({
                 <button
                   type="button"
                   onClick={handleRetryMission}
-                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 whitespace-nowrap"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 whitespace-nowrap"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
                   Tentar Novamente

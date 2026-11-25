@@ -240,14 +240,14 @@ export function LabView({
           <button
             type="button"
             onClick={onBackToHub}
-            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 hover:text-slate-100 whitespace-nowrap"
+            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 hover:text-slate-100 whitespace-nowrap"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Voltar à Trilha
           </button>
 
           {/* Lab Mode Segmented Switcher: Missão CTF | Sandbox Python & Redes | Terminal Linux */}
-          <div className="flex flex-wrap items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] p-1">
+          <div className="flex flex-wrap items-center gap-1 rounded-lg border border-slate-800 bg-[#0F1E36] p-1">
             <button
               type="button"
               onClick={() => onModeChange('mission')}
@@ -322,7 +322,7 @@ export function LabView({
               type="button"
               disabled={!prevMission}
               onClick={() => prevMission && onSelectMission(prevMission)}
-              className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
             >
               <ChevronLeft className="h-3.5 w-3.5" />
               Anterior
@@ -336,7 +336,7 @@ export function LabView({
                   onSelectMission(chosen);
                 }
               }}
-              className="max-w-[210px] cursor-pointer rounded-lg border border-slate-800 bg-[#111827] px-2.5 py-2 font-mono text-xs text-slate-200 focus:border-cyan-400 focus:outline-none"
+              className="max-w-[210px] cursor-pointer rounded-lg border border-slate-800 bg-[#0F1E36] px-2.5 py-2 font-mono text-xs text-slate-200 focus:border-cyan-400 focus:outline-none"
             >
               {MISSIONS.map((m) => {
                 const unlocked = isMissionUnlocked(m);
@@ -353,7 +353,7 @@ export function LabView({
               type="button"
               disabled={!nextMission || !isMissionUnlocked(nextMission)}
               onClick={() => nextMission && onSelectMission(nextMission)}
-              className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap"
             >
               Próxima
               <ChevronRight className="h-3.5 w-3.5" />
@@ -426,7 +426,7 @@ export function LabView({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* LEFT ZONE: Micro-Leitura + Exemplo + Objetivo + Dicas em Camadas */}
         <aside className="flex flex-col gap-5 lg:col-span-5">
-          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex items-center justify-between text-xs text-slate-400">
               <span>
                 {mission.topic} · Regra dos {mission.durationMinutes} min
@@ -457,7 +457,7 @@ export function LabView({
             {/* Visual Example */}
             <div className="mt-5">
               <p className="text-xs font-medium text-slate-400">{mission.exampleTitle}</p>
-              <pre className="mt-2 overflow-x-auto rounded-xl border border-slate-800 bg-[#060911] p-4 font-mono text-xs leading-relaxed text-cyan-200">
+              <pre className="mt-2 overflow-x-auto rounded-xl border border-slate-800 bg-[#050E1D] p-4 font-mono text-xs leading-relaxed text-cyan-200">
                 {mission.exampleCode}
               </pre>
             </div>
@@ -498,13 +498,13 @@ export function LabView({
               </div>
 
               <div className="mt-3 space-y-2.5">
-                <div className="rounded-lg border border-amber-400/30 bg-[#090D16] p-3.5 text-xs leading-relaxed text-slate-200">
+                <div className="rounded-lg border border-amber-400/30 bg-[#071225] p-3.5 text-xs leading-relaxed text-slate-200">
                   <p className="font-semibold text-amber-300">Dica 1 · Orientação da Missão</p>
                   <p className="mt-1">{mission.hints[0]}</p>
                 </div>
 
                 {hintLevel >= 2 && (
-                  <div className="rounded-lg border border-amber-400/40 bg-[#090D16] p-3.5 text-xs leading-relaxed text-slate-200">
+                  <div className="rounded-lg border border-amber-400/40 bg-[#071225] p-3.5 text-xs leading-relaxed text-slate-200">
                     <p className="font-semibold text-amber-300">
                       Dica 2 · Estrutura da linha
                     </p>
@@ -517,7 +517,7 @@ export function LabView({
 
           {/* Bonus Purple Team Reflection after Mission 20B (from PDF p. 4) */}
           {mission.hasPurpleBonus && isCompleted && (
-            <div className="rounded-2xl border border-sky-400/30 bg-[#111827] p-6">
+            <div className="rounded-2xl border border-sky-400/30 bg-[#0F1E36] p-6">
               <div className="flex items-center gap-2 text-xs font-semibold text-sky-300">
                 <ShieldCheck className="h-4 w-4" />
                 <span>Desafio Bônus · Mentalidade Purple Team</span>
@@ -544,7 +544,7 @@ export function LabView({
                     value={purpleFix1}
                     onChange={(e) => setPurpleFix1(e.target.value)}
                     placeholder="Ex.: Remover /backup do acesso público e restringir permissões"
-                    className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                    className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -560,7 +560,7 @@ export function LabView({
                     value={purpleFix2}
                     onChange={(e) => setPurpleFix2(e.target.value)}
                     placeholder="Ex.: Exigir senha forte + bloquear IP após 5 falhas (rate limit)"
-                    className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                    className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
                 <div className="flex items-center justify-between gap-3">
@@ -584,7 +584,7 @@ export function LabView({
         {/* RIGHT ZONE: Code Editor + Quick Presets + Action Controls + Terminal Console */}
         <section className="flex flex-col gap-5 lg:col-span-7">
           {/* Code Editor Panel */}
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
             {/* Editor Header */}
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-4 py-3">
               <div className="flex items-center gap-2 text-xs text-slate-300">
@@ -621,7 +621,7 @@ export function LabView({
                   type="button"
                   title={preset.description}
                   onClick={() => handleInsertPreset(preset.snippet)}
-                  className="cursor-pointer rounded-md border border-slate-800 bg-[#111827] px-2.5 py-1 font-mono text-[11px] text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap shrink-0"
+                  className="cursor-pointer rounded-md border border-slate-800 bg-[#0F1E36] px-2.5 py-1 font-mono text-[11px] text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap shrink-0"
                 >
                   + {preset.label}
                 </button>
@@ -629,7 +629,7 @@ export function LabView({
             </div>
 
             {/* Editor with Line Numbers */}
-            <div className="flex bg-[#060911]">
+            <div className="flex bg-[#050E1D]">
               <div
                 aria-hidden="true"
                 className="select-none border-r border-slate-800/80 bg-[#080C15] px-3 py-4 text-right font-mono text-xs leading-6 text-slate-600 tabular-nums"
@@ -652,13 +652,13 @@ export function LabView({
             </div>
 
             {/* Action Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 bg-[#111827] px-4 py-3.5">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 bg-[#0F1E36] px-4 py-3.5">
               <div className="flex flex-wrap items-center gap-2.5">
                 <button
                   type="button"
                   disabled={isRunning}
                   onClick={() => handleRun(false)}
-                  className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-700 bg-[#090D16] px-4 py-2.5 text-sm font-semibold text-slate-100 transition-colors hover:border-cyan-400/60 hover:text-cyan-200 disabled:opacity-50 whitespace-nowrap"
+                  className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-700 bg-[#071225] px-4 py-2.5 text-sm font-semibold text-slate-100 transition-colors hover:border-cyan-400/60 hover:text-cyan-200 disabled:opacity-50 whitespace-nowrap"
                 >
                   {isRunning ? (
                     <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
@@ -690,9 +690,9 @@ export function LabView({
           </div>
 
           {/* Console Output & Local History Panel */}
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
             <div className="flex items-center justify-between border-b border-slate-800 px-4 py-2.5">
-              <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+              <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
                 <button
                   type="button"
                   onClick={() => setConsoleTab('output')}
@@ -727,7 +727,7 @@ export function LabView({
               )}
             </div>
 
-            <div className="min-h-[180px] bg-[#060911] p-4">
+            <div className="min-h-[180px] bg-[#050E1D] p-4">
               {consoleTab === 'output' ? (
                 <div className="space-y-4">
                   {/* Validation Feedback Banner */}
@@ -782,7 +782,7 @@ export function LabView({
                           </button>
 
                           {showRawTraceback && (
-                            <pre className="mt-2 overflow-x-auto rounded-lg border border-rose-500/20 bg-[#060911] p-3 font-mono text-[11px] text-rose-200/80">
+                            <pre className="mt-2 overflow-x-auto rounded-lg border border-rose-500/20 bg-[#050E1D] p-3 font-mono text-[11px] text-rose-200/80">
                               {execResult.translatedError.rawError}
                             </pre>
                           )}

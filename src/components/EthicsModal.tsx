@@ -16,7 +16,7 @@ export function EthicsModal({ open, onAccept, onClose }: EthicsModalProps) {
       aria-labelledby="ethics-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
     >
-      <div className="w-full max-w-lg rounded-xl border border-slate-700 bg-[#111827] p-6 shadow-2xl">
+      <div className="w-full max-w-lg rounded-xl border border-slate-700 bg-[#0F1E36] p-6 shadow-2xl">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-amber-400/30 bg-amber-400/10 text-amber-300">
@@ -49,7 +49,7 @@ export function EthicsModal({ open, onAccept, onClose }: EthicsModalProps) {
             Antes de iniciar os desafios de criptografia, análise forense (Blue Team) e
             automação ofensiva controlada (Red Team), confirme as regras do laboratório:
           </p>
-          <ul className="space-y-2.5 rounded-lg border border-slate-800 bg-[#090D16] p-4 text-slate-300">
+          <ul className="space-y-2.5 rounded-lg border border-slate-800 bg-[#071225] p-4 text-slate-300">
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
               <span>

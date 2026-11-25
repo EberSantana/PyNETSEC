@@ -55,7 +55,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
   return (
     <div className="space-y-6">
       {/* Intro Banner */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
         <h2 className="text-base font-bold text-slate-100">
           Onde os Protocolos Aparecem no Seu Uso Cotidiano
         </h2>
@@ -78,7 +78,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
                 className={`cursor-pointer rounded-xl border p-3.5 text-left transition-colors ${
                   active
                     ? 'border-cyan-400/70 bg-cyan-400/12'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
                 className={`w-full cursor-pointer rounded-2xl border p-4 text-left transition-colors ${
                   isSelected
                     ? 'border-cyan-400/70 bg-[#131F33]'
-                    : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#0F1E36] hover:border-slate-700'
                 }`}
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -127,7 +127,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
                       {proto.fullName} · {proto.portOrLayer}
                     </span>
                   </div>
-                  <span className="rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1 font-mono text-[11px] font-semibold text-cyan-300">
+                  <span className="rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1 font-mono text-[11px] font-semibold text-cyan-300">
                     {proto.visualBadge}
                   </span>
                 </div>
@@ -141,7 +141,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
         </div>
 
         {/* Right 6 cols: Live "Como Você Enxerga na Tela" Inspector */}
-        <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#111827] p-5 lg:col-span-6">
+        <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 lg:col-span-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2">
@@ -161,7 +161,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
             </div>
 
             {/* Realistic Dark UI Mockup Window */}
-            <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#060911]">
+            <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#050E1D]">
               <div className="flex items-center justify-between border-b border-slate-800 bg-[#0B111E] px-3.5 py-2">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70" />
@@ -186,7 +186,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
                           ? 'border-rose-500/35 bg-rose-500/10 text-rose-200'
                           : isOk
                             ? 'border-emerald-500/35 bg-emerald-500/10 text-emerald-200'
-                            : 'border-slate-800 bg-[#090D16] text-slate-200'
+                            : 'border-slate-800 bg-[#071225] text-slate-200'
                       }`}
                     >
                       {line}
@@ -196,7 +196,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5 text-xs">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-3.5 text-xs">
               <span className="font-mono text-[10px] font-semibold text-cyan-300">
                 ONDE OBSERVAR NO DIA A DIA
               </span>
@@ -214,7 +214,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
       </div>
 
       {/* SECTION 4: Como "ver" todos eles acontecendo em tempo real? */}
-      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-5 py-4">
           <div>
             <span className="font-mono text-[11px] font-semibold text-cyan-300">
@@ -228,7 +228,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#090D16] p-1">
+          <div className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#071225] p-1">
             <button
               type="button"
               onClick={() => setInspectTool('devtools')}
@@ -272,7 +272,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
           {inspectTool === 'devtools' && (
             <div className="space-y-4">
               <p className="text-xs leading-relaxed text-slate-300">
-                Aperte <kbd className="rounded border border-slate-700 bg-[#090D16] px-1.5 py-0.5 font-mono text-cyan-300">F12</kbd> no
+                Aperte <kbd className="rounded border border-slate-700 bg-[#071225] px-1.5 py-0.5 font-mono text-cyan-300">F12</kbd> no
                 Chrome ou Edge, vá na aba <strong className="text-slate-100">Network (Rede)</strong> e
                 recarregue uma página. Ative a coluna <strong className="text-slate-100">Protocol</strong> para
                 enxergar <code className="font-mono text-cyan-300">h2</code> (HTTP/2),{' '}
@@ -282,7 +282,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
               </p>
 
               {/* Simulated Chrome DevTools Network Table */}
-              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#060911]">
+              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#050E1D]">
                 <table className="w-full text-left font-mono text-xs tabular-nums">
                   <thead className="border-b border-slate-800 bg-[#0B111E] text-[11px] text-slate-400">
                     <tr>
@@ -325,7 +325,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
                   <strong className="text-cyan-300">IP + DHCP</strong> e{' '}
                   <strong className="text-emerald-300">DNS + ICMP</strong> em ação:
                 </p>
-                <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1 font-mono text-[11px]">
+                <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#071225] p-1 font-mono text-[11px]">
                   <button
                     type="button"
                     onClick={() => setTerminalOs('windows')}
@@ -348,7 +348,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
               </div>
 
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                <div className="rounded-xl border border-slate-800 bg-[#060911] p-4 font-mono text-xs">
+                <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-4 font-mono text-xs">
                   <div className="text-cyan-300">
                     $ {terminalOs === 'windows' ? 'ipconfig /all' : 'ifconfig wlan0'}
                   </div>
@@ -359,7 +359,7 @@ export function EverydayProtocolsModule({ onOpenSandbox }: EverydayProtocolsModu
                   </pre>
                 </div>
 
-                <div className="rounded-xl border border-slate-800 bg-[#060911] p-4 font-mono text-xs">
+                <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-4 font-mono text-xs">
                   <div className="text-cyan-300">$ ping google.com</div>
                   <pre className="mt-2 whitespace-pre-wrap text-[11px] leading-relaxed text-emerald-300">
 {`Disparando google.com [142.250.219.195] com 32 bytes:
@@ -375,7 +375,7 @@ Resposta de 142.250.219.195: bytes=32 tempo=11ms TTL=117
           )}
 
           {inspectTool === 'wireshark' && (
-            <div className="flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#060911] p-5 sm:flex-row sm:items-center">
+            <div className="flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#050E1D] p-5 sm:flex-row sm:items-center">
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm font-bold text-slate-100">
                   <CheckCircle2 className="h-4 w-4 text-emerald-400" />

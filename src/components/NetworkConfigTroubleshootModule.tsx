@@ -160,7 +160,7 @@ export function NetworkConfigTroubleshootModule({
   return (
     <div className="space-y-6">
       {/* PART 1: CONFIGURAÇÃO BÁSICA DE REDE */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2">
             <Sliders className="h-4 w-4 text-cyan-400" />
@@ -174,7 +174,7 @@ export function NetworkConfigTroubleshootModule({
             </div>
           </div>
 
-          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#090D16] p-1 text-xs font-semibold">
+          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#071225] p-1 text-xs font-semibold">
             <button
               type="button"
               onClick={() => setConfigMode('dhcp')}
@@ -200,7 +200,7 @@ export function NetworkConfigTroubleshootModule({
           {/* Interactive Parameters Form */}
           <div className="space-y-3 lg:col-span-7">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <label className="block rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <label className="block rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block font-mono text-[10px] font-bold text-cyan-300">
                   ENDEREÇO IPv4 (IDENTIDADE DO HOST)
                 </span>
@@ -209,11 +209,11 @@ export function NetworkConfigTroubleshootModule({
                   disabled={configMode === 'dhcp'}
                   value={configMode === 'dhcp' ? '192.168.10.15 (via DHCP)' : ipAddr}
                   onChange={(e) => setIpAddr(e.target.value)}
-                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#060911] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
+                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#050E1D] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
                 />
               </label>
 
-              <label className="block rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <label className="block rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block font-mono text-[10px] font-bold text-cyan-300">
                   MÁSCARA DE SUB-REDE (TAMANHO DA REDE)
                 </span>
@@ -222,11 +222,11 @@ export function NetworkConfigTroubleshootModule({
                   disabled={configMode === 'dhcp'}
                   value={configMode === 'dhcp' ? '255.255.255.0 (/24)' : subnetMask}
                   onChange={(e) => setSubnetMask(e.target.value)}
-                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#060911] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
+                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#050E1D] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
                 />
               </label>
 
-              <label className="block rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <label className="block rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block font-mono text-[10px] font-bold text-emerald-300">
                   GATEWAY PADRÃO (ROTEADOR DE SAÍDA)
                 </span>
@@ -235,11 +235,11 @@ export function NetworkConfigTroubleshootModule({
                   disabled={configMode === 'dhcp'}
                   value={configMode === 'dhcp' ? '192.168.10.1' : gateway}
                   onChange={(e) => setGateway(e.target.value)}
-                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#060911] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
+                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#050E1D] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
                 />
               </label>
 
-              <label className="block rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <label className="block rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block font-mono text-[10px] font-bold text-amber-300">
                   SERVIDOR DNS (TRADUZ NOMES EM IP)
                 </span>
@@ -248,7 +248,7 @@ export function NetworkConfigTroubleshootModule({
                   disabled={configMode === 'dhcp'}
                   value={configMode === 'dhcp' ? '10.0.0.20 (dns.if.lab)' : dnsServer}
                   onChange={(e) => setDnsServer(e.target.value)}
-                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#060911] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
+                  className="mt-1.5 w-full rounded-md border border-slate-700 bg-[#050E1D] px-2.5 py-1.5 font-mono text-xs text-slate-100 disabled:opacity-60 focus:border-cyan-400 focus:outline-none"
                 />
               </label>
             </div>
@@ -271,7 +271,7 @@ export function NetworkConfigTroubleshootModule({
           </div>
 
           {/* Generated Linux Netplan Config Preview */}
-          <div className="rounded-xl border border-slate-800 bg-[#060911] p-4 font-mono text-xs lg:col-span-5">
+          <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-4 font-mono text-xs lg:col-span-5">
             <div className="flex items-center justify-between border-b border-slate-800 pb-2 text-[11px] text-slate-400">
               <span>/etc/netplan/01-netcfg.yaml</span>
               <span className="text-cyan-300">Linux Netplan</span>
@@ -289,7 +289,7 @@ export function NetworkConfigTroubleshootModule({
       </div>
 
       {/* PART 2: SOLUÇÕES PARA PROBLEMAS DE REDE (TROUBLESHOOTING) */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2">
             <Wrench className="h-4 w-4 text-amber-400" />
@@ -320,7 +320,7 @@ export function NetworkConfigTroubleshootModule({
                   className={`w-full cursor-pointer rounded-xl border p-3 text-left transition-colors ${
                     active
                       ? 'border-cyan-400/70 bg-cyan-400/12'
-                      : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                      : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                   }`}
                 >
                   <div className={`text-xs font-bold ${active ? 'text-cyan-200' : 'text-slate-100'}`}>
@@ -333,7 +333,7 @@ export function NetworkConfigTroubleshootModule({
           </div>
 
           {/* Live 4-Layer Diagnostic Checklist + Fix Simulator (7 cols) */}
-          <div className="flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#090D16] p-4 lg:col-span-7">
+          <div className="flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#071225] p-4 lg:col-span-7">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
@@ -347,7 +347,7 @@ export function NetworkConfigTroubleshootModule({
                   onClick={() => setFixed((v) => !v)}
                   className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
                     fixed
-                      ? 'border border-slate-700 bg-[#111827] text-slate-200'
+                      ? 'border border-slate-700 bg-[#0F1E36] text-slate-200'
                       : 'bg-emerald-400 text-[#05131C] hover:bg-emerald-300'
                   }`}
                 >
@@ -382,7 +382,7 @@ export function NetworkConfigTroubleshootModule({
                 })}
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-[#060911] p-3.5 text-xs">
+              <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-3.5 text-xs">
                 <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold text-amber-300">
                   <ShieldAlert className="h-3.5 w-3.5" />
                   CAUSA PROVÁVEL

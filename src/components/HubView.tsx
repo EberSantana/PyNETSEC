@@ -113,7 +113,7 @@ export function HubView({
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
       {/* Hero Banner: Focused Single Anchor + Clear Resume Action */}
-      <section className="cyber-grid-bg rounded-2xl border border-slate-800 bg-[#111827] p-6 sm:p-8 lg:p-10">
+      <section className="cyber-grid-bg rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 sm:p-8 lg:p-10">
         <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12">
           <div className="flex flex-col justify-between lg:col-span-8">
             <div>
@@ -155,7 +155,7 @@ export function HubView({
                 <button
                   type="button"
                   onClick={() => onOpenProfileDrawer('profile')}
-                  className="cursor-pointer rounded-lg border border-slate-700 bg-[#090D16] px-4 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-slate-500 hover:text-white"
+                  className="cursor-pointer rounded-lg border border-slate-700 bg-[#071225] px-4 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-slate-500 hover:text-white"
                 >
                   Informar Nome e Turma
                 </button>
@@ -164,7 +164,7 @@ export function HubView({
           </div>
 
           {/* Right Summary Panel (Single Elevation) */}
-          <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-4">
+          <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#071225] p-5 lg:col-span-4">
             <div>
               <div className="flex items-center justify-between text-xs text-slate-400">
                 <span>Progresso PyNetSec</span>
@@ -228,7 +228,7 @@ export function HubView({
         <button
           type="button"
           onClick={() => onOpenStudy(selectedCircuit)}
-          className="group flex cursor-pointer flex-col justify-between rounded-xl border border-slate-800 bg-[#111827] p-5 text-left transition-colors hover:border-cyan-400/60"
+          className="group flex cursor-pointer flex-col justify-between rounded-xl border border-slate-800 bg-[#0F1E36] p-5 text-left transition-colors hover:border-cyan-400/60"
         >
           <div>
             <div className="flex items-center justify-between text-xs text-cyan-300">
@@ -256,7 +256,7 @@ export function HubView({
 
         <a
           href="#trilha-modulos"
-          className="group flex flex-col justify-between rounded-xl border border-slate-800 bg-[#111827] p-5 text-left transition-colors hover:border-cyan-400/60"
+          className="group flex flex-col justify-between rounded-xl border border-slate-800 bg-[#0F1E36] p-5 text-left transition-colors hover:border-cyan-400/60"
         >
           <div>
             <div className="flex items-center justify-between text-xs text-emerald-300">
@@ -282,7 +282,7 @@ export function HubView({
           </div>
         </a>
 
-        <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#111827] p-5 text-left">
+        <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#0F1E36] p-5 text-left">
           <div>
             <div className="flex items-center justify-between text-xs text-amber-300">
               <span className="font-mono font-semibold">03. Laboratório</span>
@@ -300,7 +300,7 @@ export function HubView({
             <button
               type="button"
               onClick={() => onOpenLabMode('packet-tracer')}
-              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1.5 font-medium text-amber-200 transition-colors hover:border-amber-400/60 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1.5 font-medium text-amber-200 transition-colors hover:border-amber-400/60 whitespace-nowrap"
             >
               <Network className="h-3.5 w-3.5" />
               Packet Tracer
@@ -308,7 +308,7 @@ export function HubView({
             <button
               type="button"
               onClick={() => onOpenLabMode('sandbox')}
-              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1.5 font-medium text-cyan-200 transition-colors hover:border-cyan-400/60 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1.5 font-medium text-cyan-200 transition-colors hover:border-cyan-400/60 whitespace-nowrap"
             >
               <Code2 className="h-3.5 w-3.5" />
               Sandbox Python
@@ -316,7 +316,7 @@ export function HubView({
             <button
               type="button"
               onClick={() => onOpenLabMode('linux')}
-              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1.5 font-medium text-emerald-200 transition-colors hover:border-emerald-400/60 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1.5 font-medium text-emerald-200 transition-colors hover:border-emerald-400/60 whitespace-nowrap"
             >
               <Terminal className="h-3.5 w-3.5" />
               Terminal Linux
@@ -344,7 +344,7 @@ export function HubView({
             className={`flex cursor-pointer items-center gap-2 self-start rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors whitespace-nowrap shrink-0 sm:self-auto ${
               freeNavigationMode
                 ? 'border-amber-400/50 bg-amber-400/10 text-amber-200'
-                : 'border-slate-800 bg-[#111827] text-slate-300 hover:border-slate-700'
+                : 'border-slate-800 bg-[#0F1E36] text-slate-300 hover:border-slate-700'
             }`}
           >
             {freeNavigationMode ? (
@@ -390,7 +390,7 @@ export function HubView({
                 className={`flex cursor-pointer flex-col justify-between rounded-xl border p-4 text-left transition-colors ${
                   isSelected
                     ? 'border-cyan-400/70 bg-[#162033]'
-                    : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#0F1E36] hover:border-slate-700'
                 }`}
               >
                 <div>
@@ -442,7 +442,7 @@ export function HubView({
       </section>
 
       {/* Active Circuit Mission List + Guided 1-2 Flow Bar + Filter & Search */}
-      <section className="mt-8 rounded-2xl border border-slate-800 bg-[#111827]">
+      <section className="mt-8 rounded-2xl border border-slate-800 bg-[#0F1E36]">
         <div className="flex flex-col gap-4 border-b border-slate-800 px-6 py-5">
           <div className="flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
             <div>
@@ -491,7 +491,7 @@ export function HubView({
 
           {/* Filter & Search Bar */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-            <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+            <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
               {(
                 [
                   { id: 'all', label: 'Todas' },
@@ -522,7 +522,7 @@ export function HubView({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar tema (TCP, OSI, chmod, ping)..."
                 aria-label="Buscar missões do CTF"
-                className="w-64 rounded-lg border border-slate-700 bg-[#090D16] py-1.5 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                className="w-64 rounded-lg border border-slate-700 bg-[#071225] py-1.5 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
               />
             </div>
           </div>
@@ -634,7 +634,7 @@ export function HubView({
                     <button
                       type="button"
                       onClick={() => onOpenStudyForMission(mission.id)}
-                      className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
+                      className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
                     >
                       <BookOpen className="h-3.5 w-3.5" />
                       Estudar
@@ -646,7 +646,7 @@ export function HubView({
                       onClick={() => onStartMission(mission)}
                       className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-semibold transition-colors whitespace-nowrap shrink-0 disabled:cursor-not-allowed disabled:opacity-40 ${
                         doneRecord
-                          ? 'border border-slate-700 bg-[#090D16] text-slate-200 hover:border-slate-500'
+                          ? 'border border-slate-700 bg-[#071225] text-slate-200 hover:border-slate-500'
                           : isBoss && unlocked
                             ? 'bg-rose-500 text-white hover:bg-rose-400'
                             : 'bg-cyan-400 text-[#05131C] hover:bg-cyan-300'

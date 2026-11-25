@@ -55,7 +55,7 @@ const OSI_LAYERS_TOP_DOWN: OsiLayerSpec[] = [
     accentText: 'text-cyan-300',
     accentBorder: 'border-cyan-400/60',
     accentBg: 'bg-cyan-500/12',
-    accentDot: '#22D3EE',
+    accentDot: '#3BE37A',
     icon: Globe,
   },
   {
@@ -384,7 +384,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
   return (
     <div className="space-y-4">
       {/* Mode Context & Controls Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-[#090D16] px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-[#071225] px-4 py-3">
         <div className="space-y-0.5">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
             <span className="text-xs font-bold text-slate-100">
@@ -425,7 +425,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
             type="button"
             onClick={handleStepEncap}
             title="Avançar uma camada"
-            className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-700 bg-[#111827] px-2.5 py-1.5 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500"
+            className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-700 bg-[#0F1E36] px-2.5 py-1.5 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500"
           >
             <StepForward className="h-3.5 w-3.5" />
             Passo
@@ -436,7 +436,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
             onClick={handleResetEncap}
             title="Reiniciar encapsulamento"
             aria-label="Reiniciar encapsulamento"
-            className="cursor-pointer rounded-lg border border-slate-700 bg-[#111827] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
+            className="cursor-pointer rounded-lg border border-slate-700 bg-[#0F1E36] p-1.5 text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
           >
             <RotateCcw className="h-3.5 w-3.5" />
           </button>
@@ -455,7 +455,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
               className={`cursor-pointer rounded-md border px-2.5 py-1 text-[11px] font-medium transition-colors ${
                 selectedPresetId === preset.id
                   ? 'border-cyan-400/60 bg-cyan-400/15 text-cyan-200'
-                  : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-slate-700'
+                  : 'border-slate-800 bg-[#071225] text-slate-300 hover:border-slate-700'
               }`}
             >
               {preset.label}
@@ -467,7 +467,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
       {/* Main 12-Col OSI Interactive Layout */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
         {/* LEFT (7 cols): Interactive 7-Layer Stack (Origin -> Wire -> Target) */}
-        <div className="rounded-xl border border-slate-800 bg-[#060911] p-4 lg:col-span-7">
+        <div className="rounded-xl border border-slate-800 bg-[#050E1D] p-4 lg:col-span-7">
           <div className="mb-3 flex items-center justify-between text-[11px] font-mono text-slate-400">
             <span className="flex items-center gap-1 text-cyan-300">
               <ArrowDown className="h-3.5 w-3.5" />
@@ -512,7 +512,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
                     <span
                       className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-mono text-xs font-bold tabular-nums ${
                         isSelected
-                          ? `${layer.accentText} bg-[#060911]`
+                          ? `${layer.accentText} bg-[#050E1D]`
                           : 'bg-slate-900 text-slate-400'
                       }`}
                     >
@@ -571,7 +571,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
           </div>
 
           {/* Physical Medium Animated Bit Stream (Camada 1) */}
-          <div className="mt-3 overflow-hidden rounded-lg border border-slate-800 bg-[#090D16] px-3 py-2">
+          <div className="mt-3 overflow-hidden rounded-lg border border-slate-800 bg-[#071225] px-3 py-2">
             <div className="flex items-center justify-between text-[10px] font-mono">
               <span className="text-rose-300 font-semibold">
                 MEIO FÍSICO (CAMADA 1 · BITS 0s e 1s)
@@ -593,7 +593,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
         </div>
 
         {/* RIGHT (5 cols): Layer Deep-Dive + Live Encapsulation "Russian Doll" Wrapper */}
-        <div className="flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#090D16] p-4 lg:col-span-5">
+        <div className="flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#071225] p-4 lg:col-span-5">
           <div className="space-y-3">
             {/* Selected Layer Header */}
             <div className="flex items-start justify-between gap-2">
@@ -618,7 +618,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
             </p>
 
             {/* Protocols & Devices */}
-            <div className="rounded-lg border border-slate-800 bg-[#060911] px-3 py-2">
+            <div className="rounded-lg border border-slate-800 bg-[#050E1D] px-3 py-2">
               <span className="block font-mono text-[10px] text-slate-500">
                 PROTOCOLOS, TECNOLOGIAS E EQUIPAMENTOS
               </span>
@@ -655,7 +655,7 @@ export function OsiModelVisualizer({ event, activePacket }: OsiModelVisualizerPr
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1 rounded-lg border border-slate-800 bg-[#060911] p-2 font-mono text-[10px]">
+            <div className="flex flex-wrap items-center gap-1 rounded-lg border border-slate-800 bg-[#050E1D] p-2 font-mono text-[10px]">
               {headerBlocks.map((blk, idx) => {
                 const isIncluded = blk.layer >= currentEncapStep.layer;
                 const isFocused = blk.layer === selectedLayerNum;

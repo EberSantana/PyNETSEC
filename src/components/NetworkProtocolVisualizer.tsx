@@ -333,9 +333,9 @@ function SequenceDiagramSvg({
   const rowGap = 48;
   const svgHeight = Math.max(350, topY + 6 * rowGap + 40);
 
-  const accentHex = protocol === 'tcp' ? '#22D3EE' : '#F59E0B';
+  const accentHex = protocol === 'tcp' ? '#3BE37A' : '#F59E0B';
   const accentSoft =
-    protocol === 'tcp' ? 'rgba(34, 211, 238, 0.14)' : 'rgba(245, 158, 11, 0.14)';
+    protocol === 'tcp' ? 'rgba(59, 227, 122, 0.14)' : 'rgba(245, 158, 11, 0.14)';
   const idPrefix = `${protocol}-${compact ? 'cmp' : 'full'}`;
 
   return (
@@ -355,7 +355,7 @@ function SequenceDiagramSvg({
           markerHeight="7"
           orient="auto-start-reverse"
         >
-          <path d="M 0 1 L 10 5 L 0 9 z" fill="#22D3EE" />
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#3BE37A" />
         </marker>
         <marker
           id={`${idPrefix}-arrow-amber`}
@@ -392,7 +392,7 @@ function SequenceDiagramSvg({
         </marker>
       </defs>
 
-      <rect x="0" y="0" width={viewWidth} height={svgHeight} fill="#060911" rx="8" />
+      <rect x="0" y="0" width={viewWidth} height={svgHeight} fill="#050E1D" rx="8" />
 
       {/* Client Node Header */}
       <rect
@@ -401,7 +401,7 @@ function SequenceDiagramSvg({
         width={compact ? 186 : 196}
         height="50"
         rx="10"
-        fill="#111827"
+        fill="#0F1E36"
         stroke={accentHex}
         strokeOpacity="0.55"
         strokeWidth="1.5"
@@ -436,7 +436,7 @@ function SequenceDiagramSvg({
         width={compact ? 186 : 196}
         height="50"
         rx="10"
-        fill="#111827"
+        fill="#0F1E36"
         stroke={accentHex}
         strokeOpacity="0.55"
         strokeWidth="1.5"
@@ -490,7 +490,7 @@ function SequenceDiagramSvg({
           <path
             d={`M ${compact ? 10 : 22} ${topY + 4} L ${compact ? 16 : 28} ${topY + 4} L ${compact ? 16 : 28} ${topY + 3 * rowGap - 6} L ${compact ? 10 : 22} ${topY + 3 * rowGap - 6}`}
             fill="none"
-            stroke="#22D3EE"
+            stroke="#3BE37A"
             strokeOpacity="0.65"
             strokeWidth="1.5"
           />
@@ -498,7 +498,7 @@ function SequenceDiagramSvg({
             x={compact ? 8 : 16}
             y={topY + 1.5 * rowGap}
             textAnchor="middle"
-            fill="#22D3EE"
+            fill="#3BE37A"
             fontSize="8.5"
             fontWeight="700"
             fontFamily="JetBrains Mono, monospace"
@@ -572,7 +572,7 @@ function SequenceDiagramSvg({
           : step.retransmit
             ? '#10B981'
             : protocol === 'tcp'
-              ? '#22D3EE'
+              ? '#3BE37A'
               : '#F59E0B';
 
         const markerUrl = step.dropped
@@ -652,7 +652,7 @@ function SequenceDiagramSvg({
                   width="44"
                   height="19"
                   rx="5"
-                  fill="#090D16"
+                  fill="#071225"
                   stroke={strokeColor}
                   strokeWidth="1.8"
                 />
@@ -886,7 +886,7 @@ export function NetworkProtocolVisualizer({
   const recoveredInFlow = singleVisible.some((s) => s.retransmit);
 
   return (
-    <section className="rounded-2xl border border-slate-800 bg-[#111827] p-5 sm:p-6">
+    <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 sm:p-6">
       {/* Header & Mode Controls Bar */}
       <div className="flex flex-col justify-between gap-4 border-b border-slate-800 pb-5 xl:flex-row xl:items-center">
         <div>
@@ -905,7 +905,7 @@ export function NetworkProtocolVisualizer({
 
         {/* 3-Mode Switcher + Packet Loss Toggle */}
         <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#090D16] p-1">
+          <div className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#071225] p-1">
             <button
               type="button"
               onClick={() => setMode('compare')}
@@ -950,7 +950,7 @@ export function NetworkProtocolVisualizer({
             className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
               simulateLoss
                 ? 'border-rose-400/50 bg-rose-500/15 text-rose-200'
-                : 'border-slate-700 bg-[#090D16] text-slate-300 hover:border-slate-500'
+                : 'border-slate-700 bg-[#071225] text-slate-300 hover:border-slate-500'
             }`}
           >
             <WifiOff className="h-3.5 w-3.5" />
@@ -960,7 +960,7 @@ export function NetworkProtocolVisualizer({
       </div>
 
       {/* Playback Controls Strip */}
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-[#090D16] px-4 py-3">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-[#071225] px-4 py-3">
         <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -985,7 +985,7 @@ export function NetworkProtocolVisualizer({
           <button
             type="button"
             onClick={handleStepForward}
-            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-cyan-400/50 whitespace-nowrap"
+            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#0F1E36] px-3 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-cyan-400/50 whitespace-nowrap"
           >
             <StepForward className="h-3.5 w-3.5 text-cyan-300" />
             Próximo Passo
@@ -994,7 +994,7 @@ export function NetworkProtocolVisualizer({
           <button
             type="button"
             onClick={handleReset}
-            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-600 whitespace-nowrap"
+            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-slate-600 whitespace-nowrap"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             Reiniciar
@@ -1034,7 +1034,7 @@ export function NetworkProtocolVisualizer({
         <div className="mt-5 space-y-5">
           <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
             {/* TCP Panel */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-cyan-400/30 bg-[#090D16] p-4">
+            <div className="flex flex-col gap-3 rounded-2xl border border-cyan-400/30 bg-[#071225] p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-cyan-300" />
@@ -1047,7 +1047,7 @@ export function NetworkProtocolVisualizer({
                 </span>
               </div>
 
-              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#060911] p-3">
+              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#050E1D] p-3">
                 <SequenceDiagramSvg
                   protocol="tcp"
                   steps={tcpSteps}
@@ -1059,7 +1059,7 @@ export function NetworkProtocolVisualizer({
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-[#111827] px-3.5 py-2.5 text-xs">
+              <div className="rounded-xl border border-slate-800 bg-[#0F1E36] px-3.5 py-2.5 text-xs">
                 <p className="font-semibold text-cyan-200">
                   {tcpSteps[Math.min(activeStepIdx, tcpSteps.length - 1)].title}
                 </p>
@@ -1070,7 +1070,7 @@ export function NetworkProtocolVisualizer({
             </div>
 
             {/* UDP Panel */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-amber-400/30 bg-[#090D16] p-4">
+            <div className="flex flex-col gap-3 rounded-2xl border border-amber-400/30 bg-[#071225] p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Zap className="h-4 w-4 text-amber-300" />
@@ -1083,7 +1083,7 @@ export function NetworkProtocolVisualizer({
                 </span>
               </div>
 
-              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#060911] p-3">
+              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#050E1D] p-3">
                 <SequenceDiagramSvg
                   protocol="udp"
                   steps={udpSteps}
@@ -1095,7 +1095,7 @@ export function NetworkProtocolVisualizer({
                 />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-[#111827] px-3.5 py-2.5 text-xs">
+              <div className="rounded-xl border border-slate-800 bg-[#0F1E36] px-3.5 py-2.5 text-xs">
                 <p className="font-semibold text-amber-200">
                   {activeStepIdx >= udpSteps.length
                     ? 'Fluxo UDP já finalizado — sem etapa de encerramento (FIN)'
@@ -1111,7 +1111,7 @@ export function NetworkProtocolVisualizer({
           </div>
 
           {/* Live Synchronized Packet Trace Log */}
-          <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#060911]">
+          <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#050E1D]">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-2.5 text-[11px] text-slate-400">
               <span className="font-mono font-semibold text-slate-200">
                 Log de Pacotes em Trânsito (Etapa 1 até {activeStepIdx + 1})
@@ -1164,7 +1164,7 @@ export function NetworkProtocolVisualizer({
 
           {/* Live Side-by-Side Quantitative Takeaway */}
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4 text-xs">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-4 text-xs">
               <p className="text-slate-400">Tempo até o 1º dado útil</p>
               <p className="mt-1 font-mono text-sm font-bold tabular-nums">
                 <span className="text-cyan-300">TCP: 70 ms</span>
@@ -1175,7 +1175,7 @@ export function NetworkProtocolVisualizer({
                 TCP gasta 3 pacotes (SYN, SYN-ACK, ACK) antes dos dados; UDP envia imediatamente.
               </p>
             </div>
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4 text-xs">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-4 text-xs">
               <p className="text-slate-400">Cabeçalho acumulado até agora</p>
               <p className="mt-1 font-mono text-sm font-bold tabular-nums">
                 <span className="text-cyan-300">TCP: {tcpHeaderBytes} B</span>
@@ -1186,7 +1186,7 @@ export function NetworkProtocolVisualizer({
                 TCP usa mínimo de 20 bytes por segmento; UDP usa apenas 8 bytes fixos.
               </p>
             </div>
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4 text-xs">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-4 text-xs">
               <p className="text-slate-400">Comportamento sob perda de pacote</p>
               <p className="mt-1 font-semibold text-slate-100">
                 {simulateLoss
@@ -1204,7 +1204,7 @@ export function NetworkProtocolVisualizer({
         <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* LEFT STAGE: Animated Sequence Diagram + Live Metrics */}
           <div className="flex flex-col gap-4 lg:col-span-7">
-            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#060911] p-4">
+            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#050E1D] p-4">
               <SequenceDiagramSvg
                 protocol={singleProtocol}
                 steps={activeSteps}
@@ -1217,14 +1217,14 @@ export function NetworkProtocolVisualizer({
 
             {/* Live Quantitative Metrics Strip */}
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3.5">
                 <p className="text-[11px] text-slate-400">Pacotes Trafegados</p>
                 <p className="mt-1 font-mono text-lg font-bold text-slate-100 tabular-nums">
                   {singleVisible.length}
                   <span className="text-xs font-normal text-slate-500">/{activeSteps.length}</span>
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3.5">
                 <p className="text-[11px] text-slate-400">Overhead Cabeçalho</p>
                 <p
                   className={`mt-1 font-mono text-lg font-bold tabular-nums ${
@@ -1234,13 +1234,13 @@ export function NetworkProtocolVisualizer({
                   {totalHeaderBytes} B
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3.5">
                 <p className="text-[11px] text-slate-400">Tempo Acumulado</p>
                 <p className="mt-1 font-mono text-lg font-bold text-slate-100 tabular-nums">
                   {totalLatencyMs} ms
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3.5">
                 <p className="text-[11px] text-slate-400">Entrega dos Dados</p>
                 <p className="mt-1 flex items-center gap-1 text-xs font-semibold">
                   {singleProtocol === 'tcp' ? (
@@ -1273,7 +1273,7 @@ export function NetworkProtocolVisualizer({
 
           {/* RIGHT DECK: Current Packet Inspector + Clickable Step Timeline */}
           <div className="flex flex-col gap-4 lg:col-span-5">
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-5">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-5">
               <div className="flex items-center justify-between gap-2 text-xs">
                 <span
                   className={`font-mono font-semibold ${
@@ -1317,7 +1317,7 @@ export function NetworkProtocolVisualizer({
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
               <p className="text-xs font-semibold text-slate-300">
                 Linha do Tempo da Troca (clique em qualquer etapa para inspecionar)
               </p>
@@ -1334,7 +1334,7 @@ export function NetworkProtocolVisualizer({
                           ? singleProtocol === 'tcp'
                             ? 'border-cyan-400/60 bg-cyan-400/10 text-slate-50'
                             : 'border-amber-400/60 bg-amber-400/10 text-slate-50'
-                          : 'border-slate-800/80 bg-[#111827] text-slate-300 hover:border-slate-700'
+                          : 'border-slate-800/80 bg-[#0F1E36] text-slate-300 hover:border-slate-700'
                       }`}
                     >
                       <div className="flex min-w-0 items-center gap-2">
