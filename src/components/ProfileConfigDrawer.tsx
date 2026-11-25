@@ -24,6 +24,8 @@ interface ProfileConfigDrawerProps {
   appsScriptUrl: string;
   freeNavigationMode: boolean;
   onSaveProfile: (profile: StudentProfile) => void;
+  /** Nome e turma vêm do login do Trilha Rali HUB: só leitura. */
+  perfilTravado?: boolean;
   onSaveAppsScriptUrl: (url: string) => void;
   onToggleFreeNavigation: (enabled: boolean) => void;
   onResetProgress: () => void;
@@ -35,6 +37,7 @@ export function ProfileConfigDrawer({
   open,
   initialTab = 'profile',
   profile,
+  perfilTravado = false,
   completedDefenseMissions,
   appsScriptUrl,
   freeNavigationMode,
@@ -191,6 +194,7 @@ export function ProfileConfigDrawer({
                     id="student-name"
                     type="text"
                     value={aluno}
+                    readOnly={perfilTravado}
                     onChange={(e) => setAluno(e.target.value)}
                     placeholder="Ex.: Lucas Ferreira"
                     className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
@@ -208,6 +212,7 @@ export function ProfileConfigDrawer({
                     id="student-class"
                     type="text"
                     value={turma}
+                    readOnly={perfilTravado}
                     onChange={(e) => setTurma(e.target.value)}
                     placeholder="Ex.: 2º Info A · IF"
                     className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"

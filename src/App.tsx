@@ -19,6 +19,7 @@ import { DEFAULT_SANDBOX_FILES } from './data/sandboxDefaults';
 import { STUDY_LESSONS, getLessonForMissionId } from './data/studyLessons';
 import { registrarMissao } from './services/appsScriptClient';
 import { loadSession, resetAllProgress, saveSession } from './services/storage';
+import { lerAlunoPortal } from './services/portal';
 import {
   AppView,
   CircuitId,
@@ -64,6 +65,19 @@ export default function App() {
   useEffect(() => {
     saveSession(session);
   }, [session]);
+
+  // Progresso individual enviado à planilha da turma pelo portal (progresso-turma.js)
+  useEffect(() => {
+    const feitas = MISSIONS.filter((m) => session.completedMissions[m.id]).length;
+    const pontos = MISSIONS.reduce((t, m) => t + (session.completedMissions[m.id] ? m.points : 0), 0);
+    window.__pynetsecDados = () => ({
+      feitas,
+      total: MISSIONS.length,
+      pontos,
+      detalhe: { missoes: MISSIONS.filter((m) => session.completedMissions[m.id]).map((m) => m.id).join(',') },
+    });
+    window.progressoMudou?.();
+  }, [session.completedMissions]);
 
   const isMissionUnlocked = useCallback(
     (mission: Mission): boolean => {
@@ -210,6 +224,7 @@ export default function App() {
   };
 
   const handleSaveProfile = (profile: StudentProfile) => {
+    if (lerAlunoPortal()) return; // nome e turma vêm do login do portal
     setSession((prev) => ({ ...prev, profile }));
   };
 
@@ -542,6 +557,7 @@ export default function App() {
         appsScriptUrl={session.appsScriptUrl}
         freeNavigationMode={session.freeNavigationMode}
         onSaveProfile={handleSaveProfile}
+        perfilTravado={Boolean(lerAlunoPortal())}
         onSaveAppsScriptUrl={handleSaveAppsScriptUrl}
         onToggleFreeNavigation={handleToggleFreeNavigation}
         onResetProgress={handleResetProgress}

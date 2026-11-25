@@ -1,6 +1,15 @@
 import { PersistedSession } from '../types/ctf';
 
-const STORAGE_KEY = 'trilharali_pysec_session_v1';
+import { lerAlunoPortal, MODO_PROFESSOR } from './portal';
+
+const STORAGE_KEY_BASE = 'trilharali_pysec_session_v1';
+
+/** Cada aluno do portal tem o seu progresso, mesmo dividindo o computador do laboratório. */
+function storageKey(): string {
+  const a = lerAlunoPortal();
+  if (a) return `${STORAGE_KEY_BASE}:${a.id}`;
+  return MODO_PROFESSOR ? `${STORAGE_KEY_BASE}:professor` : STORAGE_KEY_BASE;
+}
 
 export const DEFAULT_SESSION: PersistedSession = {
   profile: {
@@ -20,8 +29,14 @@ export const DEFAULT_SESSION: PersistedSession = {
 };
 
 export function loadSession(): PersistedSession {
+  const s = lerSessao();
+  const a = lerAlunoPortal();
+  return a ? { ...s, profile: { aluno: a.nome, turma: a.turma || s.profile.turma } } : s;
+}
+
+function lerSessao(): PersistedSession {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(storageKey());
     if (!raw) {
       return { ...DEFAULT_SESSION };
     }
@@ -55,7 +70,7 @@ export function loadSession(): PersistedSession {
 
 export function saveSession(session: PersistedSession): void {
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    window.localStorage.setItem(storageKey(), JSON.stringify(session));
   } catch {
     // Ignore quota errors on restricted school browsers
   }
