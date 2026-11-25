@@ -544,7 +544,7 @@ export function TcpUdpModule() {
   return (
     <div className="space-y-6">
       {/* 1. O QUE SÃO E QUAL SUA FUNCIONALIDADE EM REDES */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
           <span className="font-mono font-semibold text-cyan-300">
             Camada 4 do Modelo OSI · Camada de Transporte
@@ -570,7 +570,7 @@ export function TcpUdpModule() {
 
         {/* Functional Role of Transport Layer: 3 core responsibilities */}
         <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+          <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
             <div className="flex items-center gap-2 text-xs font-bold text-cyan-300">
               <Layers className="h-4 w-4 shrink-0" />
               1. Endereçamento por Portas
@@ -583,7 +583,7 @@ export function TcpUdpModule() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+          <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
             <div className="flex items-center gap-2 text-xs font-bold text-cyan-300">
               <Cpu className="h-4 w-4 shrink-0" />
               2. Segmentação de Dados
@@ -594,7 +594,7 @@ export function TcpUdpModule() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+          <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
             <div className="flex items-center gap-2 text-xs font-bold text-cyan-300">
               <Gauge className="h-4 w-4 shrink-0" />
               3. Controle da Entrega
@@ -610,7 +610,7 @@ export function TcpUdpModule() {
         {/* Two side-by-side protocol summary blocks */}
         <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* TCP Summary */}
-          <div className="rounded-xl border border-cyan-500/35 bg-[#090D16] p-5">
+          <div className="rounded-xl border border-cyan-500/35 bg-[#071225] p-5">
             <div className="flex items-center justify-between gap-2">
               <div>
                 <h3 className="text-base font-bold text-cyan-200">
@@ -641,7 +641,7 @@ export function TcpUdpModule() {
           </div>
 
           {/* UDP Summary */}
-          <div className="rounded-xl border border-emerald-500/35 bg-[#090D16] p-5">
+          <div className="rounded-xl border border-emerald-500/35 bg-[#071225] p-5">
             <div className="flex items-center justify-between gap-2">
               <div>
                 <h3 className="text-base font-bold text-emerald-200">
@@ -673,7 +673,7 @@ export function TcpUdpModule() {
       </div>
 
       {/* 2. SIMULADOR INTERATIVO PASSO A PASSO (TWO-ZONE SANDBOX) */}
-      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
         {/* Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-5 py-4">
           <div>
@@ -687,7 +687,7 @@ export function TcpUdpModule() {
 
           <div className="flex flex-wrap items-center gap-2">
             {/* Protocol Segmented Switch */}
-            <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#090D16] p-1">
+            <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#071225] p-1">
               <button
                 type="button"
                 onClick={() => handleSwitchProtocol('tcp')}
@@ -713,7 +713,7 @@ export function TcpUdpModule() {
             </div>
 
             {/* Network Condition Switch */}
-            <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#090D16] p-1">
+            <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#071225] p-1">
               <button
                 type="button"
                 onClick={() => handleToggleLoss(false)}
@@ -743,7 +743,7 @@ export function TcpUdpModule() {
         {/* Two-Zone Split: 7 cols Stage + 5 cols Step Controls & Explanation */}
         <div className="grid grid-cols-1 lg:grid-cols-12">
           {/* LEFT: Animated SVG Wire Stage + Live Telemetry */}
-          <div className="border-b border-slate-800 bg-[#060911] p-5 lg:col-span-7 lg:border-r lg:border-b-0">
+          <div className="border-b border-slate-800 bg-[#050E1D] p-5 lg:col-span-7 lg:border-r lg:border-b-0">
             <TransportStageSvg
               protocol={simProtocol}
               step={currentStep}
@@ -758,8 +758,8 @@ export function TcpUdpModule() {
                   : currentStep.isRetransmit
                     ? 'border-amber-400/45 bg-amber-400/10'
                     : simProtocol === 'tcp'
-                      ? 'border-cyan-400/35 bg-[#090D16]'
-                      : 'border-emerald-400/35 bg-[#090D16]'
+                      ? 'border-cyan-400/35 bg-[#071225]'
+                      : 'border-emerald-400/35 bg-[#071225]'
               }`}
             >
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
@@ -787,19 +787,19 @@ export function TcpUdpModule() {
 
             {/* Live Tabular Metrics */}
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block text-[11px] text-slate-400">Cabeçalho</span>
                 <span className="mt-0.5 block font-mono text-sm font-bold text-slate-100 tabular-nums">
                   {simProtocol === 'tcp' ? '20 bytes' : '8 bytes'}
                 </span>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block text-[11px] text-slate-400">Entregues OK</span>
                 <span className="mt-0.5 block font-mono text-sm font-bold text-emerald-300 tabular-nums">
                   {currentStep.deliveredInOrder}/3 dados
                 </span>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block text-[11px] text-slate-400">Retransmissões</span>
                 <span
                   className={`mt-0.5 block font-mono text-sm font-bold tabular-nums ${
@@ -809,7 +809,7 @@ export function TcpUdpModule() {
                   {currentStep.retransmissions}
                 </span>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block text-[11px] text-slate-400">Tempo Acumulado</span>
                 <span className="mt-0.5 block font-mono text-sm font-bold text-cyan-300 tabular-nums">
                   {currentStep.latencyMs} ms
@@ -837,7 +837,7 @@ export function TcpUdpModule() {
                 <button
                   type="button"
                   onClick={handleStepForward}
-                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 whitespace-nowrap"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 whitespace-nowrap"
                 >
                   <SkipForward className="h-3.5 w-3.5" />
                   Próximo passo
@@ -872,8 +872,8 @@ export function TcpUdpModule() {
                               ? 'border-cyan-400/70 bg-cyan-400/12 text-cyan-100'
                               : 'border-emerald-400/70 bg-emerald-400/12 text-emerald-100'
                           : isPast
-                            ? 'border-slate-800 bg-[#090D16] text-slate-300'
-                            : 'border-slate-800/70 bg-[#090D16]/60 text-slate-400 hover:border-slate-700'
+                            ? 'border-slate-800 bg-[#071225] text-slate-300'
+                            : 'border-slate-800/70 bg-[#071225]/60 text-slate-400 hover:border-slate-700'
                       }`}
                     >
                       <div className="min-w-0">
@@ -905,7 +905,7 @@ export function TcpUdpModule() {
       {/* 3. ANATOMIA DO CABEÇALHO + TABELA COMPARATIVA */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Left 5 cols: Interactive Header Inspector */}
-        <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5 lg:col-span-5">
+        <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 lg:col-span-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h3 className="text-base font-bold text-slate-50">Anatomia do Cabeçalho</h3>
@@ -913,7 +913,7 @@ export function TcpUdpModule() {
                 Clique em cada campo para entender por que o TCP é mais completo e o UDP mais leve.
               </p>
             </div>
-            <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1">
+            <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#071225] p-1">
               <button
                 type="button"
                 onClick={() => handleSwitchHeaderTab('tcp')}
@@ -952,7 +952,7 @@ export function TcpUdpModule() {
                       ? headerTab === 'tcp'
                         ? 'border-cyan-400 bg-cyan-400/15 text-cyan-100'
                         : 'border-emerald-400 bg-emerald-400/15 text-emerald-100'
-                      : 'border-slate-800 bg-[#090D16] text-slate-200 hover:border-slate-700'
+                      : 'border-slate-800 bg-[#071225] text-slate-200 hover:border-slate-700'
                   }`}
                 >
                   <div className="text-xs font-bold">{field.name}</div>
@@ -964,7 +964,7 @@ export function TcpUdpModule() {
             })}
           </div>
 
-          <div className="mt-4 rounded-xl border border-slate-800 bg-[#060911] p-4">
+          <div className="mt-4 rounded-xl border border-slate-800 bg-[#050E1D] p-4">
             <div className="flex items-center justify-between text-xs">
               <span
                 className={`font-bold ${
@@ -984,7 +984,7 @@ export function TcpUdpModule() {
         </div>
 
         {/* Right 7 cols: Full Technical Comparison Table */}
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827] lg:col-span-7">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36] lg:col-span-7">
           <div className="border-b border-slate-800 px-5 py-4">
             <h3 className="text-base font-bold text-slate-50">Comparativo Direto: TCP × UDP</h3>
             <p className="mt-0.5 text-xs text-slate-400">
@@ -994,7 +994,7 @@ export function TcpUdpModule() {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs tabular-nums">
-              <thead className="border-b border-slate-800 bg-[#090D16] text-slate-400">
+              <thead className="border-b border-slate-800 bg-[#071225] text-slate-400">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Característica</th>
                   <th className="px-4 py-3 font-semibold text-cyan-300">TCP</th>
@@ -1016,7 +1016,7 @@ export function TcpUdpModule() {
       </div>
 
       {/* 4. DESAFIO INTERATIVO: QUAL PROTOCOLO ESCOLHER? */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
             <h3 className="text-base font-bold text-slate-50">
@@ -1054,7 +1054,7 @@ export function TcpUdpModule() {
             return (
               <div
                 key={item.id}
-                className="rounded-xl border border-slate-800 bg-[#090D16] p-4"
+                className="rounded-xl border border-slate-800 bg-[#071225] p-4"
               >
                 <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
                   <div>
@@ -1073,7 +1073,7 @@ export function TcpUdpModule() {
                           ? isCorrect
                             ? 'border-emerald-400 bg-emerald-400/20 text-emerald-200'
                             : 'border-rose-400 bg-rose-500/20 text-rose-200'
-                          : 'border-slate-700 bg-[#111827] text-slate-200 hover:border-cyan-400/60'
+                          : 'border-slate-700 bg-[#0F1E36] text-slate-200 hover:border-cyan-400/60'
                       }`}
                     >
                       Usar TCP
@@ -1086,7 +1086,7 @@ export function TcpUdpModule() {
                           ? isCorrect
                             ? 'border-emerald-400 bg-emerald-400/20 text-emerald-200'
                             : 'border-rose-400 bg-rose-500/20 text-rose-200'
-                          : 'border-slate-700 bg-[#111827] text-slate-200 hover:border-emerald-400/60'
+                          : 'border-slate-700 bg-[#0F1E36] text-slate-200 hover:border-emerald-400/60'
                       }`}
                     >
                       Usar UDP
@@ -1162,7 +1162,7 @@ function TcpUdpPortsDirectory() {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
       <div className="border-b border-slate-800 p-5">
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
           <span className="font-mono font-semibold text-cyan-300">
@@ -1193,7 +1193,7 @@ function TcpUdpPortsDirectory() {
                 className={`cursor-pointer rounded-xl border p-3.5 text-left transition-colors ${
                   active
                     ? 'border-cyan-400/70 bg-cyan-400/10'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
@@ -1214,7 +1214,7 @@ function TcpUdpPortsDirectory() {
         </div>
 
         {/* Status Legend */}
-        <div className="mt-4 grid grid-cols-1 gap-2 rounded-xl border border-slate-800 bg-[#090D16] p-3.5 text-[11px] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-1 gap-2 rounded-xl border border-slate-800 bg-[#071225] p-3.5 text-[11px] sm:grid-cols-2 lg:grid-cols-4">
           {PORT_STATUS_LEGEND.map((item) => (
             <div key={item.status} className="leading-relaxed">
               <strong className={getStatusClass(item.status)}>{item.status}:</strong>{' '}
@@ -1233,11 +1233,11 @@ function TcpUdpPortsDirectory() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar por porta (443, 53, 3306), serviço (SSH, DNS, VPN, MySQL)..."
               aria-label="Buscar portas TCP e UDP"
-              className="w-full rounded-lg border border-slate-700 bg-[#090D16] py-2 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+              className="w-full rounded-lg border border-slate-700 bg-[#071225] py-2 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
             />
           </div>
 
-          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1">
+          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#071225] p-1">
             {(['all', 'TCP', 'UDP', 'TCP/UDP'] as const).map((t) => (
               <button
                 key={t}
@@ -1254,7 +1254,7 @@ function TcpUdpPortsDirectory() {
             ))}
           </div>
 
-          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1">
+          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#071225] p-1">
             {(['all', 'Oficial', 'Não-oficial', 'Conflito'] as const).map((st) => (
               <button
                 key={st}
@@ -1274,7 +1274,7 @@ function TcpUdpPortsDirectory() {
       </div>
 
       {/* Scrollable Tabular Ports List */}
-      <div className="max-h-[460px] overflow-auto bg-[#060911]">
+      <div className="max-h-[460px] overflow-auto bg-[#050E1D]">
         {filteredPorts.length === 0 ? (
           <div className="p-8 text-center text-xs text-slate-400">
             Nenhuma porta encontrada com os filtros atuais. Tente buscar por{' '}
@@ -1335,7 +1335,7 @@ function TransportStageSvg({
   step: SimulationStep;
   reduced: boolean;
 }) {
-  const accent = protocol === 'tcp' ? '#22D3EE' : '#10B981';
+  const accent = protocol === 'tcp' ? '#3BE37A' : '#10B981';
   const packetFill = step.isLossEvent
     ? '#FB7185'
     : step.isRetransmit
@@ -1360,7 +1360,7 @@ function TransportStageSvg({
       role="img"
       aria-label={`Simulação de envio de pacotes ${protocol.toUpperCase()}`}
     >
-      <rect width="600" height="200" rx="12" fill="#090D16" stroke="#1E293B" />
+      <rect width="600" height="200" rx="12" fill="#071225" stroke="#1E293B" />
 
       {/* Upper TX lane (Client -> Server) */}
       <line x1="145" y1="74" x2="455" y2="74" stroke="#1E293B" strokeWidth="3" />
@@ -1443,7 +1443,7 @@ function TransportStageSvg({
           width="128"
           height="28"
           rx="8"
-          fill="#060911"
+          fill="#050E1D"
           stroke={packetFill}
           strokeWidth="1.8"
         />

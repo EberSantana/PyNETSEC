@@ -261,7 +261,7 @@ export function NetworkTroubleshootingTipsPanel({
   };
 
   return (
-    <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+    <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 border-b border-slate-800 pb-5 lg:flex-row lg:items-center">
         <div>
@@ -296,7 +296,7 @@ export function NetworkTroubleshootingTipsPanel({
               <button
                 type="button"
                 onClick={onOpenLinuxLab}
-                className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-emerald-400/50 hover:text-emerald-200 whitespace-nowrap"
+                className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-emerald-400/50 hover:text-emerald-200 whitespace-nowrap"
               >
                 <Terminal className="h-3.5 w-3.5 text-emerald-400" />
                 Abrir Terminal Linux
@@ -307,7 +307,7 @@ export function NetworkTroubleshootingTipsPanel({
       </div>
 
       {/* Quick Decision Flow Strip (Order of Troubleshooting) */}
-      <div className="mt-5 rounded-xl border border-slate-800 bg-[#090D16] p-4">
+      <div className="mt-5 rounded-xl border border-slate-800 bg-[#071225] p-4">
         <p className="text-[11px] font-semibold text-cyan-300">
           Ordem recomendada em campo (da Camada 1 até a Camada 7)
         </p>
@@ -332,7 +332,7 @@ export function NetworkTroubleshootingTipsPanel({
                   className={`cursor-pointer rounded-lg border px-2.5 py-1.5 text-left transition-colors ${
                     isCurrent
                       ? 'border-cyan-400 bg-cyan-400/15 text-cyan-100'
-                      : 'border-slate-800 bg-[#111827] text-slate-300 hover:border-slate-600'
+                      : 'border-slate-800 bg-[#0F1E36] text-slate-300 hover:border-slate-600'
                   }`}
                 >
                   <span className="font-mono font-semibold text-cyan-300">{item.step}</span>
@@ -369,7 +369,7 @@ export function NetworkTroubleshootingTipsPanel({
               className={`cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                 active
                   ? 'border-cyan-400 bg-cyan-400 text-[#05131C]'
-                  : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-slate-700 hover:text-slate-100'
+                  : 'border-slate-800 bg-[#071225] text-slate-300 hover:border-slate-700 hover:text-slate-100'
               }`}
             >
               {f.label}
@@ -393,7 +393,7 @@ export function NetworkTroubleshootingTipsPanel({
                 className={`flex w-full cursor-pointer flex-col rounded-xl border p-4 text-left transition-colors ${
                   isSelected
                     ? 'border-cyan-400 bg-[#162033]'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 text-xs">
@@ -412,7 +412,7 @@ export function NetworkTroubleshootingTipsPanel({
         </div>
 
         {/* Right 8 cols: Detailed Practical Guide + Terminal Sample */}
-        <div className="flex flex-col justify-between gap-5 rounded-2xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-8">
+        <div className="flex flex-col justify-between gap-5 rounded-2xl border border-slate-800 bg-[#071225] p-5 lg:col-span-8">
           <div className="space-y-5">
             {/* Command Title Bar */}
             <div className="border-b border-slate-800 pb-4">
@@ -441,7 +441,7 @@ export function NetworkTroubleshootingTipsPanel({
                   return (
                     <div
                       key={ex.cmd}
-                      className="flex flex-col justify-between gap-2 rounded-xl border border-slate-800 bg-[#111827] px-3.5 py-2.5 sm:flex-row sm:items-center"
+                      className="flex flex-col justify-between gap-2 rounded-xl border border-slate-800 bg-[#0F1E36] px-3.5 py-2.5 sm:flex-row sm:items-center"
                     >
                       <div className="min-w-0">
                         <code className="font-mono text-xs font-semibold text-cyan-300">
@@ -452,7 +452,7 @@ export function NetworkTroubleshootingTipsPanel({
                       <button
                         type="button"
                         onClick={() => handleCopy(ex.cmd)}
-                        className="flex cursor-pointer items-center gap-1 self-start rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap sm:self-auto"
+                        className="flex cursor-pointer items-center gap-1 self-start rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap sm:self-auto"
                       >
                         {isCopied ? (
                           <>
@@ -473,7 +473,7 @@ export function NetworkTroubleshootingTipsPanel({
             </div>
 
             {/* Simulated Terminal Output */}
-            <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#060911]">
+            <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#050E1D]">
               <div className="flex items-center justify-between border-b border-slate-800 px-3.5 py-2 text-[11px] text-slate-400">
                 <span className="flex items-center gap-1.5 font-mono font-semibold text-slate-300">
                   <Terminal className="h-3.5 w-3.5 text-emerald-400" />

@@ -110,7 +110,7 @@ export function BadgesView({
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
       {/* Header + Overall Lock-Screen Card CTA */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#111827] p-6 sm:flex-row sm:items-center">
+      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 sm:flex-row sm:items-center">
         <div>
           <p className="text-xs font-medium text-cyan-300">
             Perfil de Conquistas · Badges de Defesa &amp; Cofre de Flags
@@ -179,7 +179,7 @@ export function BadgesView({
                 key={mission.id}
                 className={`flex flex-col justify-between rounded-xl border p-5 ${
                   unlocked
-                    ? 'border-emerald-500/40 bg-[#111827]'
+                    ? 'border-emerald-500/40 bg-[#0F1E36]'
                     : 'border-slate-800 bg-[#0D1321]'
                 }`}
               >
@@ -200,7 +200,7 @@ export function BadgesView({
                       className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${
                         unlocked
                           ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-300'
-                          : 'border-slate-800 bg-[#090D16] text-slate-600'
+                          : 'border-slate-800 bg-[#071225] text-slate-600'
                       }`}
                     >
                       <Icon className="h-5 w-5" />
@@ -226,7 +226,7 @@ export function BadgesView({
                   </p>
 
                   {unlocked && (
-                    <div className="mt-3 truncate rounded-lg border border-emerald-500/25 bg-[#060911] px-3 py-1.5 font-mono text-[11px] text-emerald-300">
+                    <div className="mt-3 truncate rounded-lg border border-emerald-500/25 bg-[#050E1D] px-3 py-1.5 font-mono text-[11px] text-emerald-300">
                       {mission.badgeCode}
                     </div>
                   )}
@@ -274,7 +274,7 @@ export function BadgesView({
         </div>
 
         {completedList.length === 0 ? (
-          <div className="mt-4 rounded-2xl border border-slate-800 bg-[#111827] p-10 text-center">
+          <div className="mt-4 rounded-2xl border border-slate-800 bg-[#0F1E36] p-10 text-center">
             <Award className="mx-auto h-8 w-8 text-slate-600" />
             <h3 className="mt-3 text-base font-semibold text-slate-200">
               Nenhuma Flag capturada ainda
@@ -299,7 +299,7 @@ export function BadgesView({
               return (
                 <div
                   key={mission.id}
-                  className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#111827] p-5"
+                  className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#0F1E36] p-5"
                 >
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 tabular-nums">
@@ -313,7 +313,7 @@ export function BadgesView({
                     <h3 className="mt-1.5 text-base font-semibold text-slate-100">
                       {mission.title}
                     </h3>
-                    <div className="mt-3 flex items-center gap-2 rounded-lg border border-emerald-500/25 bg-[#060911] px-3 py-2 font-mono text-xs text-emerald-300">
+                    <div className="mt-3 flex items-center gap-2 rounded-lg border border-emerald-500/25 bg-[#050E1D] px-3 py-2 font-mono text-xs text-emerald-300">
                       <Flag className="h-3.5 w-3.5 shrink-0" />
                       <span className="truncate">{record.flag}</span>
                     </div>
@@ -350,7 +350,7 @@ export function BadgesView({
           </h2>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+        <div className="mt-4 overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
           {runHistory.length === 0 ? (
             <p className="p-6 text-xs text-slate-400">
               Suas execuções Python no laboratório aparecerão registradas aqui automaticamente.

@@ -144,7 +144,7 @@ export function ProfileConfigDrawer({
 
         {/* Segmented Tabs */}
         <div className="border-b border-slate-800 px-6 py-3">
-          <div className="grid grid-cols-2 gap-1 rounded-lg bg-[#090D16] p-1">
+          <div className="grid grid-cols-2 gap-1 rounded-lg bg-[#071225] p-1">
             <button
               type="button"
               onClick={() => setTab('profile')}
@@ -197,7 +197,7 @@ export function ProfileConfigDrawer({
                     readOnly={perfilTravado}
                     onChange={(e) => setAluno(e.target.value)}
                     placeholder="Ex.: Lucas Ferreira"
-                    className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                    className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
 
@@ -215,7 +215,7 @@ export function ProfileConfigDrawer({
                     readOnly={perfilTravado}
                     onChange={(e) => setTurma(e.target.value)}
                     placeholder="Ex.: 2º Info A · IF"
-                    className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                    className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
 
@@ -230,7 +230,7 @@ export function ProfileConfigDrawer({
               <hr className="border-slate-800" />
 
               {/* Unlocked Defense Badges inside Student Profile */}
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <div className="flex items-center justify-between gap-2">
                   <p className="flex items-center gap-1.5 text-sm font-semibold text-slate-100">
                     <Award className="h-4 w-4 text-emerald-400" />
@@ -259,7 +259,7 @@ export function ProfileConfigDrawer({
                         className={`flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs ${
                           unlocked
                             ? 'border-emerald-500/35 bg-emerald-500/10 text-emerald-200'
-                            : 'border-slate-800 bg-[#111827] text-slate-500'
+                            : 'border-slate-800 bg-[#0F1E36] text-slate-500'
                         }`}
                       >
                         <span className="truncate font-medium">{mission.badgeTitle}</span>
@@ -275,7 +275,7 @@ export function ProfileConfigDrawer({
               </div>
 
               {/* Teacher Free Navigation Mode */}
-              <div className="flex items-start justify-between gap-4 rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="flex items-start justify-between gap-4 rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <div>
                   <p className="text-sm font-semibold text-slate-100">
                     Modo Livre (Professor / Demonstração)
@@ -297,7 +297,7 @@ export function ProfileConfigDrawer({
                   }`}
                 >
                   <span
-                    className={`inline-block h-5 w-5 rounded-full bg-[#090D16] transition-transform ${
+                    className={`inline-block h-5 w-5 rounded-full bg-[#071225] transition-transform ${
                       freeNavigationMode ? 'translate-x-5' : 'translate-x-0'
                     }`}
                   />
@@ -305,7 +305,7 @@ export function ProfileConfigDrawer({
               </div>
 
               {/* Reset Session */}
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <p className="text-sm font-semibold text-slate-200">
                   Reiniciar progresso local
                 </p>
@@ -361,7 +361,7 @@ export function ProfileConfigDrawer({
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
                   placeholder="https://script.google.com/macros/s/.../exec"
-                  className="w-full rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2.5 font-mono text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2.5 font-mono text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                 />
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -399,7 +399,7 @@ export function ProfileConfigDrawer({
               </form>
 
               {/* Step 1: Spreadsheet Columns */}
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="text-sm font-semibold text-slate-100">
                     1. Aba &quot;Progresso&quot; no Google Sheets
@@ -426,13 +426,13 @@ export function ProfileConfigDrawer({
                   Crie uma aba chamada <code className="text-cyan-300">Progresso</code> com estas
                   7 colunas na linha 1 (suporta múltiplos módulos como PyNetSec e BD):
                 </p>
-                <div className="mt-3 overflow-x-auto rounded-lg border border-slate-800 bg-[#060911] px-3 py-2 font-mono text-xs text-cyan-200">
+                <div className="mt-3 overflow-x-auto rounded-lg border border-slate-800 bg-[#050E1D] px-3 py-2 font-mono text-xs text-cyan-200">
                   {SHEET_HEADERS.join('  |  ')}
                 </div>
               </div>
 
               {/* Step 2: Code.gs */}
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="text-sm font-semibold text-slate-100">
                     2. Código Google Apps Script (Code.gs)
@@ -463,7 +463,7 @@ export function ProfileConfigDrawer({
                   </strong>{' '}
                   (Executar como: <em>Eu</em>; Quem pode acessar: <em>Qualquer pessoa</em>).
                 </p>
-                <pre className="mt-3 max-h-56 overflow-auto rounded-lg border border-slate-800 bg-[#060911] p-3 font-mono text-[11px] leading-relaxed text-slate-300">
+                <pre className="mt-3 max-h-56 overflow-auto rounded-lg border border-slate-800 bg-[#050E1D] p-3 font-mono text-[11px] leading-relaxed text-slate-300">
                   {APPS_SCRIPT_CODE_GS}
                 </pre>
               </div>

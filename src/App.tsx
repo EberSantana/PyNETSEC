@@ -396,7 +396,7 @@ export default function App() {
   );
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#090D16] text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#071225] text-slate-100">
       <Navbar
         activeView={activeView}
         onNavigate={handleNavigate}

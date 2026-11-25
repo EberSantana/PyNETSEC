@@ -383,7 +383,7 @@ export function StudyView({
                 className={`flex cursor-pointer flex-col justify-between rounded-xl border p-4 text-left transition-colors ${
                   isActive
                     ? 'border-cyan-400 bg-[#162033]'
-                    : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#0F1E36] hover:border-slate-700'
                 }`}
               >
                 <div>
@@ -426,8 +426,8 @@ export function StudyView({
       {/* PILLAR 02: Redes & TCP/UDP Unified Track */}
       {studyTrack === 'networks' ? (
         <div className="mt-6 space-y-6">
-          <div className="flex flex-col justify-between gap-3 rounded-xl border border-slate-800 bg-[#111827] p-3.5 xl:flex-row xl:items-center">
-            <div className="flex flex-wrap items-center gap-1 rounded-lg bg-[#090D16] p-1">
+          <div className="flex flex-col justify-between gap-3 rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5 xl:flex-row xl:items-center">
+            <div className="flex flex-wrap items-center gap-1 rounded-lg bg-[#071225] p-1">
               <button
                 type="button"
                 onClick={() => setNetworkSubTab('fundamentals')}
@@ -574,7 +574,7 @@ export function StudyView({
         <>
           {/* Circuit Filter + Horizontal Lesson Strip */}
           <div className="mt-6 space-y-3">
-            <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-slate-800 bg-[#111827] p-1.5 w-fit">
+            <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-slate-800 bg-[#0F1E36] p-1.5 w-fit">
               {CIRCUITS.filter((c) => STUDY_LESSONS.some((l) => l.circuit === c.id)).map((c) => (
                 <button
                   key={c.id}
@@ -613,7 +613,7 @@ export function StudyView({
                     className={`flex cursor-pointer flex-col justify-between rounded-xl border p-4 text-left transition-colors ${
                       isSelected
                         ? 'border-cyan-400 bg-[#162033]'
-                        : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+                        : 'border-slate-800 bg-[#0F1E36] hover:border-slate-700'
                     }`}
                   >
                     <div>
@@ -648,7 +648,7 @@ export function StudyView({
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
             {/* LEFT: Micro-Leitura + Tabela de Comandos + Link para Missões */}
             <section className="flex flex-col gap-5 lg:col-span-5">
-              <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+              <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
                 <div className="flex items-center justify-between text-xs text-slate-400">
                   <span className="flex items-center gap-1.5 font-medium text-cyan-300">
                     <BookOpen className="h-3.5 w-3.5" />
@@ -703,7 +703,7 @@ export function StudyView({
                   <h3 className="text-xs font-semibold text-slate-200">
                     Guia Rápido de Comandos
                   </h3>
-                  <div className="mt-2.5 overflow-hidden rounded-xl border border-slate-800 bg-[#090D16]">
+                  <div className="mt-2.5 overflow-hidden rounded-xl border border-slate-800 bg-[#071225]">
                     <div className="divide-y divide-slate-800/80">
                       {activeLesson.commandTable.map((row, idx) => (
                         <div key={idx} className="p-3.5">
@@ -752,10 +752,10 @@ export function StudyView({
 
             {/* RIGHT: Treino de Repetição (3 drills) & Sandbox Livre */}
             <section className="flex flex-col gap-5 lg:col-span-7">
-              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
                 {/* Mode Tabs */}
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-4 py-3">
-                  <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+                  <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
                     <button
                       type="button"
                       onClick={() => {
@@ -824,7 +824,7 @@ export function StudyView({
                                 ? 'border-cyan-400 bg-cyan-400/15 text-cyan-200'
                                 : done
                                   ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
-                                  : 'border-slate-800 bg-[#111827] text-slate-400 hover:text-slate-200'
+                                  : 'border-slate-800 bg-[#0F1E36] text-slate-400 hover:text-slate-200'
                             }`}
                           >
                             {done && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />}
@@ -853,7 +853,7 @@ export function StudyView({
                     </div>
 
                     {showHint && (
-                      <p className="mt-2.5 rounded-lg border border-amber-400/25 bg-[#090D16] px-3 py-2 font-mono text-xs text-amber-200">
+                      <p className="mt-2.5 rounded-lg border border-amber-400/25 bg-[#071225] px-3 py-2 font-mono text-xs text-amber-200">
                         Dica: {activeDrill.hint}
                       </p>
                     )}
@@ -869,7 +869,7 @@ export function StudyView({
                           setSandboxCode(ex.code);
                           setExecResult(null);
                         }}
-                        className="cursor-pointer rounded-md border border-slate-700 bg-[#111827] px-3 py-1 text-xs font-medium text-cyan-200 transition-colors hover:border-cyan-400/60"
+                        className="cursor-pointer rounded-md border border-slate-700 bg-[#0F1E36] px-3 py-1 text-xs font-medium text-cyan-200 transition-colors hover:border-cyan-400/60"
                       >
                         {ex.label}
                       </button>
@@ -886,11 +886,11 @@ export function StudyView({
                   autoCapitalize="off"
                   autoCorrect="off"
                   aria-label="Editor Python do ambiente de estudo"
-                  className="code-editor min-h-[210px] w-full resize-y bg-[#060911] p-4 font-mono text-sm leading-6 text-slate-100 focus:outline-none"
+                  className="code-editor min-h-[210px] w-full resize-y bg-[#050E1D] p-4 font-mono text-sm leading-6 text-slate-100 focus:outline-none"
                 />
 
                 {/* Run Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 bg-[#111827] px-4 py-3">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 bg-[#0F1E36] px-4 py-3">
                   <div className="flex items-center gap-2.5">
                     <button
                       type="button"
@@ -925,7 +925,7 @@ export function StudyView({
               </div>
 
               {/* Live Console Output */}
-              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
                 <div className="flex items-center justify-between border-b border-slate-800 px-4 py-2.5 text-xs text-slate-400">
                   <span className="flex items-center gap-1.5 font-medium text-slate-200">
                     <Terminal className="h-3.5 w-3.5 text-cyan-400" />
@@ -938,7 +938,7 @@ export function StudyView({
                   )}
                 </div>
 
-                <div className="min-h-[140px] bg-[#060911] p-4 space-y-3">
+                <div className="min-h-[140px] bg-[#050E1D] p-4 space-y-3">
                   {drillFeedback && (
                     <div
                       className={`flex items-start gap-2 rounded-xl border p-3 text-xs ${
@@ -991,7 +991,7 @@ export function StudyView({
       )}
 
       {/* Fluid Next-Step Footer Strip: Always guides from Study -> CTF Lab or Next Pillar */}
-      <div className="mt-8 flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#111827] p-5 sm:flex-row sm:items-center">
+      <div className="mt-8 flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 sm:flex-row sm:items-center">
         <div>
           <p className="text-xs font-medium text-cyan-300">
             Próximo passo no fluxo PyNetSec
@@ -1016,7 +1016,7 @@ export function StudyView({
             <button
               type="button"
               onClick={() => onOpenLabMode(studyTrack === 'linux' ? 'linux' : 'sandbox')}
-              className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
             >
               <Terminal className="h-3.5 w-3.5 text-cyan-400" />
               {studyTrack === 'linux' ? 'Abrir Lab Linux' : 'Abrir Sandbox Livre'}

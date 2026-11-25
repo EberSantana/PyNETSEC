@@ -75,7 +75,7 @@ export function RankingView({
             type="button"
             onClick={loadLeaderboard}
             disabled={loading}
-            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#111827] px-3.5 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 disabled:opacity-50 whitespace-nowrap"
+            className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#0F1E36] px-3.5 py-2 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 disabled:opacity-50 whitespace-nowrap"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
             Atualizar Placar
@@ -92,8 +92,8 @@ export function RankingView({
       </div>
 
       {/* Module Segmented Control + Connection State */}
-      <div className="mt-6 flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#111827] p-4 sm:flex-row sm:items-center">
-        <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+      <div className="mt-6 flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-[#0F1E36] p-4 sm:flex-row sm:items-center">
+        <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
           {MODULE_TABS.map((tab) => (
             <button
               key={tab.id}
@@ -135,7 +135,7 @@ export function RankingView({
       )}
 
       {/* Leaderboard Table */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
         {loading ? (
           <div className="p-10 text-center text-sm text-slate-400">
             Consultando placar do módulo {modulo}...

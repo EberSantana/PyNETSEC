@@ -348,9 +348,9 @@ export function LinuxLabView() {
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
       {/* LEFT PANEL (5 cols): FHS Directory Explorer + Searchable Guide + Challenges */}
       <aside className="flex flex-col gap-4 lg:col-span-5">
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
           {/* Switcher */}
-          <div className="grid grid-cols-3 border-b border-slate-800 bg-[#090D16] p-1.5 text-xs font-semibold">
+          <div className="grid grid-cols-3 border-b border-slate-800 bg-[#071225] p-1.5 text-xs font-semibold">
             <button
               type="button"
               onClick={() => setLeftTab('dirs')}
@@ -404,7 +404,7 @@ export function LinuxLabView() {
                       className={`flex w-full cursor-pointer items-start justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${
                         isCurrent
                           ? 'border-cyan-400/60 bg-cyan-400/12'
-                          : 'border-slate-800 bg-[#090D16] hover:border-cyan-400/40'
+                          : 'border-slate-800 bg-[#071225] hover:border-cyan-400/40'
                       }`}
                     >
                       <div className="min-w-0">
@@ -429,7 +429,7 @@ export function LinuxLabView() {
                   value={guideSearch}
                   onChange={(e) => setGuideSearch(e.target.value)}
                   placeholder="Filtrar comando (ex.: grep, chmod, tar, nano, ufw)..."
-                  className="w-full rounded-lg border border-slate-700 bg-[#090D16] py-2 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-700 bg-[#071225] py-2 pr-3 pl-8 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                 />
               </div>
 
@@ -437,7 +437,7 @@ export function LinuxLabView() {
                 {filteredCategories.map((cat) => {
                   const isOpen = Boolean(guideSearch.trim()) || openCategoryId === cat.id;
                   return (
-                    <div key={cat.id} className="overflow-hidden rounded-xl border border-slate-800 bg-[#090D16]">
+                    <div key={cat.id} className="overflow-hidden rounded-xl border border-slate-800 bg-[#071225]">
                       <button
                         type="button"
                         onClick={() => setOpenCategoryId(cat.id)}
@@ -467,7 +467,7 @@ export function LinuxLabView() {
                                 </p>
                               </div>
                               {item.runnable && (
-                                <span className="shrink-0 rounded border border-slate-700 bg-[#111827] px-1.5 py-0.5 font-mono text-[10px] text-emerald-300">
+                                <span className="shrink-0 rounded border border-slate-700 bg-[#0F1E36] px-1.5 py-0.5 font-mono text-[10px] text-emerald-300">
                                   Testar
                                 </span>
                               )}
@@ -480,7 +480,7 @@ export function LinuxLabView() {
                 })}
 
                 {/* Networking Concepts + Shortcuts Reference Card */}
-                <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3 text-[11px]">
+                <div className="rounded-xl border border-slate-800 bg-[#071225] p-3 text-[11px]">
                   <div className="font-mono text-[10px] font-bold text-emerald-300">
                     CONCEITOS DE REDE E ATALHOS DO TERMINAL
                   </div>
@@ -515,7 +515,7 @@ export function LinuxLabView() {
                     className={`rounded-xl border p-3 ${
                       done
                         ? 'border-emerald-500/50 bg-emerald-500/10'
-                        : 'border-slate-800 bg-[#090D16]'
+                        : 'border-slate-800 bg-[#071225]'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
@@ -540,7 +540,7 @@ export function LinuxLabView() {
 
       {/* RIGHT PANEL (7 cols): Interactive Linux Terminal + Nano / Vim Editors */}
       <section className="flex flex-col gap-4 lg:col-span-7">
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
           {/* Terminal Title Bar */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-3">
             <div className="flex items-center gap-2">
@@ -554,14 +554,14 @@ export function LinuxLabView() {
               <button
                 type="button"
                 onClick={() => setReverseSearchOpen((v) => !v)}
-                className="cursor-pointer rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1 font-mono text-[11px] text-slate-300 hover:border-cyan-400/50 hover:text-cyan-200"
+                className="cursor-pointer rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1 font-mono text-[11px] text-slate-300 hover:border-cyan-400/50 hover:text-cyan-200"
               >
                 Ctrl+R Histórico
               </button>
               <button
                 type="button"
                 onClick={() => setLines([])}
-                className="cursor-pointer rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1 text-[11px] font-medium text-slate-300 hover:bg-slate-800"
+                className="cursor-pointer rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1 text-[11px] font-medium text-slate-300 hover:bg-slate-800"
               >
                 clear
               </button>
@@ -579,7 +579,7 @@ export function LinuxLabView() {
                   ]);
                 }}
                 title="Reiniciar máquina Linux virtual"
-                className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1 text-[11px] text-slate-300 hover:bg-slate-800"
+                className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1 text-[11px] text-slate-300 hover:bg-slate-800"
               >
                 <RotateCcw className="h-3 w-3" />
                 Resetar
@@ -604,7 +604,7 @@ export function LinuxLabView() {
                   key={cmd}
                   type="button"
                   onClick={() => executeCommand(cmd)}
-                  className="shrink-0 cursor-pointer rounded-md border border-slate-800 bg-[#090D16] px-2.5 py-1 font-mono text-[11px] text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
+                  className="shrink-0 cursor-pointer rounded-md border border-slate-800 bg-[#071225] px-2.5 py-1 font-mono text-[11px] text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
                 >
                   {cmd}
                 </button>
@@ -614,7 +614,7 @@ export function LinuxLabView() {
 
           {/* INTERACTIVE NANO / VIM MODE OR BASH TERMINAL */}
           {editor ? (
-            <div className="flex h-[460px] flex-col bg-[#060911] font-mono text-xs">
+            <div className="flex h-[460px] flex-col bg-[#050E1D] font-mono text-xs">
               {/* Editor Top Status */}
               <div className="flex items-center justify-between bg-slate-200 px-3 py-1 font-bold text-[#05131C]">
                 <span>
@@ -707,7 +707,7 @@ export function LinuxLabView() {
                 }}
                 autoFocus
                 spellCheck={false}
-                className="flex-1 resize-none bg-[#060911] p-4 leading-6 text-slate-100 focus:outline-none"
+                className="flex-1 resize-none bg-[#050E1D] p-4 leading-6 text-slate-100 focus:outline-none"
               />
 
               {/* Vim Command Line (:w, :x, :q!, /busca) */}
@@ -763,7 +763,7 @@ export function LinuxLabView() {
                     <button
                       type="button"
                       onClick={() => setEditor({ ...editor, showSearch: !editor.showSearch })}
-                      className="cursor-pointer rounded border border-slate-700 bg-[#090D16] px-2 py-0.5 text-slate-300"
+                      className="cursor-pointer rounded border border-slate-700 bg-[#071225] px-2 py-0.5 text-slate-300"
                     >
                       ^W Buscar
                     </button>
@@ -822,7 +822,7 @@ export function LinuxLabView() {
               {/* Bash Terminal Output */}
               <div
                 onClick={() => inputRef.current?.focus()}
-                className="h-[385px] overflow-y-auto bg-[#060911] p-4 font-mono text-xs leading-relaxed sm:text-[13px]"
+                className="h-[385px] overflow-y-auto bg-[#050E1D] p-4 font-mono text-xs leading-relaxed sm:text-[13px]"
               >
                 {lines.map((line) => {
                   if (line.kind === 'prompt') {

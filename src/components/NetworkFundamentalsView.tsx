@@ -76,7 +76,7 @@ export function NetworkFundamentalsView({
         className={`cursor-pointer rounded-xl border p-4 text-left transition-colors ${
           isActive
             ? 'border-cyan-400/70 bg-cyan-400/10'
-            : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+            : 'border-slate-800 bg-[#0F1E36] hover:border-slate-700'
         }`}
       >
         <div className="flex items-center gap-2">
@@ -137,7 +137,7 @@ function NetworkTypesModule() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
       {/* Left 5 cols: Selector list */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5 lg:col-span-5">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 lg:col-span-5">
         <h2 className="text-base font-bold text-slate-100">Principais Tipos de Rede</h2>
         <p className="mt-1 text-xs text-slate-400">
           Selecione um tipo para ver o alcance geográfico, a arquitetura animada e os casos reais de uso.
@@ -154,7 +154,7 @@ function NetworkTypesModule() {
                 className={`flex cursor-pointer items-center justify-between gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors ${
                   isSelected
                     ? 'border-cyan-400/70 bg-cyan-400/12'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className="min-w-0">
@@ -185,7 +185,7 @@ function NetworkTypesModule() {
 
       {/* Right 7 cols: Animated Visual Stage + Details */}
       <div className="flex flex-col gap-5 lg:col-span-7">
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-5 py-3.5">
             <div>
               <span className="font-mono text-xs font-bold text-cyan-300">
@@ -199,7 +199,7 @@ function NetworkTypesModule() {
           </div>
 
           {/* Animated SVG Illustration per Network Type */}
-          <div className="bg-[#060911] p-4">
+          <div className="bg-[#050E1D] p-4">
             <NetworkTypeSvg type={selected.id} reduced={Boolean(prefersReducedMotion)} />
             <p className="mt-2 text-center text-xs text-slate-400">{selected.diagramCaption}</p>
           </div>
@@ -207,13 +207,13 @@ function NetworkTypesModule() {
           {/* Structured Specs */}
           <div className="space-y-4 p-5">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block font-mono text-[10px] text-slate-500">ALCANCE TÍPICO</span>
                 <span className="mt-0.5 block text-xs font-semibold text-cyan-200">
                   {selected.rangeLabel}
                 </span>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
                 <span className="block font-mono text-[10px] text-slate-500">DESEMPENHO / TECNOLOGIA</span>
                 <span className="mt-0.5 block text-xs font-semibold text-emerald-200">
                   {selected.speedLabel}
@@ -230,7 +230,7 @@ function NetworkTypesModule() {
               ))}
             </ul>
 
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] px-4 py-3 text-xs">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] px-4 py-3 text-xs">
               <span className="font-mono text-[10px] font-semibold text-slate-500">EXEMPLOS PRÁTICOS</span>
               <p className="mt-1 text-slate-200">{selected.examples}</p>
             </div>
@@ -238,7 +238,7 @@ function NetworkTypesModule() {
         </div>
 
         {/* Scale Bar: PAN -> LAN -> CAN -> MAN -> WAN */}
-        <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+        <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
           <div className="flex items-center justify-between text-xs">
             <span className="font-bold text-slate-100">Escala Geográfica das Redes</span>
             <span className="font-mono text-[11px] text-slate-400">10 m → Global</span>
@@ -255,7 +255,7 @@ function NetworkTypesModule() {
                   className={`cursor-pointer rounded-lg border px-2 py-2 text-center transition-colors ${
                     isCurrent
                       ? 'border-cyan-400 bg-cyan-400/15 text-cyan-200'
-                      : 'border-slate-800 bg-[#090D16] text-slate-400 hover:text-slate-200'
+                      : 'border-slate-800 bg-[#071225] text-slate-400 hover:text-slate-200'
                   }`}
                 >
                   <div className="font-mono text-xs font-bold">{info.acronym}</div>
@@ -288,14 +288,14 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
   if (type === 'vpn') {
     return (
       <svg viewBox="0 0 600 180" className="h-auto w-full select-none" role="img" aria-label="Diagrama VPN">
-        <rect width="600" height="180" fill="#060911" rx="10" />
+        <rect width="600" height="180" fill="#050E1D" rx="10" />
         {/* Public internet cloud box */}
         <rect x="190" y="34" width="220" height="112" rx="16" fill="#170E1A" stroke="#FB7185" strokeDasharray="5 4" strokeOpacity="0.6" />
         <text x="300" y="54" textAnchor="middle" fill="#FDA4AF" fontSize="10" fontFamily="JetBrains Mono, monospace">
           INTERNET PÚBLICA (NÃO CONFIÁVEL)
         </text>
         {/* Encrypted tunnel cylinder */}
-        <rect x="145" y="76" width="310" height="36" rx="18" fill="#06283D" stroke="#22D3EE" strokeWidth="2" />
+        <rect x="145" y="76" width="310" height="36" rx="18" fill="#06283D" stroke="#3BE37A" strokeWidth="2" />
         <text x="300" y="98" textAnchor="middle" fill="#A5F3FC" fontSize="11" fontWeight="700" fontFamily="JetBrains Mono, monospace">
           TÚNEL CRIPTOGRAFADO (AES / TLS)
         </text>
@@ -310,7 +310,7 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
           />
         )}
         {/* Left Remote User */}
-        <rect x="26" y="64" width="110" height="60" rx="10" fill="#0C1424" stroke="#22D3EE" />
+        <rect x="26" y="64" width="110" height="60" rx="10" fill="#0C1424" stroke="#3BE37A" />
         <text x="81" y="90" textAnchor="middle" fill="#F1F5F9" fontSize="11" fontWeight="700">Usuário Remoto</text>
         <text x="81" y="108" textAnchor="middle" fill="#94A3B8" fontSize="9.5" fontFamily="JetBrains Mono, monospace">Cliente VPN</text>
         {/* Right Corporate Server */}
@@ -324,24 +324,24 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
   if (type === 'pan') {
     return (
       <svg viewBox="0 0 600 180" className="h-auto w-full select-none" role="img" aria-label="Diagrama PAN">
-        <rect width="600" height="180" fill="#060911" rx="10" />
-        <circle cx="300" cy="90" r="72" fill="#082F49" fillOpacity="0.22" stroke="#22D3EE" strokeDasharray="4 4" strokeOpacity="0.5" />
+        <rect width="600" height="180" fill="#050E1D" rx="10" />
+        <circle cx="300" cy="90" r="72" fill="#082F49" fillOpacity="0.22" stroke="#3BE37A" strokeDasharray="4 4" strokeOpacity="0.5" />
         <text x="300" y="172" textAnchor="middle" fill="#64748B" fontSize="10" fontFamily="JetBrains Mono, monospace">
           RAIO DE ALCANCE: ATÉ 10 METROS (BLUETOOTH)
         </text>
-        <line x1="170" y1="90" x2="300" y2="90" stroke="#22D3EE" strokeDasharray="4 3" />
-        <line x1="300" y1="90" x2="430" y2="62" stroke="#22D3EE" strokeDasharray="4 3" />
-        <line x1="300" y1="90" x2="430" y2="118" stroke="#22D3EE" strokeDasharray="4 3" />
+        <line x1="170" y1="90" x2="300" y2="90" stroke="#3BE37A" strokeDasharray="4 3" />
+        <line x1="300" y1="90" x2="430" y2="62" stroke="#3BE37A" strokeDasharray="4 3" />
+        <line x1="300" y1="90" x2="430" y2="118" stroke="#3BE37A" strokeDasharray="4 3" />
         {!reduced && (
           <motion.circle
             cy="90"
             r="4.5"
-            fill="#22D3EE"
+            fill="#3BE37A"
             animate={{ cx: [175, 295] }}
             transition={{ duration: 1.4, repeat: Infinity, repeatType: 'reverse' }}
           />
         )}
-        <rect x="255" y="65" width="90" height="50" rx="10" fill="#0C1424" stroke="#22D3EE" strokeWidth="1.8" />
+        <rect x="255" y="65" width="90" height="50" rx="10" fill="#0C1424" stroke="#3BE37A" strokeWidth="1.8" />
         <text x="300" y="94" textAnchor="middle" fill="#F1F5F9" fontSize="11" fontWeight="700">Smartphone</text>
         <rect x="92" y="68" width="84" height="44" rx="9" fill="#0C1424" stroke="#38BDF8" />
         <text x="134" y="94" textAnchor="middle" fill="#E2E8F0" fontSize="10.5">Fone BT</text>
@@ -356,12 +356,12 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
   if (type === 'san') {
     return (
       <svg viewBox="0 0 600 180" className="h-auto w-full select-none" role="img" aria-label="Diagrama SAN">
-        <rect width="600" height="180" fill="#060911" rx="10" />
+        <rect width="600" height="180" fill="#050E1D" rx="10" />
         <line x1="150" y1="60" x2="260" y2="90" stroke="#10B981" strokeWidth="2" />
         <line x1="150" y1="120" x2="260" y2="90" stroke="#10B981" strokeWidth="2" />
-        <line x1="340" y1="90" x2="450" y2="55" stroke="#22D3EE" strokeWidth="2" />
-        <line x1="340" y1="90" x2="450" y2="90" stroke="#22D3EE" strokeWidth="2" />
-        <line x1="340" y1="90" x2="450" y2="125" stroke="#22D3EE" strokeWidth="2" />
+        <line x1="340" y1="90" x2="450" y2="55" stroke="#3BE37A" strokeWidth="2" />
+        <line x1="340" y1="90" x2="450" y2="90" stroke="#3BE37A" strokeWidth="2" />
+        <line x1="340" y1="90" x2="450" y2="125" stroke="#3BE37A" strokeWidth="2" />
         {!reduced && (
           <motion.circle
             cy="90"
@@ -375,12 +375,12 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
         <text x="95" y="62" textAnchor="middle" fill="#F1F5F9" fontSize="10.5" fontWeight="700">Servidor Web</text>
         <rect x="40" y="102" width="110" height="40" rx="8" fill="#0C1424" stroke="#10B981" />
         <text x="95" y="126" textAnchor="middle" fill="#F1F5F9" fontSize="10.5" fontWeight="700">Servidor BD</text>
-        <rect x="255" y="64" width="90" height="52" rx="10" fill="#083344" stroke="#22D3EE" strokeWidth="1.8" />
+        <rect x="255" y="64" width="90" height="52" rx="10" fill="#083344" stroke="#3BE37A" strokeWidth="1.8" />
         <text x="300" y="88" textAnchor="middle" fill="#A5F3FC" fontSize="10.5" fontWeight="700">Fabric SAN</text>
         <text x="300" y="103" textAnchor="middle" fill="#67E8F9" fontSize="9" fontFamily="JetBrains Mono, monospace">Fibre Channel</text>
         {[40, 75, 110].map((y, idx) => (
           <g key={y}>
-            <rect x="450" y={y} width="112" height="28" rx="6" fill="#0C1424" stroke="#22D3EE" />
+            <rect x="450" y={y} width="112" height="28" rx="6" fill="#0C1424" stroke="#3BE37A" />
             <text x="506" y={y + 18} textAnchor="middle" fill="#E2E8F0" fontSize="10" fontFamily="JetBrains Mono, monospace">
               Storage Array #{idx + 1}
             </text>
@@ -402,14 +402,14 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
 
   return (
     <svg viewBox="0 0 600 180" className="h-auto w-full select-none" role="img" aria-label={`Diagrama ${type}`}>
-      <rect width="600" height="180" fill="#060911" rx="10" />
+      <rect width="600" height="180" fill="#050E1D" rx="10" />
       <line x1="150" y1="90" x2="450" y2="90" stroke="#1E293B" strokeWidth="4" />
       <line
         x1="150"
         y1="90"
         x2="450"
         y2="90"
-        stroke="#22D3EE"
+        stroke="#3BE37A"
         strokeWidth="2"
         strokeDasharray={type === 'wlan' ? '5 5' : undefined}
         opacity="0.7"
@@ -418,12 +418,12 @@ function NetworkTypeSvg({ type, reduced }: { type: NetworkTypeItem['id']; reduce
         <motion.circle
           cy="90"
           r="6"
-          fill="#22D3EE"
+          fill="#3BE37A"
           animate={pulseAnim}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
-      <rect x="26" y="62" width="132" height="56" rx="10" fill="#0C1424" stroke="#22D3EE" />
+      <rect x="26" y="62" width="132" height="56" rx="10" fill="#0C1424" stroke="#3BE37A" />
       <text x="92" y="94" textAnchor="middle" fill="#F1F5F9" fontSize="11" fontWeight="700">{cfg.left}</text>
 
       <rect x="230" y="56" width="140" height="68" rx="12" fill="#083344" stroke="#38BDF8" strokeWidth="1.8" />
@@ -542,7 +542,7 @@ function TopologiesModule() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
       {/* Left 4 cols: 6 Topologies Selector */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5 lg:col-span-4">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 lg:col-span-4">
         <h2 className="text-base font-bold text-slate-100">Topologias de Rede</h2>
         <p className="mt-1 text-xs text-slate-400">
           Escolha uma topologia e clique nos equipamentos do diagrama para simular falhas reais.
@@ -559,7 +559,7 @@ function TopologiesModule() {
                 className={`w-full cursor-pointer rounded-xl border px-3.5 py-2.5 text-left transition-colors ${
                   isSelected
                     ? 'border-cyan-400/70 bg-cyan-400/12'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className={`text-xs font-bold ${isSelected ? 'text-cyan-200' : 'text-slate-100'}`}>
@@ -574,7 +574,7 @@ function TopologiesModule() {
 
       {/* Right 8 cols: Interactive Fault Simulator Canvas + Pros/Cons */}
       <div className="flex flex-col gap-5 lg:col-span-8">
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-5 py-3.5">
             <div>
               <h3 className="text-base font-bold text-slate-50">{selected.name}</h3>
@@ -593,7 +593,7 @@ function TopologiesModule() {
           </div>
 
           {/* Interactive SVG Topology Stage */}
-          <div className="bg-[#060911] p-4">
+          <div className="bg-[#050E1D] p-4">
             <TopologyInteractiveSvg
               topology={selected.id}
               failedNode={failedNode}
@@ -610,7 +610,7 @@ function TopologiesModule() {
                     ? 'border-amber-400/50 bg-amber-500/10 text-amber-200'
                     : faultImpact.tone === 'resilient'
                       ? 'border-emerald-400/50 bg-emerald-500/10 text-emerald-200'
-                      : 'border-slate-800 bg-[#090D16] text-slate-300'
+                      : 'border-slate-800 bg-[#071225] text-slate-300'
               }`}
             >
               {faultImpact.tone === 'critical' ? (
@@ -653,7 +653,7 @@ function TopologiesModule() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] px-4 py-2.5 text-xs text-slate-300">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] px-4 py-2.5 text-xs text-slate-300">
               <span className="font-semibold text-cyan-300">Onde é usada: </span>
               {selected.realWorldUse}
             </div>
@@ -692,7 +692,7 @@ function TopologyInteractiveSvg({
       <circle
         r={isCentral ? 26 : 20}
         fill={isDown ? '#3F0A18' : isCentral ? '#083344' : '#0C1424'}
-        stroke={isDown ? '#FB7185' : isCentral ? '#22D3EE' : '#10B981'}
+        stroke={isDown ? '#FB7185' : isCentral ? '#3BE37A' : '#10B981'}
         strokeWidth={isCentral ? 2.2 : 1.6}
       />
       <text
@@ -739,7 +739,7 @@ function TopologyInteractiveSvg({
               y1={115}
               x2={n.x}
               y2={n.y}
-              stroke={linkDead ? '#FB7185' : '#22D3EE'}
+              stroke={linkDead ? '#FB7185' : '#3BE37A'}
               strokeWidth="2"
               strokeDasharray={linkDead ? '4 4' : undefined}
               opacity={linkDead ? 0.5 : 0.8}
@@ -749,7 +749,7 @@ function TopologyInteractiveSvg({
         {!reduced && !hubDown && failedNode !== 'PC1' && failedNode !== 'PC2' && (
           <motion.circle
             r="5"
-            fill="#22D3EE"
+            fill="#3BE37A"
             animate={{ cx: [140, 300, 460], cy: [55, 115, 55] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -780,7 +780,7 @@ function TopologyInteractiveSvg({
               y1={p.y}
               x2={next.x}
               y2={next.y}
-              stroke={ringBroken ? '#FB7185' : '#22D3EE'}
+              stroke={ringBroken ? '#FB7185' : '#3BE37A'}
               strokeWidth="2.2"
               strokeDasharray={ringBroken ? '5 4' : undefined}
               opacity={ringBroken ? 0.5 : 0.85}
@@ -852,7 +852,7 @@ function TopologyInteractiveSvg({
           <motion.circle
             cy="121"
             r="5.5"
-            fill="#22D3EE"
+            fill="#3BE37A"
             animate={{ cx: [120, 480] }}
             transition={{ duration: 2.2, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
           />
@@ -868,8 +868,8 @@ function TopologyInteractiveSvg({
     const sw2Down = rootDown || failedNode === 'SW2';
     return (
       <svg viewBox="0 0 600 245" className="h-auto w-full select-none">
-        <line x1="300" y1="42" x2="170" y2="112" stroke={sw1Down ? '#FB7185' : '#22D3EE'} strokeWidth="2.2" />
-        <line x1="300" y1="42" x2="430" y2="112" stroke={sw2Down ? '#FB7185' : '#22D3EE'} strokeWidth="2.2" />
+        <line x1="300" y1="42" x2="170" y2="112" stroke={sw1Down ? '#FB7185' : '#3BE37A'} strokeWidth="2.2" />
+        <line x1="300" y1="42" x2="430" y2="112" stroke={sw2Down ? '#FB7185' : '#3BE37A'} strokeWidth="2.2" />
         <line x1="170" y1="112" x2="105" y2="195" stroke={sw1Down || failedNode === 'PC1' ? '#FB7185' : '#10B981'} strokeWidth="1.8" />
         <line x1="170" y1="112" x2="235" y2="195" stroke={sw1Down || failedNode === 'PC2' ? '#FB7185' : '#10B981'} strokeWidth="1.8" />
         <line x1="430" y1="112" x2="365" y2="195" stroke={sw2Down || failedNode === 'PC3' ? '#FB7185' : '#10B981'} strokeWidth="1.8" />
@@ -877,7 +877,7 @@ function TopologyInteractiveSvg({
         {!reduced && !rootDown && !sw1Down && !sw2Down && (
           <motion.circle
             r="5"
-            fill="#22D3EE"
+            fill="#3BE37A"
             animate={{ cx: [105, 170, 300, 430, 495], cy: [195, 112, 42, 112, 195] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -924,7 +924,7 @@ function TopologyInteractiveSvg({
               y1={a.y}
               x2={b.x}
               y2={b.y}
-              stroke={dead ? '#475569' : '#22D3EE'}
+              stroke={dead ? '#475569' : '#3BE37A'}
               strokeWidth={dead ? 1 : 1.7}
               strokeDasharray={dead ? '3 4' : undefined}
               opacity={dead ? 0.35 : 0.7}
@@ -952,9 +952,9 @@ function TopologyInteractiveSvg({
       {/* Backbone between Star and Ring */}
       <line x1="165" y1="120" x2="365" y2="120" stroke={swDown || ringDown ? '#FB7185' : '#FBBF24'} strokeWidth="2.5" />
       {/* Star side */}
-      <line x1="165" y1="120" x2="80" y2="55" stroke={swDown ? '#FB7185' : '#22D3EE'} strokeWidth="1.8" />
-      <line x1="165" y1="120" x2="80" y2="185" stroke={swDown ? '#FB7185' : '#22D3EE'} strokeWidth="1.8" />
-      <line x1="165" y1="120" x2="165" y2="42" stroke={swDown ? '#FB7185' : '#22D3EE'} strokeWidth="1.8" />
+      <line x1="165" y1="120" x2="80" y2="55" stroke={swDown ? '#FB7185' : '#3BE37A'} strokeWidth="1.8" />
+      <line x1="165" y1="120" x2="80" y2="185" stroke={swDown ? '#FB7185' : '#3BE37A'} strokeWidth="1.8" />
+      <line x1="165" y1="120" x2="165" y2="42" stroke={swDown ? '#FB7185' : '#3BE37A'} strokeWidth="1.8" />
       {/* Ring side */}
       <polygon
         points="365,120 450,55 520,120 450,185"
@@ -966,7 +966,7 @@ function TopologyInteractiveSvg({
       {!reduced && !swDown && !ringDown && (
         <motion.circle
           r="5"
-          fill="#22D3EE"
+          fill="#3BE37A"
           animate={{ cx: [80, 165, 365, 450, 520], cy: [55, 120, 120, 55, 120] }}
           transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -1007,7 +1007,7 @@ function TransmissionMediaModule() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
       {/* Left 5 cols: Guided + Unguided Selector */}
-      <div className="space-y-4 rounded-2xl border border-slate-800 bg-[#111827] p-5 lg:col-span-5">
+      <div className="space-y-4 rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 lg:col-span-5">
         <div>
           <h2 className="text-base font-bold text-slate-100">Meios de Transmissão</h2>
           <p className="mt-1 text-xs text-slate-400">
@@ -1029,7 +1029,7 @@ function TransmissionMediaModule() {
                 className={`w-full cursor-pointer rounded-xl border px-3.5 py-2.5 text-left transition-colors ${
                   selected.id === m.id
                     ? 'border-cyan-400/70 bg-cyan-400/12'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
@@ -1056,7 +1056,7 @@ function TransmissionMediaModule() {
                 className={`w-full cursor-pointer rounded-xl border px-3.5 py-2.5 text-left transition-colors ${
                   selected.id === m.id
                     ? 'border-emerald-400/70 bg-emerald-400/12'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
@@ -1073,7 +1073,7 @@ function TransmissionMediaModule() {
       </div>
 
       {/* Right 7 cols: Interactive Signal Propagation Simulator */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] lg:col-span-7">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] lg:col-span-7">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-5 py-3.5">
           <div>
             <span className="font-mono text-[11px] text-cyan-300">
@@ -1088,7 +1088,7 @@ function TransmissionMediaModule() {
             className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
               obstacleOn
                 ? 'border-amber-400/70 bg-amber-400/15 text-amber-200'
-                : 'border-slate-700 bg-[#090D16] text-slate-200 hover:border-amber-400/50'
+                : 'border-slate-700 bg-[#071225] text-slate-200 hover:border-amber-400/50'
             }`}
           >
             <Zap className="h-3.5 w-3.5" />
@@ -1103,10 +1103,10 @@ function TransmissionMediaModule() {
         </div>
 
         {/* Signal Propagation SVG */}
-        <div className="bg-[#060911] p-4">
+        <div className="bg-[#050E1D] p-4">
           <svg viewBox="0 0 600 175" className="h-auto w-full select-none" role="img" aria-label={`Simulação ${selected.name}`}>
             {/* Emitter & Receiver */}
-            <rect x="24" y="58" width="96" height="58" rx="10" fill="#0C1424" stroke="#22D3EE" />
+            <rect x="24" y="58" width="96" height="58" rx="10" fill="#0C1424" stroke="#3BE37A" />
             <text x="72" y="90" textAnchor="middle" fill="#F1F5F9" fontSize="11" fontWeight="700">Emissor</text>
             <rect x="480" y="58" width="96" height="58" rx="10" fill="#0C1424" stroke={signalBlocked ? '#FB7185' : '#10B981'} />
             <text x="528" y="90" textAnchor="middle" fill="#F1F5F9" fontSize="11" fontWeight="700">Receptor</text>
@@ -1192,15 +1192,15 @@ function TransmissionMediaModule() {
         {/* Details */}
         <div className="space-y-4 p-5">
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
               <span className="block font-mono text-[10px] text-slate-500">TIPO DE SINAL</span>
               <span className="mt-0.5 block text-xs font-semibold text-slate-100">{selected.signalType}</span>
             </div>
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
               <span className="block font-mono text-[10px] text-slate-500">CONECTOR / FAIXA</span>
               <span className="mt-0.5 block text-xs font-semibold text-cyan-200">{selected.connectorOrBand}</span>
             </div>
-            <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3">
+            <div className="rounded-xl border border-slate-800 bg-[#071225] p-3">
               <span className="block font-mono text-[10px] text-slate-500">ALCANCE TÍPICO</span>
               <span className="mt-0.5 block text-xs font-semibold text-emerald-200">{selected.typicalRange}</span>
             </div>
@@ -1214,14 +1214,14 @@ function TransmissionMediaModule() {
                 ? 'border-rose-400/50 bg-rose-500/10 text-rose-200'
                 : obstacleOn
                   ? 'border-amber-400/40 bg-amber-500/10 text-amber-100'
-                  : 'border-slate-800 bg-[#090D16] text-slate-300'
+                  : 'border-slate-800 bg-[#071225] text-slate-300'
             }`}
           >
             <span className="font-semibold text-slate-100">Comportamento frente a interferências/obstáculos: </span>
             {selected.obstacleBehavior}
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-[#090D16] px-4 py-2.5 text-xs text-slate-300">
+          <div className="rounded-xl border border-slate-800 bg-[#071225] px-4 py-2.5 text-xs text-slate-300">
             <span className="font-semibold text-cyan-300">Exemplos reais: </span>
             {selected.examples}
           </div>
@@ -1289,7 +1289,7 @@ function TransmissionModesModule() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Mode Selector (4 cols) */}
-        <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5 lg:col-span-4">
+        <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5 lg:col-span-4">
           <h2 className="text-base font-bold text-slate-100">Modos de Transmissão</h2>
           <p className="mt-1 text-xs text-slate-400">
             Selecione o modo e teste enviar dados de A, de B ou dos dois ao mesmo tempo.
@@ -1310,7 +1310,7 @@ function TransmissionModesModule() {
                   className={`w-full cursor-pointer rounded-xl border p-3.5 text-left transition-colors ${
                     isSelected
                       ? 'border-cyan-400/70 bg-cyan-400/12'
-                      : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                      : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
@@ -1327,7 +1327,7 @@ function TransmissionModesModule() {
         </div>
 
         {/* Interactive Channel Lab (8 cols) */}
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827] lg:col-span-8">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36] lg:col-span-8">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-5 py-3.5">
             <div className="flex items-center gap-2">
               <Radio className="h-4 w-4 text-cyan-400" />
@@ -1342,7 +1342,7 @@ function TransmissionModesModule() {
                 className={`cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
                   testAction === 'a-to-b'
                     ? 'border-cyan-400 bg-cyan-400/20 text-cyan-200'
-                    : 'border-slate-700 bg-[#090D16] text-slate-300 hover:border-slate-500'
+                    : 'border-slate-700 bg-[#071225] text-slate-300 hover:border-slate-500'
                 }`}
               >
                 Enviar A → B
@@ -1353,7 +1353,7 @@ function TransmissionModesModule() {
                 className={`cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
                   testAction === 'b-to-a'
                     ? 'border-cyan-400 bg-cyan-400/20 text-cyan-200'
-                    : 'border-slate-700 bg-[#090D16] text-slate-300 hover:border-slate-500'
+                    : 'border-slate-700 bg-[#071225] text-slate-300 hover:border-slate-500'
                 }`}
               >
                 Enviar B → A
@@ -1364,7 +1364,7 @@ function TransmissionModesModule() {
                 className={`cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
                   testAction === 'both'
                     ? 'border-emerald-400 bg-emerald-400/20 text-emerald-200'
-                    : 'border-slate-700 bg-[#090D16] text-slate-300 hover:border-slate-500'
+                    : 'border-slate-700 bg-[#071225] text-slate-300 hover:border-slate-500'
                 }`}
               >
                 Enviar A e B juntos
@@ -1372,10 +1372,10 @@ function TransmissionModesModule() {
             </div>
           </div>
 
-          <div className="bg-[#060911] p-4">
+          <div className="bg-[#050E1D] p-4">
             <svg viewBox="0 0 600 170" className="h-auto w-full select-none" role="img" aria-label={`Animação ${selected.name}`}>
               {/* Device A & B */}
-              <rect x="24" y="48" width="110" height="72" rx="12" fill="#0C1424" stroke="#22D3EE" strokeWidth="1.6" />
+              <rect x="24" y="48" width="110" height="72" rx="12" fill="#0C1424" stroke="#3BE37A" strokeWidth="1.6" />
               <text x="79" y="80" textAnchor="middle" fill="#F1F5F9" fontSize="12" fontWeight="700">Dispositivo A</text>
               <text x="79" y="98" textAnchor="middle" fill="#94A3B8" fontSize="9.5" fontFamily="JetBrains Mono, monospace">
                 {modeId === 'simplex' ? 'SÓ TRANSMISSOR' : 'TX / RX'}
@@ -1390,7 +1390,7 @@ function TransmissionModesModule() {
               {/* Channel tracks */}
               {modeId === 'full-duplex' ? (
                 <>
-                  <line x1="134" y1="68" x2="466" y2="68" stroke="#22D3EE" strokeWidth="3" opacity="0.6" />
+                  <line x1="134" y1="68" x2="466" y2="68" stroke="#3BE37A" strokeWidth="3" opacity="0.6" />
                   <line x1="134" y1="102" x2="466" y2="102" stroke="#10B981" strokeWidth="3" opacity="0.6" />
                   <text x="300" y="56" textAnchor="middle" fill="#67E8F9" fontSize="9.5" fontFamily="JetBrains Mono, monospace">
                     VIA 1: A → B (SIMULTÂNEA)
@@ -1414,7 +1414,7 @@ function TransmissionModesModule() {
                   key={`ab-${pulseKey}`}
                   cy={modeId === 'full-duplex' ? 68 : 84}
                   r="8"
-                  fill="#22D3EE"
+                  fill="#3BE37A"
                   animate={{ cx: [148, 452] }}
                   transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
                 />
@@ -1437,7 +1437,7 @@ function TransmissionModesModule() {
                     key={`both-ab-${pulseKey}`}
                     cy="68"
                     r="8"
-                    fill="#22D3EE"
+                    fill="#3BE37A"
                     animate={{ cx: [148, 452] }}
                     transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
                   />
@@ -1502,13 +1502,13 @@ function TransmissionModesModule() {
       </div>
 
       {/* Quick Comparison Table */}
-      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
         <div className="border-b border-slate-800 px-5 py-3.5">
           <h3 className="text-sm font-bold text-slate-100">Comparação Rápida dos Modos de Transmissão</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-slate-800 bg-[#090D16] font-mono text-[11px] text-slate-400">
+            <thead className="border-b border-slate-800 bg-[#071225] font-mono text-[11px] text-slate-400">
               <tr>
                 <th className="px-4 py-3">Característica</th>
                 <th className="px-4 py-3 text-cyan-300">Simplex</th>

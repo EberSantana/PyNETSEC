@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Mesma tipografia e o mesmo verde do Trilha Rali HUB (tema escuro do HUB) */
+  --font-display: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+
+  --color-cyan-50: #F0FDF4; --color-cyan-100: #DCFCE7; --color-cyan-200: #BBF7D0; --color-cyan-300: #86EFAC;
+  --color-cyan-400: #3BE37A; --color-cyan-500: #22C55E; --color-cyan-600: #16A34A; --color-cyan-700: #15803D;
+  --color-cyan-800: #166534; --color-cyan-900: #14532D; --color-cyan-950: #052E16;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-obsidian: #090D16;
-  --color-terminal: #060911;
-  --color-panel: #111827;
+  --color-obsidian: #071225;
+  --color-terminal: #050E1D;
+  --color-panel: #0F1E36;
   --color-panel-elevated: #162033;
-  --color-neon-cyan: #22D3EE;
+  --color-neon-cyan: #3BE37A;
   --color-neon-emerald: #10B981;
   --color-neon-crimson: #FB7185;
   --color-neon-amber: #FBBF24;
@@ -18,14 +23,16 @@
 @layer base {
   html {
     font-family: var(--font-sans);
-    background-color: #090D16;
+    background-color: #071225;
     color: #F1F5F9;
     letter-spacing: 0.008em;
     scroll-behavior: smooth;
   }
 
+  html { font-size: 17px; }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
+    font-weight: 800;
     text-wrap: balance;
   }
 
@@ -40,8 +47,8 @@
 
 .cyber-grid-bg {
   background-image:
-    linear-gradient(to right, rgba(34, 211, 238, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(59, 227, 122, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 227, 122, 0.04) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 
@@ -52,7 +59,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #090D16;
+  background: #071225;
 }
 
 ::-webkit-scrollbar-thumb {

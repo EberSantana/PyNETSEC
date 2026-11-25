@@ -464,7 +464,7 @@ export function SandboxView({
         {/* LEFT COLUMN (4 cols): Virtual Filesystem Explorer + Safe Virtual Network */}
         <aside className="flex flex-col gap-5 lg:col-span-4">
           {/* Filesystem Explorer */}
-          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+          <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <FolderOpen className="h-4 w-4 text-cyan-400" />
@@ -502,7 +502,7 @@ export function SandboxView({
                   onChange={(e) => setNewFileName(e.target.value)}
                   placeholder="ex.: scripts/teste.py"
                   autoFocus
-                  className="min-w-0 flex-1 rounded-lg border border-slate-700 bg-[#090D16] px-3 py-1.5 font-mono text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
+                  className="min-w-0 flex-1 rounded-lg border border-slate-700 bg-[#071225] px-3 py-1.5 font-mono text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none"
                 />
                 <button
                   type="submit"
@@ -528,7 +528,7 @@ export function SandboxView({
                     className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-colors ${
                       isSelected
                         ? 'border-cyan-400/60 bg-cyan-400/10 text-cyan-100'
-                        : 'border-transparent bg-[#090D16] text-slate-300 hover:border-slate-800 hover:text-slate-100'
+                        : 'border-transparent bg-[#071225] text-slate-300 hover:border-slate-800 hover:text-slate-100'
                     }`}
                   >
                     <button
@@ -561,7 +561,7 @@ export function SandboxView({
           </div>
 
           {/* Virtual Lab Network Reference (Safe Sockets) */}
-          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+          <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
             <div className="flex items-center gap-2">
               <Network className="h-4 w-4 text-emerald-400" />
               <h2 className="text-sm font-bold text-slate-100">
@@ -573,7 +573,7 @@ export function SandboxView({
               memória com estes hosts simulados — sem gerar tráfego real na rede da escola.
             </p>
 
-            <div className="mt-4 divide-y divide-slate-800/80 rounded-xl border border-slate-800 bg-[#090D16]">
+            <div className="mt-4 divide-y divide-slate-800/80 rounded-xl border border-slate-800 bg-[#071225]">
               {SANDBOX_LAB_HOSTS.map((item) => (
                 <div key={item.host} className="p-3">
                   <div className="flex items-center justify-between gap-2 text-xs">
@@ -603,7 +603,7 @@ export function SandboxView({
                       setTerminalMode('shell');
                       handleExecuteTerminalCommand(util.cmd, 'shell');
                     }}
-                    className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg border border-slate-800 bg-[#090D16] px-3 py-2 text-left transition-colors hover:border-cyan-400/50"
+                    className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg border border-slate-800 bg-[#071225] px-3 py-2 text-left transition-colors hover:border-cyan-400/50"
                   >
                     <div className="min-w-0">
                       <code className="font-mono text-xs font-semibold text-cyan-300">
@@ -626,7 +626,7 @@ export function SandboxView({
         {/* RIGHT COLUMN (8 cols): File Editor + Persistent Terminal */}
         <section className="flex flex-col gap-5 lg:col-span-8">
           {/* File Editor Panel */}
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-4 py-3">
               <div className="flex items-center gap-2 text-xs">
                 <FileCode2 className="h-4 w-4 text-cyan-400" />
@@ -642,7 +642,7 @@ export function SandboxView({
                 <button
                   type="button"
                   onClick={() => handleSaveCurrentFile()}
-                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3 py-1.5 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 whitespace-nowrap"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3 py-1.5 text-xs font-medium text-slate-200 transition-colors hover:border-slate-500 whitespace-nowrap"
                 >
                   <Save className="h-3.5 w-3.5" />
                   Salvar
@@ -673,7 +673,7 @@ export function SandboxView({
                   type="button"
                   title={tpl.description}
                   onClick={() => handleLoadTemplate(tpl)}
-                  className="cursor-pointer rounded-md border border-slate-800 bg-[#111827] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap shrink-0"
+                  className="cursor-pointer rounded-md border border-slate-800 bg-[#0F1E36] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap shrink-0"
                 >
                   {tpl.label}
                 </button>
@@ -691,15 +691,15 @@ export function SandboxView({
               autoCapitalize="off"
               autoCorrect="off"
               aria-label={`Editor do arquivo ${selectedFile}`}
-              className="code-editor min-h-[210px] w-full resize-y bg-[#060911] p-4 font-mono text-sm leading-6 text-slate-100 focus:outline-none"
+              className="code-editor min-h-[210px] w-full resize-y bg-[#050E1D] p-4 font-mono text-sm leading-6 text-slate-100 focus:outline-none"
             />
           </div>
 
           {/* Persistent Interactive Terminal (Shell & Python REPL) */}
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
             {/* Terminal Top Bar */}
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-4 py-2.5">
-              <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+              <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
                 <button
                   type="button"
                   onClick={() => setTerminalMode('shell')}
@@ -755,7 +755,7 @@ export function SandboxView({
                     key={cmd}
                     type="button"
                     onClick={() => handleExecuteTerminalCommand(cmd)}
-                    className="cursor-pointer rounded-md border border-slate-800 bg-[#090D16] px-2.5 py-1 font-mono text-[11px] text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap shrink-0"
+                    className="cursor-pointer rounded-md border border-slate-800 bg-[#071225] px-2.5 py-1 font-mono text-[11px] text-slate-300 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap shrink-0"
                   >
                     {cmd}
                   </button>
@@ -766,7 +766,7 @@ export function SandboxView({
             {/* Terminal Output Area */}
             <div
               onClick={() => inputRef.current?.focus()}
-              className="h-[290px] overflow-y-auto bg-[#060911] p-4 font-mono text-xs leading-relaxed sm:text-[13px]"
+              className="h-[290px] overflow-y-auto bg-[#050E1D] p-4 font-mono text-xs leading-relaxed sm:text-[13px]"
             >
               {terminalLines.map((line) => {
                 if (line.kind === 'prompt') {

@@ -70,7 +70,7 @@ const PROTOCOL_STYLE: Record<
   { stroke: string; fill: string; text: string; badgeBg: string }
 > = {
   ARP: { stroke: '#F59E0B', fill: '#FEF3C7', text: 'text-amber-300', badgeBg: '#451A03' },
-  ICMP: { stroke: '#22D3EE', fill: '#CFFAFE', text: 'text-cyan-300', badgeBg: '#083344' },
+  ICMP: { stroke: '#3BE37A', fill: '#CFFAFE', text: 'text-cyan-300', badgeBg: '#083344' },
   DHCP: { stroke: '#34D399', fill: '#D1FAE5', text: 'text-emerald-300', badgeBg: '#064E3B' },
   DNS: { stroke: '#A78BFA', fill: '#EDE9FE', text: 'text-violet-300', badgeBg: '#2E1065' },
   TCP: { stroke: '#38BDF8', fill: '#E0F2FE', text: 'text-sky-300', badgeBg: '#0C4A6E' },
@@ -617,7 +617,7 @@ export function PacketTracerView() {
   return (
     <div className="space-y-5">
       {/* Header & Scenario Selector Strip */}
-      <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-5">
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div>
             <p className="text-xs font-medium text-cyan-300">
@@ -671,7 +671,7 @@ export function PacketTracerView() {
                 className={`flex cursor-pointer flex-col justify-between rounded-xl border p-3 text-left transition-colors ${
                   active
                     ? 'border-cyan-400 bg-[#162033]'
-                    : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                    : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                 }`}
               >
                 <div>
@@ -692,9 +692,9 @@ export function PacketTracerView() {
       </div>
 
       {/* Main Toolbar: Interaction Tools + Add Devices + Playback */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-[#111827] p-3.5 xl:flex-row xl:items-center xl:justify-between">
+      <div className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-[#0F1E36] p-3.5 xl:flex-row xl:items-center xl:justify-between">
         {/* Interaction Tools */}
-        <div className="flex flex-wrap items-center gap-1 rounded-lg bg-[#090D16] p-1">
+        <div className="flex flex-wrap items-center gap-1 rounded-lg bg-[#071225] p-1">
           {[
             { id: 'select' as ToolMode, label: 'Mover / Selecionar', icon: MousePointer2 },
             { id: 'cable-ethernet' as ToolMode, label: 'Cabo Direto', icon: Cable },
@@ -752,7 +752,7 @@ export function PacketTracerView() {
                 key={item.type}
                 type="button"
                 onClick={() => addDeviceToCanvas(item.type)}
-                className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-700 bg-[#090D16] px-2.5 py-1.5 text-xs font-medium text-slate-200 transition-colors hover:border-cyan-400/60 hover:text-cyan-200 whitespace-nowrap"
+                className="flex cursor-pointer items-center gap-1 rounded-lg border border-slate-700 bg-[#071225] px-2.5 py-1.5 text-xs font-medium text-slate-200 transition-colors hover:border-cyan-400/60 hover:text-cyan-200 whitespace-nowrap"
               >
                 <Plus className="h-3 w-3 text-cyan-400" />
                 <Icon className="h-3.5 w-3.5 text-slate-400" />
@@ -767,7 +767,7 @@ export function PacketTracerView() {
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
         {/* LEFT ZONE: Interactive Topology Canvas + Live Packet Sniffer */}
         <div className="space-y-4 lg:col-span-7">
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
             {/* Canvas Top Strip */}
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-4 py-2.5">
               <div className="flex items-center gap-2 text-xs text-slate-300">
@@ -796,7 +796,7 @@ export function PacketTracerView() {
                   aria-label="Velocidade da animação de pacotes"
                   value={hopDurationMs}
                   onChange={(e) => setHopDurationMs(Number(e.target.value))}
-                  className="cursor-pointer rounded-md border border-slate-700 bg-[#090D16] px-2 py-1 text-[11px] text-slate-200 focus:border-cyan-400 focus:outline-none"
+                  className="cursor-pointer rounded-md border border-slate-700 bg-[#071225] px-2 py-1 text-[11px] text-slate-200 focus:border-cyan-400 focus:outline-none"
                 >
                   <option value={1100}>Velocidade: Lento</option>
                   <option value={680}>Velocidade: Normal</option>
@@ -815,7 +815,7 @@ export function PacketTracerView() {
                 <button
                   type="button"
                   onClick={() => loadPreset(activePresetId)}
-                  className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#090D16] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-colors hover:border-slate-500 hover:text-white whitespace-nowrap"
+                  className="flex cursor-pointer items-center gap-1 rounded-md border border-slate-700 bg-[#071225] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-colors hover:border-slate-500 hover:text-white whitespace-nowrap"
                 >
                   <RotateCcw className="h-3 w-3" />
                   Resetar
@@ -824,7 +824,7 @@ export function PacketTracerView() {
             </div>
 
             {/* Interactive SVG Topology Blueprint */}
-            <div className="relative bg-[#060911]">
+            <div className="relative bg-[#050E1D]">
               <svg
                 ref={svgRef}
                 viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
@@ -993,7 +993,7 @@ export function PacketTracerView() {
                         cy={endAY}
                         r="3.8"
                         fill={isLinkActive ? '#10B981' : '#F43F5E'}
-                        stroke="#060911"
+                        stroke="#050E1D"
                         strokeWidth="1.2"
                       />
                       <circle
@@ -1001,7 +1001,7 @@ export function PacketTracerView() {
                         cy={endBY}
                         r="3.8"
                         fill={isLinkActive ? '#10B981' : '#F43F5E'}
-                        stroke="#060911"
+                        stroke="#050E1D"
                         strokeWidth="1.2"
                       />
 
@@ -1069,7 +1069,7 @@ export function PacketTracerView() {
                     : dev.type === 'router'
                       ? '#38BDF8'
                       : dev.type === 'switch'
-                        ? '#22D3EE'
+                        ? '#3BE37A'
                         : dev.type === 'server'
                           ? '#34D399'
                           : dev.type === 'ap'
@@ -1103,7 +1103,7 @@ export function PacketTracerView() {
                           cy="0"
                           r="32"
                           fill="none"
-                          stroke={isPendingSrc ? '#34D399' : '#22D3EE'}
+                          stroke={isPendingSrc ? '#34D399' : '#3BE37A'}
                           strokeWidth="2"
                           strokeDasharray={isPendingSrc ? '5 3' : undefined}
                         />
@@ -1115,7 +1115,7 @@ export function PacketTracerView() {
                         cy="0"
                         r="26"
                         fill={isSelected ? '#162236' : '#0F172A'}
-                        stroke={!dev.up ? '#F43F5E' : isSelected ? '#22D3EE' : '#334155'}
+                        stroke={!dev.up ? '#F43F5E' : isSelected ? '#3BE37A' : '#334155'}
                         strokeWidth={isSelected ? '2' : '1.4'}
                       />
 
@@ -1264,7 +1264,7 @@ export function PacketTracerView() {
           </div>
 
           {/* Live Packet Capture Log (Sniffer Table) */}
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#111827]">
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#0F1E36]">
             <div className="flex items-center justify-between border-b border-slate-800 px-4 py-2.5 text-xs">
               <span className="font-semibold text-slate-100">
                 Captura de Pacotes em Tempo Real (Sniffer PDU)
@@ -1286,7 +1286,7 @@ export function PacketTracerView() {
             ) : (
               <div className="max-h-[210px] overflow-y-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="sticky top-0 bg-[#090D16] text-[11px] text-slate-400">
+                  <thead className="sticky top-0 bg-[#071225] text-[11px] text-slate-400">
                     <tr>
                       <th className="px-3 py-2 font-medium">#</th>
                       <th className="px-3 py-2 font-medium">Protocolo</th>
@@ -1337,10 +1337,10 @@ export function PacketTracerView() {
         </div>
 
         {/* RIGHT ZONE: Terminal CLI + Device Config + Scenario Guide (5 cols) */}
-        <div className="flex flex-col rounded-2xl border border-slate-800 bg-[#111827] overflow-hidden lg:col-span-5">
+        <div className="flex flex-col rounded-2xl border border-slate-800 bg-[#0F1E36] overflow-hidden lg:col-span-5">
           {/* Segmented Tabs */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 px-3.5 py-2.5">
-            <div className="flex items-center gap-1 rounded-lg bg-[#090D16] p-1">
+            <div className="flex items-center gap-1 rounded-lg bg-[#071225] p-1">
               <button
                 type="button"
                 onClick={() => setRightTab('cli')}
@@ -1388,7 +1388,7 @@ export function PacketTracerView() {
                   setSelectedDeviceId(e.target.value || null);
                   setSelectedLinkId(null);
                 }}
-                className="max-w-[165px] cursor-pointer rounded-md border border-slate-700 bg-[#090D16] px-2 py-1 font-mono text-xs text-cyan-200 focus:border-cyan-400 focus:outline-none"
+                className="max-w-[165px] cursor-pointer rounded-md border border-slate-700 bg-[#071225] px-2 py-1 font-mono text-xs text-cyan-200 focus:border-cyan-400 focus:outline-none"
               >
                 {devices.map((d) => (
                   <option key={d.id} value={d.id}>
@@ -1413,7 +1413,7 @@ export function PacketTracerView() {
                       key={idx}
                       type="button"
                       onClick={() => runCliCommand(item.command, item.deviceId)}
-                      className="cursor-pointer rounded-md border border-slate-700 bg-[#111827] px-2.5 py-1 font-mono text-[11px] text-cyan-200 transition-colors hover:border-cyan-400/70 hover:bg-cyan-400/10 whitespace-nowrap"
+                      className="cursor-pointer rounded-md border border-slate-700 bg-[#0F1E36] px-2.5 py-1 font-mono text-[11px] text-cyan-200 transition-colors hover:border-cyan-400/70 hover:bg-cyan-400/10 whitespace-nowrap"
                     >
                       $ {item.label}
                     </button>
@@ -1421,7 +1421,7 @@ export function PacketTracerView() {
                   <button
                     type="button"
                     onClick={() => runCliCommand('help')}
-                    className="cursor-pointer rounded-md border border-slate-800 bg-[#090D16] px-2.5 py-1 font-mono text-[11px] text-slate-400 transition-colors hover:text-slate-200 whitespace-nowrap"
+                    className="cursor-pointer rounded-md border border-slate-800 bg-[#071225] px-2.5 py-1 font-mono text-[11px] text-slate-400 transition-colors hover:text-slate-200 whitespace-nowrap"
                   >
                     help
                   </button>
@@ -1429,7 +1429,7 @@ export function PacketTracerView() {
               </div>
 
               {/* Scrollable Terminal Log */}
-              <div className="flex-1 min-h-[330px] max-h-[430px] overflow-y-auto bg-[#060911] p-4 font-mono text-xs leading-relaxed space-y-1.5">
+              <div className="flex-1 min-h-[330px] max-h-[430px] overflow-y-auto bg-[#050E1D] p-4 font-mono text-xs leading-relaxed space-y-1.5">
                 {terminalLines.map((line) => (
                   <div
                     key={line.id}
@@ -1561,7 +1561,7 @@ export function PacketTracerView() {
                       type="text"
                       value={selectedDevice.name}
                       onChange={(e) => updateDevice(selectedDevice.id, { name: e.target.value })}
-                      className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                      className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                     />
                   </div>
 
@@ -1599,7 +1599,7 @@ export function PacketTracerView() {
                       {selectedDevice.interfaces.map((iface, idx) => (
                         <div
                           key={iface.id}
-                          className="rounded-xl border border-slate-800 bg-[#090D16] p-3 space-y-2.5"
+                          className="rounded-xl border border-slate-800 bg-[#071225] p-3 space-y-2.5"
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-mono text-xs font-bold text-cyan-300">
@@ -1638,7 +1638,7 @@ export function PacketTracerView() {
                                     ...(idx === 0 ? { ip: e.target.value } : {}),
                                   });
                                 }}
-                                className="mt-1 w-full rounded-md border border-slate-700 bg-[#111827] px-2.5 py-1.5 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                                className="mt-1 w-full rounded-md border border-slate-700 bg-[#0F1E36] px-2.5 py-1.5 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                               />
                             </div>
                             <div>
@@ -1655,7 +1655,7 @@ export function PacketTracerView() {
                                     ...(idx === 0 ? { mask: e.target.value } : {}),
                                   });
                                 }}
-                                className="mt-1 w-full rounded-md border border-slate-700 bg-[#111827] px-2.5 py-1.5 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                                className="mt-1 w-full rounded-md border border-slate-700 bg-[#0F1E36] px-2.5 py-1.5 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                               />
                             </div>
                           </div>
@@ -1689,7 +1689,7 @@ export function PacketTracerView() {
                             value={selectedDevice.ip}
                             onChange={(e) => updateDevice(selectedDevice.id, { ip: e.target.value })}
                             placeholder="192.168.10.11"
-                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                           />
                         </div>
                         <div>
@@ -1703,7 +1703,7 @@ export function PacketTracerView() {
                               updateDevice(selectedDevice.id, { mask: e.target.value })
                             }
                             placeholder="255.255.255.0"
-                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                           />
                         </div>
                         <div>
@@ -1717,7 +1717,7 @@ export function PacketTracerView() {
                               updateDevice(selectedDevice.id, { gateway: e.target.value })
                             }
                             placeholder="192.168.10.1"
-                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                           />
                         </div>
                         <div>
@@ -1729,7 +1729,7 @@ export function PacketTracerView() {
                             value={selectedDevice.dns}
                             onChange={(e) => updateDevice(selectedDevice.id, { dns: e.target.value })}
                             placeholder="192.168.10.50"
-                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#090D16] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                            className="mt-1 w-full rounded-lg border border-slate-700 bg-[#071225] px-3 py-2 font-mono text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                           />
                         </div>
                       </div>
@@ -1784,7 +1784,7 @@ export function PacketTracerView() {
                               className={`cursor-pointer rounded-lg border px-2 py-2 text-center text-[11px] font-semibold transition-colors ${
                                 enabled
                                   ? 'border-emerald-400/50 bg-emerald-400/15 text-emerald-200'
-                                  : 'border-slate-800 bg-[#090D16] text-slate-400 hover:text-slate-200'
+                                  : 'border-slate-800 bg-[#071225] text-slate-400 hover:text-slate-200'
                               }`}
                             >
                               {svc.label}
@@ -1798,7 +1798,7 @@ export function PacketTracerView() {
 
                       {/* DNS Records Editor */}
                       {selectedDevice.services?.dns && (
-                        <div className="rounded-xl border border-slate-800 bg-[#090D16] p-3 space-y-2">
+                        <div className="rounded-xl border border-slate-800 bg-[#071225] p-3 space-y-2">
                           <p className="text-[11px] font-semibold text-slate-300">
                             Registros DNS (Zona A)
                           </p>
@@ -1819,14 +1819,14 @@ export function PacketTracerView() {
                               value={newDnsHost}
                               onChange={(e) => setNewDnsHost(e.target.value)}
                               placeholder="site.local"
-                              className="min-w-0 flex-1 rounded border border-slate-700 bg-[#111827] px-2 py-1 font-mono text-[11px] text-slate-100 focus:border-cyan-400 focus:outline-none"
+                              className="min-w-0 flex-1 rounded border border-slate-700 bg-[#0F1E36] px-2 py-1 font-mono text-[11px] text-slate-100 focus:border-cyan-400 focus:outline-none"
                             />
                             <input
                               type="text"
                               value={newDnsIp}
                               onChange={(e) => setNewDnsIp(e.target.value)}
                               placeholder="192.168.10.50"
-                              className="w-28 rounded border border-slate-700 bg-[#111827] px-2 py-1 font-mono text-[11px] text-slate-100 focus:border-cyan-400 focus:outline-none"
+                              className="w-28 rounded border border-slate-700 bg-[#0F1E36] px-2 py-1 font-mono text-[11px] text-slate-100 focus:border-cyan-400 focus:outline-none"
                             />
                             <button
                               type="button"
@@ -1890,7 +1890,7 @@ export function PacketTracerView() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2 rounded-lg border border-slate-800 bg-[#090D16] px-3 py-2"
+                    className="flex items-center gap-2 rounded-lg border border-slate-800 bg-[#071225] px-3 py-2"
                   >
                     <CheckCircle2
                       className={`h-4 w-4 shrink-0 ${

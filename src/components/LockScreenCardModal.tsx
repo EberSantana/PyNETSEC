@@ -18,9 +18,9 @@ const CARD_THEMES: CardTheme[] = [
     id: 'cyan',
     label: 'Ciano Terminal',
     bgTop: '#06111F',
-    bgBottom: '#090D16',
-    accent: '#22D3EE',
-    accentSoft: 'rgba(34, 211, 238, 0.16)',
+    bgBottom: '#071225',
+    accent: '#3BE37A',
+    accentSoft: 'rgba(59, 227, 122, 0.16)',
     secondary: '#38BDF8',
   },
   {
@@ -76,7 +76,7 @@ function drawWallpaperCanvas(
   // Base gradient background
   const grad = ctx.createLinearGradient(0, 0, width, height);
   grad.addColorStop(0, theme.bgTop);
-  grad.addColorStop(0.55, '#090D16');
+  grad.addColorStop(0.55, '#071225');
   grad.addColorStop(1, theme.bgBottom);
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, width, height);
@@ -155,7 +155,7 @@ function drawWallpaperCanvas(
 
   // Flag terminal box
   const flagBoxY = cardY + 420;
-  ctx.fillStyle = '#060911';
+  ctx.fillStyle = '#050E1D';
   ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -251,10 +251,10 @@ export function LockScreenCardModal({ open, card, onClose }: LockScreenCardModal
       aria-labelledby="lockscreen-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
     >
-      <div className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-700 bg-[#111827] shadow-2xl md:flex-row">
+      <div className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-700 bg-[#0F1E36] shadow-2xl md:flex-row">
         {/* Left: 9:16 Phone Preview with Live Lock-Screen Clock Overlay */}
-        <div className="flex flex-1 items-center justify-center bg-[#060911] p-6">
-          <div className="relative aspect-[9/16] w-[240px] overflow-hidden rounded-[2rem] border-4 border-slate-700 bg-[#090D16] shadow-2xl sm:w-[270px]">
+        <div className="flex flex-1 items-center justify-center bg-[#050E1D] p-6">
+          <div className="relative aspect-[9/16] w-[240px] overflow-hidden rounded-[2rem] border-4 border-slate-700 bg-[#071225] shadow-2xl sm:w-[270px]">
             <canvas
               ref={canvasRef}
               className="h-full w-full object-cover"
@@ -327,7 +327,7 @@ export function LockScreenCardModal({ open, card, onClose }: LockScreenCardModal
                       className={`flex cursor-pointer items-center justify-between rounded-lg border px-3.5 py-2.5 text-left text-sm font-medium transition-colors ${
                         selected
                           ? 'border-cyan-400 bg-cyan-400/10 text-slate-50'
-                          : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-slate-700'
+                          : 'border-slate-800 bg-[#071225] text-slate-300 hover:border-slate-700'
                       }`}
                     >
                       <span>{theme.label}</span>
@@ -347,7 +347,7 @@ export function LockScreenCardModal({ open, card, onClose }: LockScreenCardModal
               <button
                 type="button"
                 onClick={() => setShowClockOverlay((prev) => !prev)}
-                className="flex w-full cursor-pointer items-center justify-between rounded-lg border border-slate-800 bg-[#090D16] px-3.5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-slate-700"
+                className="flex w-full cursor-pointer items-center justify-between rounded-lg border border-slate-800 bg-[#071225] px-3.5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-slate-700"
               >
                 <span className="flex items-center gap-2">
                   <Smartphone className="h-4 w-4 text-cyan-400" />

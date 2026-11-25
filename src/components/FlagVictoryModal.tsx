@@ -40,7 +40,7 @@ export function FlagVictoryModal({
       aria-labelledby="flag-victory-title"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
     >
-      <div className="w-full max-w-lg rounded-2xl border border-emerald-400/40 bg-[#111827] p-6 shadow-2xl">
+      <div className="w-full max-w-lg rounded-2xl border border-emerald-400/40 bg-[#0F1E36] p-6 shadow-2xl">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/15 text-emerald-300">
@@ -74,7 +74,7 @@ export function FlagVictoryModal({
         </p>
 
         {/* Flag Code Box */}
-        <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-emerald-500/30 bg-[#060911] px-4 py-3.5">
+        <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-emerald-500/30 bg-[#050E1D] px-4 py-3.5">
           <code className="truncate font-mono text-sm font-semibold text-emerald-300 sm:text-base">
             {mission.flag}
           </code>

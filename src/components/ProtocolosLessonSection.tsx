@@ -59,7 +59,7 @@ export function ProtocolosLessonSection({
   return (
     <div className="space-y-6">
       {/* Top Overview Card */}
-      <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+      <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
@@ -91,7 +91,7 @@ export function ProtocolosLessonSection({
             <button
               type="button"
               onClick={onOpenNetworkSimulator}
-              className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#090D16] px-3.5 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
+              className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-700 bg-[#071225] px-3.5 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-cyan-400/50 hover:text-cyan-200 whitespace-nowrap"
             >
               <Network className="h-3.5 w-3.5 text-cyan-300" />
               Simulador & Portas IANA
@@ -103,7 +103,7 @@ export function ProtocolosLessonSection({
           {lesson.overviewParagraphs.map((paragraph, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-slate-800/90 bg-[#090D16] p-4 text-xs leading-relaxed text-slate-300"
+              className="rounded-xl border border-slate-800/90 bg-[#071225] p-4 text-xs leading-relaxed text-slate-300"
             >
               {paragraph}
             </div>
@@ -115,7 +115,7 @@ export function ProtocolosLessonSection({
           {highlightItems.map((item) => (
             <div
               key={item.label}
-              className="rounded-xl border border-slate-800 bg-[#090D16] p-4 text-xs"
+              className="rounded-xl border border-slate-800 bg-[#071225] p-4 text-xs"
             >
               <p className="font-semibold text-slate-100">{item.label}</p>
               <p className="mt-2 leading-relaxed text-slate-300">
@@ -133,7 +133,7 @@ export function ProtocolosLessonSection({
         {/* Side-by-side Protocol Summary Cards */}
         <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* TCP Card */}
-          <div className="rounded-xl border border-cyan-500/30 bg-[#090D16] p-5">
+          <div className="rounded-xl border border-cyan-500/30 bg-[#071225] p-5">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5 text-cyan-300" />
@@ -156,13 +156,13 @@ export function ProtocolosLessonSection({
             </p>
 
             <div className="mt-3.5 grid grid-cols-2 gap-2.5 text-xs">
-              <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
+              <div className="rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Cabeçalho</span>
                 <span className="font-mono font-semibold text-cyan-300 tabular-nums">
                   {lesson.tcp.headerSize}
                 </span>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
+              <div className="rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Socket Python</span>
                 <span className="font-mono font-semibold text-cyan-300">
                   {lesson.tcp.pythonSocket}
@@ -177,7 +177,7 @@ export function ProtocolosLessonSection({
           </div>
 
           {/* UDP Card */}
-          <div className="rounded-xl border border-amber-500/30 bg-[#090D16] p-5">
+          <div className="rounded-xl border border-amber-500/30 bg-[#071225] p-5">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <Zap className="h-5 w-5 text-amber-300" />
@@ -200,13 +200,13 @@ export function ProtocolosLessonSection({
             </p>
 
             <div className="mt-3.5 grid grid-cols-2 gap-2.5 text-xs">
-              <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
+              <div className="rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Cabeçalho</span>
                 <span className="font-mono font-semibold text-amber-300 tabular-nums">
                   {lesson.udp.headerSize}
                 </span>
               </div>
-              <div className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2">
+              <div className="rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2">
                 <span className="block text-[11px] text-slate-400">Socket Python</span>
                 <span className="font-mono font-semibold text-amber-300">
                   {lesson.udp.pythonSocket}
@@ -223,9 +223,9 @@ export function ProtocolosLessonSection({
       </section>
 
       {/* Interactive Deep-Dive Tabs */}
-      <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+      <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
         <div className="flex flex-col justify-between gap-3 border-b border-slate-800 pb-4 sm:flex-row sm:items-center">
-          <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-slate-800 bg-[#090D16] p-1">
+          <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-slate-800 bg-[#071225] p-1">
             <button
               type="button"
               onClick={() => setActiveTab('mechanics')}
@@ -265,7 +265,7 @@ export function ProtocolosLessonSection({
           </div>
 
           {activeTab === 'mechanics' && (
-            <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1 self-start sm:self-auto">
+            <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#071225] p-1 self-start sm:self-auto">
               <button
                 type="button"
                 onClick={() => setFocusedProto('tcp')}
@@ -292,7 +292,7 @@ export function ProtocolosLessonSection({
           )}
 
           {activeTab === 'use-cases' && (
-            <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#090D16] p-1 self-start sm:self-auto">
+            <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#071225] p-1 self-start sm:self-auto">
               {(['ALL', 'TCP', 'UDP'] as const).map((filterVal) => (
                 <button
                   key={filterVal}
@@ -327,7 +327,7 @@ export function ProtocolosLessonSection({
                 {profile.howItWorks.map((step) => (
                   <div
                     key={step.step}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-3.5"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
@@ -344,7 +344,7 @@ export function ProtocolosLessonSection({
                       </div>
 
                       {step.direction && (
-                        <span className="inline-flex items-center gap-1 rounded-md border border-slate-800 bg-[#111827] px-2 py-0.5 font-mono text-[10px] text-slate-400 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1 rounded-md border border-slate-800 bg-[#0F1E36] px-2 py-0.5 font-mono text-[10px] text-slate-400 whitespace-nowrap">
                           <ArrowLeftRight className="h-3 w-3" />
                           {step.direction === 'client-to-server'
                             ? 'Cliente → Servidor'
@@ -363,7 +363,7 @@ export function ProtocolosLessonSection({
 
               {/* Strengths & Trade-offs */}
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="rounded-xl border border-emerald-500/25 bg-[#090D16] p-4">
+                <div className="rounded-xl border border-emerald-500/25 bg-[#071225] p-4">
                   <h4 className="text-xs font-bold text-emerald-300">Pontos Fortes</h4>
                   <ul className="mt-2 space-y-1.5 text-xs text-slate-300">
                     {profile.strengths.map((item, idx) => (
@@ -375,7 +375,7 @@ export function ProtocolosLessonSection({
                   </ul>
                 </div>
 
-                <div className="rounded-xl border border-amber-500/25 bg-[#090D16] p-4">
+                <div className="rounded-xl border border-amber-500/25 bg-[#071225] p-4">
                   <h4 className="text-xs font-bold text-amber-300">Limitações / Custos</h4>
                   <ul className="mt-2 space-y-1.5 text-xs text-slate-300">
                     {profile.tradeoffs.map((item, idx) => (
@@ -400,7 +400,7 @@ export function ProtocolosLessonSection({
                 </p>
               </div>
 
-              <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#090D16]">
+              <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#071225]">
                 <div className="divide-y divide-slate-800/80">
                   {profile.headerFields.map((hf, idx) => (
                     <div key={idx} className="p-3.5">
@@ -412,7 +412,7 @@ export function ProtocolosLessonSection({
                         >
                           {hf.field}
                         </span>
-                        <span className="rounded bg-[#111827] px-2 py-0.5 font-mono text-[11px] text-slate-300 tabular-nums">
+                        <span className="rounded bg-[#0F1E36] px-2 py-0.5 font-mono text-[11px] text-slate-300 tabular-nums">
                           {hf.size}
                         </span>
                       </div>
@@ -429,7 +429,7 @@ export function ProtocolosLessonSection({
                 {profile.keyFeatures.map((feat, idx) => (
                   <div
                     key={idx}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-3.5"
                   >
                     <p className="text-xs font-semibold text-slate-100">{feat.title}</p>
                     <p className="mt-1 text-xs leading-relaxed text-slate-400">
@@ -445,7 +445,7 @@ export function ProtocolosLessonSection({
         {/* TAB 2: COMPARISON TABLE + GOLDEN RULES */}
         {activeTab === 'comparison' && (
           <div className="mt-5 space-y-5">
-            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#090D16]">
+            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#071225]">
               <table className="w-full min-w-[680px] text-left text-xs">
                 <thead className="border-b border-slate-800 bg-[#0D1322] text-slate-400">
                   <tr>
@@ -479,7 +479,7 @@ export function ProtocolosLessonSection({
               {lesson.goldenRules.map((rule) => (
                 <div
                   key={rule.protocol}
-                  className={`rounded-xl border p-4 bg-[#090D16] ${
+                  className={`rounded-xl border p-4 bg-[#071225] ${
                     rule.protocol === 'TCP'
                       ? 'border-cyan-500/35'
                       : 'border-amber-500/35'
@@ -510,7 +510,7 @@ export function ProtocolosLessonSection({
             {filteredUseCases.map((uc) => (
               <div
                 key={uc.id}
-                className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#090D16] p-4"
+                className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#071225] p-4"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">

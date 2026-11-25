@@ -249,7 +249,7 @@ export function InfoSecLabView({
   return (
     <div className="space-y-6">
       {/* Sub-module Navigation Bar */}
-      <div className="flex flex-wrap items-center gap-1.5 rounded-2xl border border-slate-800 bg-[#111827] p-1.5">
+      <div className="flex flex-wrap items-center gap-1.5 rounded-2xl border border-slate-800 bg-[#0F1E36] p-1.5">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -289,7 +289,7 @@ export function InfoSecLabView({
       {activeTab === 'fundamentals' && (
         <div className="space-y-6">
           {/* Course Syllabus Banner */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
               <div>
                 <p className="text-xs font-semibold text-cyan-300">
@@ -302,7 +302,7 @@ export function InfoSecLabView({
                   {COURSE_SYLLABUS.ementa}
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] px-4 py-3 text-xs shrink-0">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] px-4 py-3 text-xs shrink-0">
                 <p className="text-slate-400">Carga Horária</p>
                 <p className="mt-0.5 font-mono font-semibold text-cyan-300 tabular-nums">
                   {COURSE_SYLLABUS.workload}
@@ -317,7 +317,7 @@ export function InfoSecLabView({
               {COURSE_SYLLABUS.units.map((unit) => (
                 <div
                   key={unit.number}
-                  className="rounded-xl border border-slate-800 bg-[#090D16] p-4"
+                  className="rounded-xl border border-slate-800 bg-[#071225] p-4"
                 >
                   <span className="font-mono text-xs font-bold text-cyan-300">
                     Unidade {unit.number}
@@ -337,7 +337,7 @@ export function InfoSecLabView({
           </section>
 
           {/* Interactive Game: Jogo dos 8 Erros de Segurança da Informação */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-3 border-b border-slate-800 pb-4 sm:flex-row sm:items-center">
               <div>
                 <span className="text-xs font-semibold text-amber-300">
@@ -352,7 +352,7 @@ export function InfoSecLabView({
               </div>
 
               <div className="flex flex-wrap items-center gap-2 shrink-0">
-                <span className="rounded-lg border border-slate-700 bg-[#090D16] px-3 py-1.5 font-mono text-xs font-semibold text-emerald-300 tabular-nums">
+                <span className="rounded-lg border border-slate-700 bg-[#071225] px-3 py-1.5 font-mono text-xs font-semibold text-emerald-300 tabular-nums">
                   {foundFlaws.length}/8 encontrados
                 </span>
                 <button
@@ -382,7 +382,7 @@ export function InfoSecLabView({
             <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-12">
               {/* Interactive Office Audit Scene */}
               <div className="lg:col-span-7">
-                <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-[#060911] aspect-[16/10]">
+                <div className="relative overflow-hidden rounded-xl border border-slate-800 bg-[#050E1D] aspect-[16/10]">
                   <svg
                     viewBox="0 0 800 500"
                     className="h-full w-full"
@@ -395,10 +395,10 @@ export function InfoSecLabView({
                     <line x1="0" y1="350" x2="800" y2="350" stroke="#1E293B" strokeWidth="2" />
 
                     {/* Calendar & Clock on wall */}
-                    <rect x="145" y="45" width="90" height="95" rx="6" fill="#111827" stroke="#334155" strokeWidth="2" />
+                    <rect x="145" y="45" width="90" height="95" rx="6" fill="#0F1E36" stroke="#334155" strokeWidth="2" />
                     <rect x="145" y="45" width="90" height="24" rx="4" fill="#1E293B" />
                     <text x="190" y="61" textAnchor="middle" fill="#94A3B8" fontSize="11" fontFamily="monospace">CALENDARIO</text>
-                    <circle cx="430" cy="85" r="34" fill="#111827" stroke="#334155" strokeWidth="2" />
+                    <circle cx="430" cy="85" r="34" fill="#0F1E36" stroke="#334155" strokeWidth="2" />
                     <line x1="430" y1="85" x2="430" y2="62" stroke="#38BDF8" strokeWidth="2.5" />
                     <line x1="430" y1="85" x2="448" y2="85" stroke="#94A3B8" strokeWidth="2" />
 
@@ -431,7 +431,7 @@ export function InfoSecLabView({
 
                     {/* #5 Monitor 2 with Sticky Notes (Passwords) */}
                     <rect x="515" y="198" width="145" height="90" rx="8" fill="#0F172A" stroke="#475569" strokeWidth="2.5" />
-                    <rect x="526" y="209" width="123" height="68" rx="4" fill="#111827" stroke="#334155" strokeWidth="1.5" />
+                    <rect x="526" y="209" width="123" height="68" rx="4" fill="#0F1E36" stroke="#334155" strokeWidth="1.5" />
                     {/* Sticky notes */}
                     <rect x="580" y="220" width="24" height="22" fill="#FACC15" />
                     <rect x="608" y="224" width="24" height="22" fill="#FDE047" />
@@ -456,7 +456,7 @@ export function InfoSecLabView({
                     />
 
                     {/* #8 Open Filing Cabinet Drawer */}
-                    <rect x="385" y="335" width="120" height="125" rx="4" fill="#111827" stroke="#475569" strokeWidth="2" />
+                    <rect x="385" y="335" width="120" height="125" rx="4" fill="#0F1E36" stroke="#475569" strokeWidth="2" />
                     <rect x="395" y="348" width="100" height="46" rx="3" fill="#1E293B" stroke="#F43F5E" strokeWidth="2" />
                     <rect x="405" y="338" width="80" height="18" fill="#CBD5E1" />
                     <text x="445" y="376" textAnchor="middle" fill="#FCA5A5" fontSize="10" fontFamily="monospace">GAVETA ABERTA</text>
@@ -502,7 +502,7 @@ export function InfoSecLabView({
                             ? 'border-cyan-400 bg-cyan-400/15 text-cyan-200'
                             : isFound
                               ? 'border-emerald-500/35 bg-emerald-500/10 text-emerald-300'
-                              : 'border-slate-800 bg-[#090D16] text-slate-400 hover:text-slate-200'
+                              : 'border-slate-800 bg-[#071225] text-slate-400 hover:text-slate-200'
                         }`}
                       >
                         {isFound ? flaw.shortLabel : `Ponto #${flaw.id}`}
@@ -513,7 +513,7 @@ export function InfoSecLabView({
               </div>
 
               {/* Right Audit Details Panel */}
-              <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-5">
+              <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#071225] p-5 lg:col-span-5">
                 {selectedFlaw ? (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-2">
@@ -563,7 +563,7 @@ export function InfoSecLabView({
 
           {/* DIKW Ladder + People / Process / Technology */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-7">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-7">
               <h3 className="text-base font-bold text-slate-50">
                 Dado × Informação = Conhecimento (Ativo de Informação)
               </h3>
@@ -580,7 +580,7 @@ export function InfoSecLabView({
                     className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap ${
                       activeDikwId === stage.id
                         ? 'border-cyan-400 bg-cyan-400/15 text-cyan-200'
-                        : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-slate-700'
+                        : 'border-slate-800 bg-[#071225] text-slate-300 hover:border-slate-700'
                     }`}
                   >
                     <span className="font-mono text-cyan-400">0{idx + 1}</span>
@@ -590,7 +590,7 @@ export function InfoSecLabView({
                 ))}
               </div>
 
-              <div className="mt-4 rounded-xl border border-slate-800 bg-[#090D16] p-4 space-y-2.5">
+              <div className="mt-4 rounded-xl border border-slate-800 bg-[#071225] p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-bold text-slate-100">{activeDikw.title}</span>
                   <span className="font-mono text-xs text-cyan-300">
@@ -598,14 +598,14 @@ export function InfoSecLabView({
                   </span>
                 </div>
                 <p className="text-xs leading-relaxed text-slate-300">{activeDikw.definition}</p>
-                <div className="rounded-lg border border-slate-800 bg-[#060911] px-3 py-2 font-mono text-xs text-emerald-300">
+                <div className="rounded-lg border border-slate-800 bg-[#050E1D] px-3 py-2 font-mono text-xs text-emerald-300">
                   Exemplo: {activeDikw.example}
                 </div>
               </div>
             </section>
 
             {/* Triangle: Pessoas, Processos, Ferramentas */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-5">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-5">
               <h3 className="text-base font-bold text-slate-50">
                 Os 3 Pilares Operacionais da Segurança
               </h3>
@@ -614,19 +614,19 @@ export function InfoSecLabView({
               </p>
 
               <div className="mt-4 space-y-2.5">
-                <div className="rounded-xl border border-cyan-500/30 bg-[#090D16] p-3.5">
+                <div className="rounded-xl border border-cyan-500/30 bg-[#071225] p-3.5">
                   <p className="text-xs font-bold text-cyan-300">1. Pessoas</p>
                   <p className="mt-0.5 text-xs text-slate-300">
                     Cultura de segurança, capacitação técnica e conscientização constante contra engenharia social.
                   </p>
                 </div>
-                <div className="rounded-xl border border-emerald-500/30 bg-[#090D16] p-3.5">
+                <div className="rounded-xl border border-emerald-500/30 bg-[#071225] p-3.5">
                   <p className="text-xs font-bold text-emerald-300">2. Processos</p>
                   <p className="mt-0.5 text-xs text-slate-300">
                     Metodologia, normas (ISO 27001/27002), políticas (PSI) e procedimentos de auditoria e resposta.
                   </p>
                 </div>
-                <div className="rounded-xl border border-amber-500/30 bg-[#090D16] p-3.5">
+                <div className="rounded-xl border border-amber-500/30 bg-[#071225] p-3.5">
                   <p className="text-xs font-bold text-amber-300">3. Ferramentas</p>
                   <p className="mt-0.5 text-xs text-slate-300">
                     Recursos físicos e lógicos: firewalls, criptografia, MFA, IDS, backups, biometria e nobreaks.
@@ -637,7 +637,7 @@ export function InfoSecLabView({
           </div>
 
           {/* Myths vs Reality Interactive Cards */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
               <div>
                 <h3 className="text-base font-bold text-slate-50">
@@ -682,7 +682,7 @@ export function InfoSecLabView({
                     className={`flex cursor-pointer flex-col justify-between rounded-xl border p-4 text-left transition-colors ${
                       isOpen
                         ? 'border-rose-400/40 bg-[#0D1322]'
-                        : 'border-slate-800 bg-[#090D16] hover:border-slate-700'
+                        : 'border-slate-800 bg-[#071225] hover:border-slate-700'
                     }`}
                   >
                     <div>
@@ -718,7 +718,7 @@ export function InfoSecLabView({
       {activeTab === 'triad-psi' && (
         <div className="space-y-6">
           {/* Interactive CIA Triad */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <h2 className="text-xl font-bold text-slate-50">
               A Tríade da Segurança da Informação (CID)
             </h2>
@@ -728,7 +728,7 @@ export function InfoSecLabView({
 
             <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-12">
               {/* Interactive Triangle Selector */}
-              <div className="flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-5">
+              <div className="flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#071225] p-5 lg:col-span-5">
                 <svg viewBox="0 0 320 260" className="w-full max-w-[300px]">
                   <polygon
                     points="160,26 42,226 278,226"
@@ -768,8 +768,8 @@ export function InfoSecLabView({
                       width="136"
                       height="34"
                       rx="8"
-                      fill={activePillarId === 'confidencialidade' ? '#22D3EE' : '#111827'}
-                      stroke="#22D3EE"
+                      fill={activePillarId === 'confidencialidade' ? '#3BE37A' : '#0F1E36'}
+                      stroke="#3BE37A"
                       strokeWidth="2"
                     />
                     <text
@@ -795,7 +795,7 @@ export function InfoSecLabView({
                       width="118"
                       height="34"
                       rx="8"
-                      fill={activePillarId === 'integridade' ? '#34D399' : '#111827'}
+                      fill={activePillarId === 'integridade' ? '#34D399' : '#0F1E36'}
                       stroke="#34D399"
                       strokeWidth="2"
                     />
@@ -822,7 +822,7 @@ export function InfoSecLabView({
                       width="126"
                       height="34"
                       rx="8"
-                      fill={activePillarId === 'disponibilidade' ? '#FBBF24' : '#111827'}
+                      fill={activePillarId === 'disponibilidade' ? '#FBBF24' : '#0F1E36'}
                       stroke="#FBBF24"
                       strokeWidth="2"
                     />
@@ -848,7 +848,7 @@ export function InfoSecLabView({
                       className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                         activePillarId === p.id
                           ? 'bg-cyan-400 text-[#05131C]'
-                          : 'border border-slate-800 bg-[#111827] text-slate-300 hover:text-slate-100'
+                          : 'border border-slate-800 bg-[#0F1E36] text-slate-300 hover:text-slate-100'
                       }`}
                     >
                       {p.shortCode} · {p.title}
@@ -858,7 +858,7 @@ export function InfoSecLabView({
               </div>
 
               {/* Selected Pillar Details */}
-              <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-7">
+              <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#071225] p-5 lg:col-span-7">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-bold text-slate-50">{activePillar.title}</h3>
@@ -908,7 +908,7 @@ export function InfoSecLabView({
                 {EXTRA_ATTRIBUTES.map((attr) => (
                   <div
                     key={attr.name}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-4"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-4"
                   >
                     <p className="text-xs font-bold text-cyan-300">{attr.name}</p>
                     <p className="mt-1 text-xs leading-relaxed text-slate-300">
@@ -927,7 +927,7 @@ export function InfoSecLabView({
           {/* Organizational Priorities + ISO Norms & PSI */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
             {/* Org Priorities Simulator */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-5">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-5">
               <h3 className="text-base font-bold text-slate-50">
                 Prioridade por Tipo de Organização
               </h3>
@@ -944,7 +944,7 @@ export function InfoSecLabView({
                     className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       activeOrgId === org.id
                         ? 'bg-cyan-400 text-[#05131C]'
-                        : 'border border-slate-800 bg-[#090D16] text-slate-300 hover:text-slate-100'
+                        : 'border border-slate-800 bg-[#071225] text-slate-300 hover:text-slate-100'
                     }`}
                   >
                     {org.organization}
@@ -957,7 +957,7 @@ export function InfoSecLabView({
                 {activeOrg.ranking.map((item, idx) => (
                   <div
                     key={idx}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-3.5"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-bold text-slate-100">{item.pillar}</span>
@@ -980,7 +980,7 @@ export function InfoSecLabView({
             </section>
 
             {/* Norms + PSI */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-7">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-7">
               <h3 className="text-base font-bold text-slate-50">
                 Normas ISO & Política de Segurança da Informação (PSI)
               </h3>
@@ -993,7 +993,7 @@ export function InfoSecLabView({
                 {PSI_STANDARDS.norms.map((n) => (
                   <div
                     key={n.code}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-3.5"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-3.5"
                   >
                     <p className="font-mono text-xs font-bold text-cyan-300">{n.code}</p>
                     <p className="mt-0.5 text-[11px] font-semibold text-slate-200">{n.focus}</p>
@@ -1006,7 +1006,7 @@ export function InfoSecLabView({
 
               {/* PSI Switcher */}
               <div className="mt-5">
-                <div className="flex flex-wrap gap-1.5 rounded-xl border border-slate-800 bg-[#090D16] p-1 w-fit">
+                <div className="flex flex-wrap gap-1.5 rounded-xl border border-slate-800 bg-[#071225] p-1 w-fit">
                   <button
                     type="button"
                     onClick={() => setPsiView('components')}
@@ -1042,13 +1042,13 @@ export function InfoSecLabView({
                   </button>
                 </div>
 
-                <div className="mt-3 rounded-xl border border-slate-800 bg-[#090D16] p-4">
+                <div className="mt-3 rounded-xl border border-slate-800 bg-[#071225] p-4">
                   {psiView === 'components' && (
                     <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                       {PSI_STANDARDS.components.map((comp) => (
                         <div
                           key={comp.name}
-                          className="rounded-lg border border-slate-800/80 bg-[#111827] p-3"
+                          className="rounded-lg border border-slate-800/80 bg-[#0F1E36] p-3"
                         >
                           <p className="text-xs font-bold text-cyan-300">{comp.name}</p>
                           <p className="mt-1 text-xs text-slate-300">{comp.question}</p>
@@ -1091,7 +1091,7 @@ export function InfoSecLabView({
       {activeTab === 'attacks' && (
         <div className="space-y-6">
           {/* Interactive 4 Attack Flows SVG Visualizer */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
               <div>
                 <h2 className="text-xl font-bold text-slate-50">
@@ -1110,7 +1110,7 @@ export function InfoSecLabView({
                     className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       activeFlowId === flow.id
                         ? 'bg-cyan-400 text-[#05131C]'
-                        : 'border border-slate-800 bg-[#090D16] text-slate-300 hover:text-slate-100'
+                        : 'border border-slate-800 bg-[#071225] text-slate-300 hover:text-slate-100'
                     }`}
                   >
                     {flow.title}
@@ -1121,11 +1121,11 @@ export function InfoSecLabView({
 
             <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-12">
               {/* SVG Diagram */}
-              <div className="flex items-center justify-center rounded-xl border border-slate-800 bg-[#060911] p-5 lg:col-span-6">
+              <div className="flex items-center justify-center rounded-xl border border-slate-800 bg-[#050E1D] p-5 lg:col-span-6">
                 <svg viewBox="0 0 460 220" className="w-full max-w-[440px]">
                   <defs>
                     <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                      <path d="M0,0 L8,4 L0,8 Z" fill="#22D3EE" />
+                      <path d="M0,0 L8,4 L0,8 Z" fill="#3BE37A" />
                     </marker>
                     <marker id="arrowRose" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
                       <path d="M0,0 L8,4 L0,8 Z" fill="#FB7185" />
@@ -1133,12 +1133,12 @@ export function InfoSecLabView({
                   </defs>
 
                   {/* Origin Node */}
-                  <circle cx="80" cy="70" r="30" fill="#111827" stroke="#22D3EE" strokeWidth="2.5" />
+                  <circle cx="80" cy="70" r="30" fill="#0F1E36" stroke="#3BE37A" strokeWidth="2.5" />
                   <text x="80" y="75" textAnchor="middle" fill="#E2E8F0" fontSize="16" fontWeight="bold">O</text>
                   <text x="80" y="28" textAnchor="middle" fill="#94A3B8" fontSize="11">Origem</text>
 
                   {/* Destination Node */}
-                  <circle cx="380" cy="70" r="30" fill="#111827" stroke="#34D399" strokeWidth="2.5" />
+                  <circle cx="380" cy="70" r="30" fill="#0F1E36" stroke="#34D399" strokeWidth="2.5" />
                   <text x="380" y="75" textAnchor="middle" fill="#E2E8F0" fontSize="16" fontWeight="bold">D</text>
                   <text x="380" y="28" textAnchor="middle" fill="#94A3B8" fontSize="11">Destino</text>
 
@@ -1149,7 +1149,7 @@ export function InfoSecLabView({
                       y1="70"
                       x2="342"
                       y2="70"
-                      stroke="#22D3EE"
+                      stroke="#3BE37A"
                       strokeWidth="3"
                       markerEnd="url(#arrowCyan)"
                     />
@@ -1182,7 +1182,7 @@ export function InfoSecLabView({
                         y1="70"
                         x2="342"
                         y2="70"
-                        stroke="#22D3EE"
+                        stroke="#3BE37A"
                         strokeWidth="3"
                         markerEnd="url(#arrowCyan)"
                       />
@@ -1257,7 +1257,7 @@ export function InfoSecLabView({
               </div>
 
               {/* Flow Metadata */}
-              <div className="space-y-3 rounded-xl border border-slate-800 bg-[#090D16] p-5 lg:col-span-6">
+              <div className="space-y-3 rounded-xl border border-slate-800 bg-[#071225] p-5 lg:col-span-6">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-base font-bold text-slate-50">{activeFlow.title}</span>
                   <span
@@ -1271,7 +1271,7 @@ export function InfoSecLabView({
                   >
                     Classe: {activeFlow.attackClass}
                   </span>
-                  <span className="rounded-md border border-slate-700 bg-[#111827] px-2 py-0.5 text-[11px] text-slate-300">
+                  <span className="rounded-md border border-slate-700 bg-[#0F1E36] px-2 py-0.5 text-[11px] text-slate-300">
                     {activeFlow.shireyGroup}
                   </span>
                 </div>
@@ -1283,7 +1283,7 @@ export function InfoSecLabView({
 
                 <p className="text-xs leading-relaxed text-slate-300">{activeFlow.description}</p>
 
-                <div className="rounded-lg border border-slate-800 bg-[#111827] p-3 text-xs text-slate-300">
+                <div className="rounded-lg border border-slate-800 bg-[#0F1E36] p-3 text-xs text-slate-300">
                   <strong className="text-cyan-300">Exemplo prático: </strong>
                   {activeFlow.realExample}
                 </div>
@@ -1297,7 +1297,7 @@ export function InfoSecLabView({
           </section>
 
           {/* 9-Step Attack Anatomy Interactive Timeline */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <h3 className="text-lg font-bold text-slate-50">
               Anatomia de um Ataque — As 9 Etapas Clássicas
             </h3>
@@ -1314,7 +1314,7 @@ export function InfoSecLabView({
                   className={`flex cursor-pointer flex-col items-start rounded-xl border p-2.5 text-left transition-colors ${
                     activeAnatomyStep === st.step
                       ? 'border-cyan-400 bg-cyan-400/15 text-cyan-100'
-                      : 'border-slate-800 bg-[#090D16] text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                      : 'border-slate-800 bg-[#071225] text-slate-400 hover:border-slate-700 hover:text-slate-200'
                   }`}
                 >
                   <span className="font-mono text-xs font-bold text-cyan-300 tabular-nums">
@@ -1327,7 +1327,7 @@ export function InfoSecLabView({
               ))}
             </div>
 
-            <div className="mt-4 rounded-xl border border-slate-800 bg-[#090D16] p-5">
+            <div className="mt-4 rounded-xl border border-slate-800 bg-[#071225] p-5">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <span className="font-mono text-xs font-bold text-cyan-300">
@@ -1362,7 +1362,7 @@ export function InfoSecLabView({
               </p>
 
               <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
-                <div className="rounded-xl border border-slate-800 bg-[#111827] p-3.5">
+                <div className="rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5">
                   <p className="text-[11px] font-bold text-amber-300">Técnicas Comuns</p>
                   <ul className="mt-1.5 space-y-1 text-xs text-slate-300">
                     {activeStepData.techniques.map((t, idx) => (
@@ -1371,13 +1371,13 @@ export function InfoSecLabView({
                   </ul>
                 </div>
 
-                <div className="rounded-xl border border-slate-800 bg-[#111827] p-3.5">
+                <div className="rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5">
                   <p className="text-[11px] font-bold text-cyan-300">Ferramentas / Sinais</p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {activeStepData.toolsOrSignals.map((sig, idx) => (
                       <span
                         key={idx}
-                        className="rounded border border-slate-700 bg-[#090D16] px-2 py-0.5 font-mono text-[11px] text-slate-200"
+                        className="rounded border border-slate-700 bg-[#071225] px-2 py-0.5 font-mono text-[11px] text-slate-200"
                       >
                         {sig}
                       </span>
@@ -1398,7 +1398,7 @@ export function InfoSecLabView({
           {/* Attackers + TCP/IP Layer Vulnerabilities */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
             {/* Attackers */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-5">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-5">
               <h3 className="text-base font-bold text-slate-50">
                 Conhecendo os Invasores & Origem
               </h3>
@@ -1410,7 +1410,7 @@ export function InfoSecLabView({
                 {ATTACKER_PROFILES.map((prof) => (
                   <div
                     key={prof.id}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-4"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-4"
                   >
                     <div className="flex items-center justify-between">
                       <span
@@ -1439,7 +1439,7 @@ export function InfoSecLabView({
             </section>
 
             {/* TCP/IP Vulnerabilities by Layer */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-7">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-7">
               <h3 className="text-base font-bold text-slate-50">
                 Vulnerabilidades nas 4 Camadas do Modelo TCP/IP
               </h3>
@@ -1457,7 +1457,7 @@ export function InfoSecLabView({
                       className={`cursor-pointer rounded-xl border p-3 text-left transition-colors ${
                         activeVulnLayerId === layer.id
                           ? 'border-cyan-400 bg-cyan-400/15 text-cyan-100'
-                          : 'border-slate-800 bg-[#090D16] text-slate-300 hover:border-slate-700'
+                          : 'border-slate-800 bg-[#071225] text-slate-300 hover:border-slate-700'
                       }`}
                     >
                       <span className="font-mono text-[10px] text-slate-400">
@@ -1468,7 +1468,7 @@ export function InfoSecLabView({
                   ))}
                 </div>
 
-                <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4 space-y-3 sm:col-span-8">
+                <div className="rounded-xl border border-slate-800 bg-[#071225] p-4 space-y-3 sm:col-span-8">
                   <div>
                     <h4 className="text-sm font-bold text-cyan-300">
                       Camada: {activeVulnLayer.layer}
@@ -1512,7 +1512,7 @@ export function InfoSecLabView({
       {activeTab === 'malware-crypto' && (
         <div className="space-y-6">
           {/* Malware Catalog Explorer */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <h2 className="text-xl font-bold text-slate-50">
               Códigos Maliciosos (Malware) & Matriz Comparativa
             </h2>
@@ -1529,7 +1529,7 @@ export function InfoSecLabView({
                   className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                     activeMalwareId === m.id
                       ? 'bg-cyan-400 text-[#05131C]'
-                      : 'border border-slate-800 bg-[#090D16] text-slate-300 hover:text-slate-100'
+                      : 'border border-slate-800 bg-[#071225] text-slate-300 hover:text-slate-100'
                   }`}
                 >
                   {m.name}
@@ -1537,7 +1537,7 @@ export function InfoSecLabView({
               ))}
             </div>
 
-            <div className="mt-4 rounded-xl border border-slate-800 bg-[#090D16] p-5">
+            <div className="mt-4 rounded-xl border border-slate-800 bg-[#071225] p-5">
               <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
                 <div>
                   <h3 className="text-base font-bold text-rose-300">{activeMalware.name}</h3>
@@ -1550,7 +1550,7 @@ export function InfoSecLabView({
               </p>
 
               <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
-                <div className="rounded-xl border border-slate-800 bg-[#111827] p-3.5">
+                <div className="rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5">
                   <p className="text-[11px] font-bold text-cyan-300">Como é obtido</p>
                   <ul className="mt-1.5 space-y-1 text-xs text-slate-300">
                     {activeMalware.howObtained.map((item, idx) => (
@@ -1559,14 +1559,14 @@ export function InfoSecLabView({
                   </ul>
                 </div>
 
-                <div className="rounded-xl border border-slate-800 bg-[#111827] p-3.5">
+                <div className="rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5">
                   <p className="text-[11px] font-bold text-amber-300">Propagação</p>
                   <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
                     {activeMalware.propagation}
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-800 bg-[#111827] p-3.5">
+                <div className="rounded-xl border border-slate-800 bg-[#0F1E36] p-3.5">
                   <p className="text-[11px] font-bold text-rose-300">Ações Maliciosas Comuns</p>
                   <ul className="mt-1.5 space-y-1 text-xs text-slate-300">
                     {activeMalware.commonActions.map((act, idx) => (
@@ -1592,7 +1592,7 @@ export function InfoSecLabView({
             </div>
 
             {/* Comparative Matrix (Tabela 4.1) */}
-            <div className="mt-5 overflow-x-auto rounded-xl border border-slate-800 bg-[#090D16]">
+            <div className="mt-5 overflow-x-auto rounded-xl border border-slate-800 bg-[#071225]">
               <table className="w-full min-w-[660px] text-left text-xs">
                 <thead className="border-b border-slate-800 bg-[#0D1322] text-slate-400">
                   <tr>
@@ -1639,7 +1639,7 @@ export function InfoSecLabView({
           </section>
 
           {/* Interactive Cryptography Lab */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
               <div>
                 <h2 className="text-xl font-bold text-slate-50">
@@ -1655,7 +1655,7 @@ export function InfoSecLabView({
             </div>
 
             {/* Live Caesar Cipher Playground */}
-            <div className="mt-4 rounded-xl border border-cyan-500/30 bg-[#090D16] p-5">
+            <div className="mt-4 rounded-xl border border-cyan-500/30 bg-[#071225] p-5">
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
                 <div className="space-y-3 lg:col-span-7">
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -1665,7 +1665,7 @@ export function InfoSecLabView({
                     >
                       Mensagem de Entrada
                     </label>
-                    <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#111827] p-0.5">
+                    <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-[#0F1E36] p-0.5">
                       <button
                         type="button"
                         onClick={() => setCaesarMode('encrypt')}
@@ -1697,7 +1697,7 @@ export function InfoSecLabView({
                     value={caesarText}
                     onChange={(e) => setCaesarText(e.target.value)}
                     placeholder="Digite uma mensagem para cifrar..."
-                    className="w-full rounded-lg border border-slate-700 bg-[#060911] px-3.5 py-2.5 font-mono text-sm text-slate-100 focus:border-cyan-400 focus:outline-none"
+                    className="w-full rounded-lg border border-slate-700 bg-[#050E1D] px-3.5 py-2.5 font-mono text-sm text-slate-100 focus:border-cyan-400 focus:outline-none"
                   />
 
                   <div className="flex flex-wrap items-center gap-3">
@@ -1730,7 +1730,7 @@ export function InfoSecLabView({
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#060911] p-4 lg:col-span-5">
+                <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#050E1D] p-4 lg:col-span-5">
                   <div>
                     <p className="text-[11px] font-semibold text-emerald-300">
                       Saída {caesarMode === 'encrypt' ? 'Cifrada' : 'Decifrada'}
@@ -1753,7 +1753,7 @@ export function InfoSecLabView({
               {CRYPTO_CONCEPTS.map((cc) => (
                 <div
                   key={cc.id}
-                  className="rounded-xl border border-slate-800 bg-[#090D16] p-5"
+                  className="rounded-xl border border-slate-800 bg-[#071225] p-5"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
@@ -1775,7 +1775,7 @@ export function InfoSecLabView({
                     {cc.algorithms.map((alg) => (
                       <span
                         key={alg}
-                        className="rounded border border-slate-700 bg-[#111827] px-2 py-0.5 font-mono text-[11px] text-amber-200"
+                        className="rounded border border-slate-700 bg-[#0F1E36] px-2 py-0.5 font-mono text-[11px] text-amber-200"
                       >
                         {alg}
                       </span>
@@ -1798,7 +1798,7 @@ export function InfoSecLabView({
       {activeTab === 'defenses-risk' && (
         <div className="space-y-6">
           {/* Perimeter Defenses */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
               <div>
                 <h2 className="text-xl font-bold text-slate-50">
@@ -1817,7 +1817,7 @@ export function InfoSecLabView({
                     className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       activeDefenseId === def.id
                         ? 'bg-cyan-400 text-[#05131C]'
-                        : 'border border-slate-800 bg-[#090D16] text-slate-300 hover:text-slate-100'
+                        : 'border border-slate-800 bg-[#071225] text-slate-300 hover:text-slate-100'
                     }`}
                   >
                     {def.name}
@@ -1827,7 +1827,7 @@ export function InfoSecLabView({
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-12">
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-5 space-y-3 lg:col-span-7">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-5 space-y-3 lg:col-span-7">
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-cyan-300" />
                   <div>
@@ -1856,7 +1856,7 @@ export function InfoSecLabView({
               </div>
 
               {/* Architecture Placement Visual */}
-              <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#060911] p-5 lg:col-span-5">
+              <div className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#050E1D] p-5 lg:col-span-5">
                 <div>
                   <p className="text-xs font-bold text-slate-200">
                     Onde atua na Arquitetura Corporativa
@@ -1865,7 +1865,7 @@ export function InfoSecLabView({
                 </div>
 
                 <div className="my-4 grid grid-cols-3 items-center gap-2 text-center font-mono text-[11px]">
-                  <div className="rounded-lg border border-slate-700 bg-[#111827] p-3 text-slate-300">
+                  <div className="rounded-lg border border-slate-700 bg-[#0F1E36] p-3 text-slate-300">
                     <Network className="mx-auto h-4 w-4 text-cyan-300" />
                     <p className="mt-1 font-bold">LAN</p>
                     <p className="text-[10px] text-slate-500">Usuários</p>
@@ -1875,7 +1875,7 @@ export function InfoSecLabView({
                     <p className="mt-1 font-bold">{activeDefense.name}</p>
                     <p className="text-[10px] text-amber-300/80">Controle / DMZ</p>
                   </div>
-                  <div className="rounded-lg border border-slate-700 bg-[#111827] p-3 text-slate-300">
+                  <div className="rounded-lg border border-slate-700 bg-[#0F1E36] p-3 text-slate-300">
                     <Server className="mx-auto h-4 w-4 text-rose-300" />
                     <p className="mt-1 font-bold">Internet</p>
                     <p className="text-[10px] text-slate-500">Rede Pública</p>
@@ -1883,10 +1883,10 @@ export function InfoSecLabView({
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-[11px]">
-                  <div className="rounded-lg border border-slate-800 bg-[#111827] p-2.5 text-slate-300">
+                  <div className="rounded-lg border border-slate-800 bg-[#0F1E36] p-2.5 text-slate-300">
                     <strong className="text-cyan-300">Hosts:</strong> proteção personalizada por máquina (mais trabalhoso).
                   </div>
-                  <div className="rounded-lg border border-slate-800 bg-[#111827] p-2.5 text-slate-300">
+                  <div className="rounded-lg border border-slate-800 bg-[#0F1E36] p-2.5 text-slate-300">
                     <strong className="text-amber-300">Rede:</strong> proteção coletiva nos ativos (menos granular).
                   </div>
                 </div>
@@ -1897,7 +1897,7 @@ export function InfoSecLabView({
           {/* Physical Security + Interactive Risk Calculator */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
             {/* Physical & Environmental Security */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-6">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-6">
               <h3 className="text-base font-bold text-slate-50">
                 Segurança Física & Ambiental de Datacenter
               </h3>
@@ -1909,7 +1909,7 @@ export function InfoSecLabView({
                 {PHYSICAL_SECURITY_CATEGORIES.map((cat) => (
                   <div
                     key={cat.title}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-4 space-y-3"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-4 space-y-3"
                   >
                     <h4 className="text-xs font-bold text-cyan-300">{cat.title}</h4>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -1936,7 +1936,7 @@ export function InfoSecLabView({
             </section>
 
             {/* Interactive Risk Management Calculator */}
-            <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6 lg:col-span-6">
+            <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6 lg:col-span-6">
               <div className="flex items-center gap-2">
                 <Sliders className="h-4 w-4 text-cyan-300" />
                 <h3 className="text-base font-bold text-slate-50">
@@ -1947,7 +1947,7 @@ export function InfoSecLabView({
                 “Você não pode se proteger de algo que não conhece.” Combine <strong className="text-slate-200">Valor do Bem × Vulnerabilidade × Ameaça</strong>.
               </p>
 
-              <div className="mt-4 space-y-4 rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="mt-4 space-y-4 rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <div>
                   <label htmlFor="risk-asset" className="text-xs font-semibold text-slate-300">
                     Ativo (Bem) sob análise
@@ -1956,7 +1956,7 @@ export function InfoSecLabView({
                     id="risk-asset"
                     value={riskAsset}
                     onChange={(e) => setRiskAsset(e.target.value)}
-                    className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#060911] px-3 py-2 text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
+                    className="mt-1.5 w-full rounded-lg border border-slate-700 bg-[#050E1D] px-3 py-2 text-xs text-slate-100 focus:border-cyan-400 focus:outline-none"
                   >
                     <option value="Servidor de Notas / Banco de Dados">Servidor de Notas / Banco de Dados</option>
                     <option value="Roteador de Borda & Firewall">Roteador de Borda & Firewall</option>
@@ -2034,7 +2034,7 @@ export function InfoSecLabView({
                   {RISK_CONCENTRIC_LAYERS.map((item) => (
                     <div
                       key={item.layer}
-                      className="rounded-lg border border-slate-800 bg-[#090D16] p-2.5 text-xs"
+                      className="rounded-lg border border-slate-800 bg-[#071225] p-2.5 text-xs"
                     >
                       <p className="font-semibold text-cyan-300">{item.layer}</p>
                       <p className="mt-0.5 text-[11px] text-slate-400">{item.detail}</p>
@@ -2052,7 +2052,7 @@ export function InfoSecLabView({
       {/* ================================================================= */}
       {activeTab === 'quiz' && (
         <div className="space-y-6">
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex flex-col justify-between gap-3 border-b border-slate-800 pb-4 sm:flex-row sm:items-center">
               <div>
                 <h2 className="text-xl font-bold text-slate-50">
@@ -2063,7 +2063,7 @@ export function InfoSecLabView({
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <span className="rounded-lg border border-slate-700 bg-[#090D16] px-3 py-1.5 font-mono text-xs font-semibold text-emerald-300 tabular-nums">
+                <span className="rounded-lg border border-slate-700 bg-[#071225] px-3 py-1.5 font-mono text-xs font-semibold text-emerald-300 tabular-nums">
                   Acertos: {quizCorrectCount}/{INFOSEC_QUIZ.length} ({quizAnsweredCount} resp.)
                 </span>
                 <button
@@ -2084,13 +2084,13 @@ export function InfoSecLabView({
                 return (
                   <div
                     key={q.id}
-                    className="rounded-xl border border-slate-800 bg-[#090D16] p-4 space-y-3"
+                    className="rounded-xl border border-slate-800 bg-[#071225] p-4 space-y-3"
                   >
                     <div className="flex items-center justify-between gap-2 text-[11px]">
                       <span className="font-mono font-bold text-cyan-300 tabular-nums">
                         Q{String(qIdx + 1).padStart(2, '0')}
                       </span>
-                      <span className="rounded border border-slate-800 bg-[#111827] px-2 py-0.5 text-slate-400">
+                      <span className="rounded border border-slate-800 bg-[#0F1E36] px-2 py-0.5 text-slate-400">
                         {q.topic}
                       </span>
                     </div>
@@ -2104,7 +2104,7 @@ export function InfoSecLabView({
                         const isChosen = chosen === optIdx;
                         const isRight = optIdx === q.correctIndex;
                         let cls =
-                          'border-slate-800 bg-[#111827] text-slate-300 hover:border-slate-600';
+                          'border-slate-800 bg-[#0F1E36] text-slate-300 hover:border-slate-600';
                         if (hasAnswered) {
                           if (isRight) {
                             cls =
@@ -2138,7 +2138,7 @@ export function InfoSecLabView({
                     </div>
 
                     {hasAnswered && (
-                      <p className="rounded-lg border border-slate-800 bg-[#111827] px-3 py-2 text-[11px] leading-relaxed text-slate-300">
+                      <p className="rounded-lg border border-slate-800 bg-[#0F1E36] px-3 py-2 text-[11px] leading-relaxed text-slate-300">
                         <strong className="text-cyan-300">Explicação: </strong>
                         {q.explanation}
                       </p>
@@ -2150,7 +2150,7 @@ export function InfoSecLabView({
           </section>
 
           {/* Linked CTF Missions */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <h3 className="text-base font-bold text-slate-50">
               Aplicar na Prática — Missões CTF de Cibersegurança
             </h3>
@@ -2181,7 +2181,7 @@ export function InfoSecLabView({
           </section>
 
           {/* Bibliography */}
-          <section className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+          <section className="rounded-2xl border border-slate-800 bg-[#0F1E36] p-6">
             <div className="flex items-center gap-2">
               <BookOpen className="h-4 w-4 text-cyan-300" />
               <h3 className="text-base font-bold text-slate-50">
@@ -2190,7 +2190,7 @@ export function InfoSecLabView({
             </div>
 
             <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <p className="flex items-center gap-1.5 text-xs font-bold text-cyan-300">
                   <FileText className="h-3.5 w-3.5" />
                   Bibliografia Básica
@@ -2202,7 +2202,7 @@ export function InfoSecLabView({
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-[#090D16] p-4">
+              <div className="rounded-xl border border-slate-800 bg-[#071225] p-4">
                 <p className="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
                   <Layers className="h-3.5 w-3.5" />
                   Bibliografia Complementar & Normas
